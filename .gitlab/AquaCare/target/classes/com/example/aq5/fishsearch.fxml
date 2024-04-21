@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aq5.FishSearchController">
+   <children>
+      <TableView fx:id="fishTableView" layoutX="21.0" layoutY="64.0" prefHeight="615.0" prefWidth="1150.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+        <columns>
+            <TableColumn fx:id="fNameTableColumn" editable="false" minWidth="30.0" prefWidth="206.0" text="Name" />
+          <TableColumn fx:id="fSpeciesTableColumn" editable="false" minWidth="30.0" prefWidth="193.0" text="Species" />
+          <TableColumn fx:id="fFavFoodTableColumn" editable="false" minWidth="30.0" prefWidth="277.0" text="Favorite Food" />
+            <TableColumn fx:id="fURLTableColumn" editable="false" minWidth="0.0" prefWidth="0.0" text="Image URL" />
+            <TableColumn fx:id="fPhTableColumn" editable="false" prefWidth="139.0" text="pH" />
+            <TableColumn fx:id="fTempTableColumn" editable="false" prefWidth="155.0" text="Temperature" />
+            <TableColumn fx:id="fLightTableColumn" editable="false" prefWidth="185.0" text="Light" />
+        </columns>
+      </TableView>
+      <Label layoutX="139.0" layoutY="24.0" text="Search Fish">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="searchBarSP" layoutX="243.0" layoutY="27.0" prefHeight="25.0" prefWidth="760.0" promptText="Keywords..." />
+      <Button fx:id="backButtonSP" layoutX="36.0" layoutY="28.0" mnemonicParsing="false" onAction="#goHomePage2" prefHeight="25.0" prefWidth="49.0" text="Back" />
+      <SplitMenuButton layoutX="1011.0" layoutY="27.0" mnemonicParsing="false" prefWidth="121.0" text="SplitMenuButton">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </SplitMenuButton>
+   </children>
+</AnchorPane>
