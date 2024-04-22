@@ -9,6 +9,10 @@ public class DatabaseInputParser{
     }
 
     public void parseMqttData(String topic, String message) {
+        
+        //!Change parse logic 
+        //*******************************
+        //!Change parse logic
 
         // Parse the MQTT message
         String[] topicLayers = topic.split("/");            //Split the topic into layers
