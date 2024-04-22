@@ -10,20 +10,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aq5.FishSearchController">
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" styleClass="background" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aq5.FishSearchController">
    <children>
-      <TableView fx:id="fishTableView" layoutX="21.0" layoutY="64.0" prefHeight="615.0" prefWidth="1150.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+      <TableView fx:id="fishTableView" layoutX="21.0" layoutY="64.0" prefHeight="615.0" prefWidth="1150.0" style="-fx-background-color: black;" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
         <columns>
-            <TableColumn fx:id="fNameTableColumn" editable="false" minWidth="30.0" prefWidth="206.0" text="Name" />
-          <TableColumn fx:id="fSpeciesTableColumn" editable="false" minWidth="30.0" prefWidth="193.0" text="Species" />
-          <TableColumn fx:id="fFavFoodTableColumn" editable="false" minWidth="30.0" prefWidth="277.0" text="Favorite Food" />
-            <TableColumn fx:id="fURLTableColumn" editable="false" minWidth="0.0" prefWidth="0.0" text="Image URL" />
-            <TableColumn fx:id="fPhTableColumn" editable="false" prefWidth="139.0" text="pH" />
-            <TableColumn fx:id="fTempTableColumn" editable="false" prefWidth="155.0" text="Temperature" />
-            <TableColumn fx:id="fLightTableColumn" editable="false" prefWidth="185.0" text="Light" />
+            <TableColumn fx:id="fNameTableColumn" editable="false" minWidth="30.0" prefWidth="206.0" resizable="false" text="Name" />
+          <TableColumn fx:id="fSpeciesTableColumn" editable="false" minWidth="30.0" prefWidth="233.0" resizable="false" text="Species" />
+          <TableColumn fx:id="fFavFoodTableColumn" editable="false" minWidth="30.0" prefWidth="251.0" resizable="false" text="Favorite Food" />
+            <TableColumn fx:id="fURLTableColumn" editable="false" minWidth="0.0" prefWidth="0.0" resizable="false" text="Image URL" />
+            <TableColumn fx:id="fPhTableColumn" editable="false" prefWidth="133.0" resizable="false" text="pH" />
+            <TableColumn fx:id="fTempTableColumn" editable="false" prefWidth="168.0" resizable="false" text="Temperature" />
+            <TableColumn fx:id="fLightTableColumn" editable="false" prefWidth="164.0" resizable="false" text="Light" />
         </columns>
       </TableView>
-      <Label layoutX="139.0" layoutY="24.0" text="Search Fish">
+      <Label layoutX="139.0" layoutY="24.0" text="Search Fish" textFill="#ffffffd1">
          <font>
             <Font size="18.0" />
          </font>

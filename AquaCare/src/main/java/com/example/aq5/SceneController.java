@@ -6,7 +6,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.w3c.dom.events.MouseEvent;
 
@@ -17,6 +21,62 @@ public class SceneController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    @FXML
+    private LineChart<String, Number> linechartPh;
+    @FXML
+    private LineChart<String, Number> linechartTemp;
+    @FXML
+    private LineChart<String, Number> linechartLight;
+    @FXML
+    private LineChart<String, Number> linechartDisp;
+    @FXML
+    private Button homeButton;
+    @FXML
+    private Button searchFishButton;
+    @FXML
+    private Button buttonLeft3;
+    @FXML
+    private Button buttonLeft4;
+    @FXML
+    private Button exitButton;
+    @FXML
+    private Button phButton;
+    @FXML
+    private Button feedButton;
+    @FXML
+    private Button lightButton;
+    @FXML
+    private Button tempButton;
+    @FXML
+    private Button buttonRight;
+    @FXML
+    private Button buttonRight1;
+    @FXML
+    private Button buttonRight2;
+    @FXML
+    private TextField textFieldLight;
+    @FXML
+    private Text lcTextPh;
+    @FXML
+    private Text lcTextLight;
+    @FXML
+    private Text lcTextTemp;
+    @FXML
+    private Text lcTextFood;
+
+
+    //  will be added when some solution is found for switching pages (not scenes)
+//    @FXML
+//    private void clickPh() {
+//        linechartPh.setVisible(true);
+//        linechartDisp.setVisible(false);
+//    }
+//    @FXML
+//    private void bringFront(ActionEvent event) {
+//        anchorPane.toFront(true);
+//    }
+
+
 
     private void goToPage(String fxmlFileName, ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource(fxmlFileName));

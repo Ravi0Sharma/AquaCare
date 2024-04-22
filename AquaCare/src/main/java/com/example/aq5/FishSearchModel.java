@@ -4,13 +4,13 @@ package com.example.aq5;
 public class FishSearchModel {
 
     //  declare variables that represents the fields in fish database
-    String fishName;
-    String fishSpecies;
-    String favoriteFood;
-    String fishURL;
-    String fishPh;
-    String fishTemp;
-    String fishLight;
+    private String fishName;
+    private String fishSpecies;
+    private String favoriteFood;
+    private String fishURL;
+    private String fishPh;
+    private String fishTemp;
+    private String fishLight;
 
     public FishSearchModel(String fishName, String fishSpecies, String favoriteFood, String fishURL, String fishPh, String fishTemp, String fishLight) {
         this.fishName = fishName;

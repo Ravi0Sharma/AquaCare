@@ -19,8 +19,6 @@ public class FishDBManager {
         } catch (Exception e){
             e.printStackTrace();
         }
-
-
         return databaseLink;
     }
 }
