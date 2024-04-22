@@ -11,7 +11,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -52,8 +51,6 @@ public class FishSearchController implements Initializable {
     private TableColumn<FishSearchModel, String> fLightTableColumn;
     @FXML
     private TextField searchBarSP;
-    @FXML
-    private Button backButtonSP;
 
 ObservableList<FishSearchModel> fishSearchModelObservableList = FXCollections.observableArrayList();
 
@@ -62,7 +59,6 @@ ObservableList<FishSearchModel> fishSearchModelObservableList = FXCollections.ob
         FishDBManager connectNow = new FishDBManager();
         Connection connectDB = connectNow.getDBConnection();
 
-        //        String fViewQuery = "SELECT fishID, fishName, fishSpecies, favoriteFood, fishURL, fishPh, fishPhMin, fishPhMax, fishTemp, fishTempMin, fishTempMax, fishLight"
         String fishViewQuery = "SELECT fishName, fishSpecies, favoriteFood, fishURL, fishPh, fishTemp, fishLight FROM fish";
 
         try{
@@ -70,7 +66,6 @@ ObservableList<FishSearchModel> fishSearchModelObservableList = FXCollections.ob
             ResultSet queryOutput = statement.executeQuery(fishViewQuery);
 
             while (queryOutput.next()){
-//                int queryfID = queryOutput.getInt("fishID");
                 String queryfName = queryOutput.getString("fishName");
                 String queryfSpecies = queryOutput.getString("fishSpecies");
                 String queryfFavFood = queryOutput.getString("favoriteFood");

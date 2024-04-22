@@ -1,65 +1,47 @@
-/*middle*/
-.explore-image{
-    -fx-background-image: url('image/background.jpg')
-}
 .background{
-    /*-fx-background-radius: 16;*/
-    /*-fx-background-image: url('images/background.jpg');*/
-    -fx-background-color: linear-gradient(to bottom, #1d203e, #1d203e);
+    -fx-background-color: linear-gradient(to top right, #14141F, #2D2633);
 }
-.background-home{
-    -fx-background-color: #cbe1da;
-    /*-fx-effect: innershadow(gaussian, rgba(5,5,5,5), 1, 0, 5, 1);*/
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.0, 0, 5);
 
-}
 .cards{
     -fx-background-radius: 20;
-    -fx-background-color: #4e5050;
-    -fx-border-color: linear-gradient(to bottom, #3a4142, #211e23); /* Gradient direction and colors */
-    -fx-border-image-slice: 1; /* Slice value */
-    -fx-border-width: 1px; /* Border width */
-    -fx-border-image-repeat: stretch; /* Repeat value */
+    -fx-background-color: linear-gradient(to top right, #1E1E29, #21242F);
+    -fx-border-color: rgba(24, 24, 35, 0.68);  /*181823*/
+    -fx-border-width: 8;
     -fx-border-radius: 20;
-}
-.search_bar-background{
-    -fx-background-color: #2c3c48;
-}
-.search_bar-home{
-    -fx-background-radius: 15;
-    -fx-border-color: #464545;
-    -fx-border-width: 1px;
-    -fx-border-style: solid;
-}
+    /*when clicked on*/
+    /*-fx-border-color: linear-gradient(to top left, #16242F, #182734);*/
 
+}
+.cards2{
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(31, 31, 40, 0.68);  /*181823*/
+    -fx-border-width: 8;
+    -fx-border-radius: 20;
+    -fx-background-color: linear-gradient(to top right, #162430, #192935);
 
-/*left side*/
+}
 .side_frame-left{
     -fx-background-color: #425e72;
     /*-fx-effect: innershadow(gaussian, rgba(0,0,0,0.5), 10, 0.0, 0, 5);*/
 }
-.side-top{
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.0, 0, 5);
-    -fx-background-color: white;
-}
-.side-bottom{
-    -fx-background-color: #1e2434;
-    /*-fx-effect: innershadow(gaussian, rgba(0,0,0,0.5), 10, 0.0, 0, 5);*/
-}
-.settings-button{
-    -fx-shape: "M0,100 A100,100 0 1,1 200,100 A100,100 0 1,1 0,100 Z";
-    -fx-background-color: lightblue;
-}
-.side_frame-left-buttons{
+.buttonHP{
     -fx-background-color: transparent;
-    -fx-background-radius: 5;
-    /*-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.0, 0, 5);*/
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 5, 0);
+    -fx-background-radius: 20;
+    /*when clicked on*/
+    /*-fx-background-color:#19212A;*/
+}
+.buttonMenuHP{
+    -fx-background-color: #35323D;
+    -fx-background-radius: 20;
+}
+.topBar{
+    -fx-background-color: linear-gradient(to top right, #1F242D, #302B37);
+    -fx-background-radius: 20;
+}
+.lineChart{
+    -fx-border-color: rgba(24, 24, 35, 0.68);  /*181823*/
+    -fx-border-width: 6;
+    -fx-border-radius: 20;
+    /*-fx-background-color: linear-gradient(to right, #20222D, #2A2F38);*/
 }
 
-
-/*right side*/
-.side_frame-farleft{
-    -fx-background-color: #1e2434;
-    /*-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.0, 0, 5);*/
-}
