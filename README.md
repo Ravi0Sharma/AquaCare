@@ -3,11 +3,6 @@
 [[_TOC_]]
 
 <!---
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
 
 ## Add your files
 
@@ -58,7 +53,7 @@ AquaCare offers an aquarium monitoring system designed to assist in maintaining 
 
 AquaCare offers products tailored to owners with specific needs, including species highly sensitive to temperature and pH fluctuations. Additionally, it provides a solution for anyone who wants to be notified of a drop in water level or excessive light in the aquarium, both of which can be harmful to aquatic life.
 
-To save time and ensure proper care, AquaCare notifies users when monitored levels (such as temperature, light, water level, or pH) exceed set thresholds, indicating the need for adjustments to protect aquatic life from hazardous conditions. AquaCare also includes an automated food dispenser for customers who are unable to manually feed the fish. The dispenser will be equipped with LED indicators to alert users of changes in conditions when the application is out of reach.
+To save time and ensure proper care, AquaCare notifies users when monitored levels (such as temperature, light or pH) exceed set thresholds, indicating the need for adjustments to protect aquatic life from hazardous conditions. AquaCare also includes an automated food dispenser for customers who are unable to manually feed the fish. The dispenser will be equipped with LED indicators to alert users of changes in conditions when the application is out of reach.
 
 AquaCare's historical data can be used to offer potential buyers detailed insights into how fish and plants have been cared for, displaying their habitat conditions during ownership.
 
@@ -98,7 +93,7 @@ Running the .jar or .exe file should start the application.
 To download the source code, check [Relases](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/releases) tab. There, under the assets menu, you can find and download the most recent source code relase. 
 
 After downloading the .zip file, extract the contents using [7zip](https://www.7-zip.org/)
-
+<!---
 #### How To Compile From Source Code
 
 !WIP
@@ -107,7 +102,7 @@ After downloading the .zip file, extract the contents using [7zip](https://www.7
 
 !WIP
 
-<!---
+
 Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
 
@@ -122,9 +117,9 @@ For contributions that everyone needs to abide by, refer [Contributions.md](http
 ## Authors and acknowledgment
 - Ahmet Yavuz Kalkan([@ahmety](https://git.chalmers.se/ahmety)): Making contributions to back-end of the application, specifically app-terminal connection and database connection.
 
-- Süeda Nalan Tahtaci([@sueda](https://git.chalmers.se/sueda)): Making significant contributions on the java applications graphical user interface.
+- Süeda Nalan Tahtaci([@sueda](https://git.chalmers.se/sueda)): Making contributions on the java application user interface.
 
-- Bouali Boujerad([@bouali](https://git.chalmers.se/bouali)): Making significant contributions on the java applications graphical user interface.
+- Bouali Boujerad([@bouali](https://git.chalmers.se/bouali)): Making contributions on the java applications user interface.
 
 - Ravi Sharma([@ravisha](https://git.chalmers.se/ravisha)): Making contributions on back-end and front-end aspects of the wio terminal. Handling from connectivity to UI of the terminal.
 <!--- add your contributions here without too much detail-->
@@ -141,5 +136,4 @@ This project is under MIT license, to read more refer to [License](https://git.c
 <!--- 
 ## Project status
 Project is under heavy developement
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
 -->
