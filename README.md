@@ -1,12 +1,8 @@
-# Dev team 16
+# AquaCare
 
+[[_TOC_]]
 
-
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+<!---
 
 ## Add your files
 
@@ -44,50 +40,100 @@ Use the built-in continuous integration in GitLab.
 
 ***
 
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
 
 ## Suggestions for a good README
 
 Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+-->
 
-## Name
-Choose a self-explaining name for your project.
 
 ## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
 
+AquaCare offers an aquarium monitoring system designed to assist in maintaining fish and plant life in a well-nurtured environment. AquaCare collects data using pH and temperature sensors to provide users with detailed historical data on temperature and pH levels.
+
+AquaCare offers products tailored to owners with specific needs, including species highly sensitive to temperature and pH fluctuations. Additionally, it provides a solution for anyone who wants to be notified of a drop in water level or excessive light in the aquarium, both of which can be harmful to aquatic life.
+
+To save time and ensure proper care, AquaCare notifies users when monitored levels (such as temperature, light or pH) exceed set thresholds, indicating the need for adjustments to protect aquatic life from hazardous conditions. AquaCare also includes an automated food dispenser for customers who are unable to manually feed the fish. The dispenser will be equipped with LED indicators to alert users of changes in conditions when the application is out of reach.
+
+AquaCare's historical data can be used to offer potential buyers detailed insights into how fish and plants have been cared for, displaying their habitat conditions during ownership.
+
+Our application serves as a central hub for aquarium monitoring, offering real-time sensor readings and a comprehensive overview of the health and conditions of aquatic life.
+
+<!---
+AquaCare offers an aquarium monitoring system designed to assist in maintaining fish and plant life in a well-nurtured environment. AquaCare collects data using a suite of sensors which is then stored and displayed on the user device. 
+
+To save time and ensure proper care, AquaCare notifies users when monitored levels (such as temperature, light, water level, or pH) exceed set thresholds, indicating the need for adjustments to protect aquatic life from hazardous conditions.
+AquaCare also includes an automated food dispenser for customers who are unable to manually feed the fish. 
+-->
+<!--- 
 ## Badges
 On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+-->
 
+<!---
 ## Visuals
 Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+-->
 
 ## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+### Prerequisites
+Before installing the application, ensure you have the following prerequisites installed on your system:
+
+Java Development Kit (JDK) version 17 or higher: [Download JDK](https://www.oracle.com/java/technologies/downloads/#java17)
+
+### Downloading the application
+To download the application, check [Relases](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/releases) tab. There you can download the most recent relase. 
+
+After downloading the .zip file, extract the contents using [7zip](https://www.7-zip.org/)
+
+Running the .jar or .exe file should start the application.
+
+### Downloading the source code
+
+To download the source code, check [Relases](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/releases) tab. There, under the assets menu, you can find and download the most recent source code relase. 
+
+After downloading the .zip file, extract the contents using [7zip](https://www.7-zip.org/)
+<!---
+#### How To Compile From Source Code
+
+!WIP
 
 ## Usage
+
+!WIP
+
+
 Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
 
+Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+-->
 ## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+For the future releases and upcoming features, refer to [Milestones](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/milestones).
 
 ## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+For contributions that everyone needs to abide by, refer [Contributions.md](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/blob/main/CONTRIBUTING.md)
 
 ## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+- Ahmet Yavuz Kalkan([@ahmety](https://git.chalmers.se/ahmety)): Making contributions to back-end of the application, specifically app-terminal connection and database connection.
+
+- Süeda Nalan Tahtaci([@sueda](https://git.chalmers.se/sueda)): Making contributions on the java application user interface.
+
+- Bouali Boujerad([@bouali](https://git.chalmers.se/bouali)): Making contributions on the java applications user interface.
+
+- Ravi Sharma([@ravisha](https://git.chalmers.se/ravisha)): Making contributions on back-end and front-end aspects of the wio terminal. Handling from connectivity to UI of the terminal.
+<!--- add your contributions here without too much detail-->
+
+
+<!---
+## Support
+[Buy us a coffee](https://www.coop.se/handla/varor/dryck/kaffe/bryggkaffe/bryggkaffe-mellanrost-8711000530085)
+-->
 
 ## License
-For open source projects, say how it is licensed.
+This project is under MIT license, to read more refer to [License](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/blob/main/LICENSE.MD)
 
+<!--- 
 ## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Project is under heavy developement
+-->
