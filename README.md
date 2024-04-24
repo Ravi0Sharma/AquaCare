@@ -115,13 +115,13 @@ For the future releases and upcoming features, refer to [Milestones](https://git
 For contributions that everyone needs to abide by, refer [Contributions.md](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/blob/main/CONTRIBUTING.md)
 
 ## Authors and acknowledgment
-- Ahmet Yavuz Kalkan([@ahmety](https://git.chalmers.se/ahmety)): Making contributions to back-end of the application, specifically app-terminal connection and database connection.
+- Ahmet Yavuz Kalkan([@ahmety](https://git.chalmers.se/ahmety)): Made substantial contributions to backend utilities for the application.
 
-- Süeda Nalan Tahtaci([@sueda](https://git.chalmers.se/sueda)): Making contributions on the java application user interface.
+- Süeda Nalan Tahtaci([@sueda](https://git.chalmers.se/sueda)): Made substantial contributions to the UI.
 
-- Bouali Boujerad([@bouali](https://git.chalmers.se/bouali)): Making contributions on the java applications user interface.
+- Bouali Boujerad([@bouali](https://git.chalmers.se/bouali)): Made substantial contributions to the UI.
 
-- Ravi Sharma([@ravisha](https://git.chalmers.se/ravisha)): Making contributions on back-end and front-end aspects of the wio terminal. Handling from connectivity to UI of the terminal.
+- Ravi Sharma([@ravisha](https://git.chalmers.se/ravisha)): Led the team as project manager and made substantial contributions to the backend utilities for the Wio Terminal and application.
 <!--- add your contributions here without too much detail-->
 
 
