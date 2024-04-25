@@ -12,9 +12,6 @@ dependencies {
     // Use JUnit Jupiter for testing.
     testImplementation("org.junit.jupiter:junit-jupiter:5.9.1")
 
-    // This dependency is used by the application.
-    //implementation("com.google.guava:guava:31.1-jre")
-
     //Project dependecy: Java-MQTT client
     implementation("com.influxdb:influxdb-client-java:7.0.0")
 

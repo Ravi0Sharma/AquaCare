@@ -17,7 +17,6 @@ import com.influxdb.query.FluxTable;;
 public class InfluxDBJavaClient {
 
     //! ********************************************
-    // There are mistakes I need to fix in this class
     // Common values will be
     // Bucket: Storage
     // Org: DIT113
@@ -43,8 +42,7 @@ public class InfluxDBJavaClient {
     private InfluxDBJavaClient() {
 
         //Defining the connection values
-        //This is not the best way to hold values such as api keys
-        //!WIP
+        //!WIP This is not the best way to hold values such as api keys
         token = "U3_AyxHK1iflHLBaCW4ph-hrQBzc8ECvKuOP02kUwzGAL1CjKEokPG7wMnRtAWIziZT4SmHX7w9qVs0LJQ3AcA==";
         bucket = "Storage";
         org = "DIT113";
@@ -72,6 +70,7 @@ public class InfluxDBJavaClient {
 
     public void WriteData(String measurement, String tagKey, String tagValue, String fieldKey, double fieldValue,
             Long timestamp) {
+
         // Creating a write point and filling it with values
         Point point = Point
                 .measurement(measurement)
@@ -79,39 +78,48 @@ public class InfluxDBJavaClient {
                 .addField(fieldKey, fieldValue)
                 .time(timestamp, WritePrecision.NS);
 
+        // Push the data point to the database
         writeApi.writePoint(bucket, org, point);
-        System.out.println("Wrote data to InfluxDB");
+
+        //!For testing purposes
+        System.out.println("Wrote data to InfluxDB"); 
     }
 
-    // Overloading
+    /**********************************************************/
+
+    // Write Overloads
+
+    /**********************************************************/
     
     // Overlaods are for testing purposes, this class is not meant to have anything
     // to do with what is going to be saved.
     // Its job is to save and retrieve data
     // These should be implemented in ApplicationInterface class
     //! Or sjould they :-)
+
+    // Able to not excpilictly state timestamp
     public void WriteData(String measurement, String tagKey, String tagValue, String fieldKey, double fieldValue) {
         WriteData(measurement, tagKey, tagValue, fieldKey, fieldValue, Instant.now().toEpochMilli() * 1000000);
         // Time is saved in apoch nano rather than mili so a conversion is needed
     }
-
-    public void WriteData(String measurement, String tagValue, double fieldValue) {
-        WriteData(measurement, "deviceID", tagValue, "value", fieldValue);
-    }
-
+    
+    // Able to not excpilictly state fieldKey - default is "value" and tagkey - default is "deviceID"
     public void WriteData(String measurement, String tagValue, double fieldValue, Long timestamp) {
         WriteData(measurement, "deviceID", tagValue, "value", fieldValue, timestamp);
     }
-
-
-
+    
+    // Able to not excpilictly state fieldKey - default is "value" and tagkey - default is "deviceID" and timestamp default is current time
+    public void WriteData(String measurement, String tagValue, double fieldValue) {
+            WriteData(measurement, "deviceID", tagValue, "value", fieldValue);
+    }
+    
     /**********************************************************/
 
     // Querying the database
 
     /**********************************************************/
 
-    public List<FluxTable> QueryDatabase(String dataBaseBucket, String duration, String measurement, String field,
+    public List<FluxTable> QueryDatabase(String duration, String measurement, String field,
             String deviceID, boolean mean) {
         // Field could be "value" at default
 
@@ -123,17 +131,17 @@ public class InfluxDBJavaClient {
         if (mean) {
             query = String.format(
                 "from(bucket: \"%s\") |> range(start: -%s) |> filter(fn: (r) => r[\"_measurement\"] == \"%s\") |> filter(fn: (r) => r[\"_field\"] == \"%s\") |> filter(fn: (r) => r[\"deviceID\"] == \"%s\") |> mean() |> yield()",
-                dataBaseBucket, duration, measurement, field, deviceID);
+                bucket, duration, measurement, field, deviceID);
         } else {
             query = String.format(
                 "from(bucket: \"%s\") |> range(start: -%s) |> filter(fn: (r) => r[\"_measurement\"] == \"%s\") |> filter(fn: (r) => r[\"_field\"] == \"%s\") |> filter(fn: (r) => r[\"deviceID\"] == \"%s\") |> yield()",
-                dataBaseBucket, duration, measurement, field, deviceID);
+                bucket, duration, measurement, field, deviceID);
         }
 
         //Querying the database
         List<FluxTable> tables = client.getQueryApi().query(query, org);
         System.out.println("Queried data from InfluxDB");
-
+        
         //Printing the data
         //!For testing purposes
         for (FluxTable fluxTable : tables) {
@@ -147,16 +155,10 @@ public class InfluxDBJavaClient {
         return tables;
     }
 
-
     /**********************************************************/
     // Query Overloads
     /**********************************************************/
-
-    // Able to not excpilictly state bucket
-    public List<FluxTable> QueryDatabase(String duration, String measurement, String field,
-    String deviceID, boolean mean) {
-        return QueryDatabase(bucket, duration, measurement, field, deviceID, mean);
-    }
+    //! May be implemented in ApplicationInterface class instead
 
     // Able to not excpilictly state mean
     public List<FluxTable> QueryDatabase(String duration, String measurement, String field,

@@ -1,40 +1,61 @@
 package backend;
 
 import java.util.List;
+import java.time.Instant;
 import com.influxdb.query.FluxTable;
 
 public class ApplicationInterface {
     
     MqttJavaClient mqttJavaClient;
-    InfluxdbClient influxdbClient;
+    InfluxDBJavaClient influxDBJavaClient;
 
     public ApplicationInterface() {
-        mqttJavaClient = new MqttJavaClient();
-        influxdbClient = new InfluxdbClient();
+        mqttJavaClient = MqttJavaClient.getInstance();
+        influxDBJavaClient = InfluxDBJavaClient.getInstance();
     }
-
+    
+    //Publishing a message to the MQTT broker
+    //Excpected topic format is "AquaCareApp/001/Temperature" - "AquaCareApp/deviceID/sensorType"
     public void Publish(String topic, String content, int qos) {
        mqttJavaClient.Publish(topic, content ,qos);
     }
-
+    
+    //Default qos is 1
     public void Publish(String topic, String content) {
         // Default qos settings are used
-        //Excpected topic format is "AquaCareApp/deviceID/actuator"
         Publish(topic, content, 1);
     }
     
-    public void ActivateFeeder(String content) {
+    public void ActivateFeeder(String deviceID, String content) {
         // Default topic, qos and (content?) settings are used
-        Publish("AquaCareApp/deviceID/actuator", content, 1);
+        Publish(String.format("AquaCareApp/%s/actuator", deviceID), content, 1);
         //We may implement duplicate command control system on the terminal side based on the sent content? -Just maybe
         //Other QoS settings may be more appropriate
     }
+
+    /*****************************/
+
+   //Write data on database
+   //!for whatever reason
+   public void WriteSensorData(String measurement, String tagKey, String tagValue, String fieldKey, double fieldValue) {
+       // Time is saved in apoch nano rather than mili so a conversion is needed
+       influxDBJavaClient.WriteData(measurement, tagKey, tagValue, fieldKey, fieldValue, Instant.now().toEpochMilli() * 1000000);
+   }
    
-    public void WriteSensorData(String measurement, String tagKey, String tagValue, String fieldKey, double fieldValue) {
-        influxdbClient.WriteData(measurement, tagKey, tagValue, fieldKey, fieldValue);
+   public void WriteSensorData(String measurement, String tagKey, String tagValue, String fieldKey, double fieldValue,
+   Long timestamp) {
+       influxDBJavaClient.WriteData(measurement, tagKey, tagValue, fieldKey, fieldValue, timestamp);
+   }
+   
+    public void WriteSensorData(String measurement, String tagValue, double fieldValue) {
+        influxDBJavaClient.WriteData(measurement, tagValue, fieldValue);
     }
 
 
+    /**********************************************************/
+    //Query database
+    /**********************************************************/
+    
     /*  1ns // 1 nanosecond
         1us // 1 microsecond
         1ms // 1 millisecond
@@ -50,17 +71,13 @@ public class ApplicationInterface {
      */
 
     public List<FluxTable> MeanOfDuration(String sensorName, String duration, String deviceID) {
-        
-        //Example parameters (Temparature, 1d, 123123)
-        //dbQueryClient.QueryDatabase(sensorName, duration, deviceID, true);
-        //Null values are handled on db side
-
-        return influxdbClient.QueryDatabase(sensorName, duration, "value", deviceID, true);
+        //Example parameters ("Temparature", "1d", "001")
+        return influxDBJavaClient.QueryDatabase(duration, sensorName, "value", deviceID, true);
     }
 
     public List<FluxTable> QueryOfDuration(String sensorName, String duration, String deviceID) {
-        return influxdbClient.QueryDatabase(sensorName, duration, "value", deviceID, false);
+        //Example parameters ("Temparature", "1d", "001")
+        return influxDBJavaClient.QueryDatabase(duration, sensorName, "value", deviceID, false);
     }
-
 
 }

@@ -100,7 +100,6 @@ public class MqttJavaClient implements MqttCallback {
             System.out.println(e);
 
         }
-
         
         Connect();
 
