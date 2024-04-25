@@ -10,12 +10,14 @@ public class ApplicationInterface {
     InfluxDBJavaClient influxDBJavaClient;
 
     public ApplicationInterface() {
+        // Getting the instances of related classes
         mqttJavaClient = MqttJavaClient.getInstance();
         influxDBJavaClient = InfluxDBJavaClient.getInstance();
+
     }
     
-    //Publishing a message to the MQTT broker
-    //Excpected topic format is "AquaCareApp/001/Temperature" - "AquaCareApp/deviceID/sensorType"
+    // Publishing a message to the MQTT broker
+    // Excpected topic format is "AquaCareApp/001/Temperature" - "AquaCareApp/deviceID/sensorType"
     public void Publish(String topic, String content, int qos) {
        mqttJavaClient.Publish(topic, content ,qos);
     }
@@ -34,8 +36,8 @@ public class ApplicationInterface {
     }
 
     /*****************************/
-
-   //Write data on database
+    
+    //Write data on database
    //!for whatever reason
    public void WriteSensorData(String measurement, String tagKey, String tagValue, String fieldKey, double fieldValue) {
        // Time is saved in apoch nano rather than mili so a conversion is needed

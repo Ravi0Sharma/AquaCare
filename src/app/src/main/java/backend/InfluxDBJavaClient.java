@@ -43,12 +43,15 @@ public class InfluxDBJavaClient {
 
         //Defining the connection values
         //!WIP This is not the best way to hold values such as api keys
-        token = "U3_AyxHK1iflHLBaCW4ph-hrQBzc8ECvKuOP02kUwzGAL1CjKEokPG7wMnRtAWIziZT4SmHX7w9qVs0LJQ3AcA==";
+        //token = "U3_AyxHK1iflHLBaCW4ph-hrQBzc8ECvKuOP02kUwzGAL1CjKEokPG7wMnRtAWIziZT4SmHX7w9qVs0LJQ3AcA==";
+        token = "ryImwF2R21ptUl337MqSxGX0m-oiGM5hszxDo-QuyunRLAuFuPACWAwQrqzWZilV2JH1L3tAxOJc2NSyE-9Yvw==";
         bucket = "Storage";
         org = "DIT113";
 
         System.out.println("Connecting to InfluxDB");
-        client = InfluxDBClientFactory.create("http://localhost:8086", token.toCharArray());
+        client = InfluxDBClientFactory.create("https://eu-central-1-1.aws.cloud2.influxdata.com", token.toCharArray());
+        //client = InfluxDBClientFactory.create("http://localhost:8086/", token.toCharArray());
+
         System.out.println("Connected to InfluxDB");
 
         writeApi = client.getWriteApiBlocking();
