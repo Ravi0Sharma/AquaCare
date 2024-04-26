@@ -51,7 +51,7 @@ Every project is different, so consider which of these sections apply to yours. 
 
 AquaCare offers an aquarium monitoring system designed to assist in maintaining fish and plant life in a well-nurtured environment. AquaCare collects data using pH and temperature sensors to provide users with detailed historical data on temperature and pH levels.
 
-AquaCare offers products tailored to owners with specific needs, including species highly sensitive to temperature and pH fluctuations. Additionally, it provides a solution for anyone who wants to be notified of a drop in water level or excessive light in the aquarium, both of which can be harmful to aquatic life.
+AquaCare offers products tailored to owners with specific needs, including species highly sensitive to temperature and pH fluctuations. Additionally, it provides a solution for anyone who wants to be notified of a excessive light in the aquarium, both of which can be harmful to aquatic life.
 
 To save time and ensure proper care, AquaCare notifies users when monitored levels (such as temperature, light or pH) exceed set thresholds, indicating the need for adjustments to protect aquatic life from hazardous conditions. AquaCare also includes an automated food dispenser for customers who are unable to manually feed the fish. The dispenser will be equipped with LED indicators to alert users of changes in conditions when the application is out of reach.
 
@@ -62,7 +62,7 @@ Our application serves as a central hub for aquarium monitoring, offering real-t
 <!---
 AquaCare offers an aquarium monitoring system designed to assist in maintaining fish and plant life in a well-nurtured environment. AquaCare collects data using a suite of sensors which is then stored and displayed on the user device. 
 
-To save time and ensure proper care, AquaCare notifies users when monitored levels (such as temperature, light, water level, or pH) exceed set thresholds, indicating the need for adjustments to protect aquatic life from hazardous conditions.
+To save time and ensure proper care, AquaCare notifies users when monitored levels (such as temperature, light or pH) exceed set thresholds, indicating the need for adjustments to protect aquatic life from hazardous conditions.
 AquaCare also includes an automated food dispenser for customers who are unable to manually feed the fish. 
 -->
 <!--- 
