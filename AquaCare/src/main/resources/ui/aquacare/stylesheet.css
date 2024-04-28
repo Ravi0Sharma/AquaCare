@@ -8,17 +8,15 @@
     -fx-border-color: rgba(24, 24, 35, 0.68);  /*181823*/
     -fx-border-width: 8;
     -fx-border-radius: 20;
-    /*when clicked on*/
-    /*-fx-border-color: linear-gradient(to top left, #16242F, #182734);*/
-
+/*text color #ffffff70*/
 }
-.cards2{
+.cards2{ /* when clicked on */
     -fx-background-radius: 20;
     -fx-border-color: rgba(31, 31, 40, 0.68);  /*181823*/
     -fx-border-width: 8;
     -fx-border-radius: 20;
     -fx-background-color: linear-gradient(to top right, #162430, #192935);
-
+/*text color #c6c5c5*/
 }
 .side_frame-left{
     -fx-background-color: #425e72;
@@ -45,3 +43,6 @@
     /*-fx-background-color: linear-gradient(to right, #20222D, #2A2F38);*/
 }
 
+.table-cell {
+    -fx-text-fill: white;
+}

@@ -1,4 +1,4 @@
-package com.example.aq5;
+package ui.aquacare;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -128,7 +128,7 @@ ObservableList<FishSearchModel> fishSearchModelObservableList = FXCollections.ob
     }
     @FXML
     public void goHomePage2(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("home-page3.fxml"));
+        root = FXMLLoader.load(getClass().getResource("homepage.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

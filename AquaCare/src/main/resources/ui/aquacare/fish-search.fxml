@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1200.0" styleClass="background" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aq5.FishSearchController">
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" styleClass="background" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.aquacare.FishSearchController">
    <children>
-      <TableView fx:id="fishTableView" layoutX="21.0" layoutY="64.0" prefHeight="615.0" prefWidth="1150.0" style="-fx-background-color: black;" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+      <TableView fx:id="fishTableView" layoutX="21.0" layoutY="64.0" prefHeight="615.0" prefWidth="1150.0" style="-fx-background-color: black;" styleClass="table-cell" stylesheets="@stylesheet.css" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
         <columns>
             <TableColumn fx:id="fNameTableColumn" editable="false" minWidth="30.0" prefWidth="206.0" resizable="false" text="Name" />
           <TableColumn fx:id="fSpeciesTableColumn" editable="false" minWidth="30.0" prefWidth="233.0" resizable="false" text="Species" />

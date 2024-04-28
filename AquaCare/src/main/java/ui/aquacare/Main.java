@@ -1,4 +1,4 @@
-package com.example.aq5;
+package ui.aquacare;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +16,7 @@ public class Main extends Application {
         stage.initStyle(StageStyle.UNDECORATED);
 //        stage.initStyle(StageStyle.UTILITY);
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("home-page3.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("homepage.fxml"));
         Scene scene = new Scene(fxmlLoader.load(),1280, 768);
 
 //        scene.getStylesheets().add(getClass().getResource("stage.css").toExternalForm());
@@ -26,6 +26,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 }

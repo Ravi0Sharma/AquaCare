@@ -1,4 +1,4 @@
-package com.example.aq5;
+package ui.aquacare;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

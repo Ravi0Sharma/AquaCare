@@ -1,9 +1,9 @@
-module com.example.aq5 {
+module ui.aquacare {
     requires javafx.controls;
     requires javafx.fxml;
-    requires javafx.graphics;
     requires java.sql;
+    requires javafx.graphics;
 
-    opens com.example.aq5 to javafx.fxml;
-    exports com.example.aq5;
+    opens ui.aquacare to javafx.fxml;
+    exports ui.aquacare;
 }

@@ -1,5 +1,6 @@
-package com.example.aq5;
+package ui.aquacare;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +30,7 @@ public class SceneController {
     private LineChart<String, Number> linechartLight;
     @FXML
     private LineChart<String, Number> linechartDisp;
+
     @FXML
     private Button homeButton;
     @FXML
@@ -39,6 +41,7 @@ public class SceneController {
     private Button buttonLeft4;
     @FXML
     private Button exitButton;
+
     @FXML
     private Button phButton;
     @FXML
@@ -47,12 +50,14 @@ public class SceneController {
     private Button lightButton;
     @FXML
     private Button tempButton;
+
     @FXML
     private Button buttonRight;
     @FXML
     private Button buttonRight1;
     @FXML
     private Button buttonRight2;
+
     @FXML
     private TextField textFieldLight;
     @FXML
@@ -76,6 +81,13 @@ public class SceneController {
 //        anchorPane.toFront(true);
 //    }
 
+    @FXML
+    private void quit(){
+        exitButton.setOnAction(event -> {
+            Platform.exit();
+        });
+    }
+
 
 
     private void goToPage(String fxmlFileName, ActionEvent event) throws IOException {
@@ -88,17 +100,17 @@ public class SceneController {
 
     @FXML
     private void goHomePage(ActionEvent event) throws IOException {
-        goToPage("home-page3.fxml", event);
+        goToPage("homepage.fxml", event);
     }
 
     @FXML
     private void goSearchPage(ActionEvent event) throws IOException {
-        goToPage("fishsearch.fxml", event);
+        goToPage("fish-search.fxml", event);
     }
 
     @FXML
     public void goSearchPage2(javafx.scene.input.MouseEvent mouseEvent) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("fishsearch.fxml"));
+        root = FXMLLoader.load(getClass().getResource("fish-search.fxml"));
         stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -107,23 +119,23 @@ public class SceneController {
 
     @FXML
     private void goPhPage(ActionEvent event) throws IOException {
-        goToPage("phScene.fxml", event);
+        goToPage("ph-scene.fxml", event);
     }
 
-
-    @FXML
-    private void goLightPage(ActionEvent event) throws IOException {
-        goToPage("lightScene.fxml", event);
-    }
+    //this is now the default homepage
+//    @FXML
+//    private void goLightPage(ActionEvent event) throws IOException {
+//        goToPage("lightScene.fxml", event);
+//    }
 
     @FXML
     private void goFoodPage(ActionEvent event) throws IOException {
-        goToPage("foodScene.fxml", event);
+        goToPage("food-scene.fxml", event);
     }
 
     @FXML
     private void goTempPage(ActionEvent event) throws IOException {
-        goToPage("temperatureScene.fxml", event);
+        goToPage("temperature-scene.fxml", event);
     }
 
     @FXML

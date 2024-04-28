@@ -1,4 +1,4 @@
-package com.example.aq5;
+package ui.aquacare;
 
 //  this represents our data
 public class FishSearchModel {
