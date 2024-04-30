@@ -8,14 +8,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseButton;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
+import java.util.List;
 
 public class SceneController {
 
@@ -69,6 +69,67 @@ public class SceneController {
     @FXML
     private Text lcTextFood;
 
+
+    /*//! Lets set active fish manually for now
+    //! We def need to add a way to switch the fishes
+    //! At least based on how the dashboard is designed
+
+    private String activeFishMonitor;
+
+    //! Two choices:
+    //! 1. Update all charts at once after selecting a fish
+    //! 2. Update each chart separately after selecting and selecting a chart( one could even say they update after selecting a chart :-> )
+
+    private void updateAllCharts() {
+        //! Should be triggered after a fish change
+
+        //Query data based om fish
+
+        //Create data series for the line chart
+
+        //Add data to the data series
+
+
+        //Update the line chart
+
+        //Do this 4 times???
+        updateChart(linechartTemp, "Temperature");
+        updateChart(linechartLight, "Light");
+        updateChart(linechartPh, "PhLevel");
+        updateChart(linechartDisp, "Dispenser");
+
+
+        //Then create a method for it and call it 4 times for each chart
+
+
+    }
+    private void updateChart(LineChart chart, String sensorName) {
+        //! A week of data is hardcoded for now
+        //! Changing the duration or exporting the full duration would be good.
+        //! Online db can only hold 30 days of data
+
+        //Create data series for the line chart
+        XYChart.Series series = new XYChart.Series();
+
+        //Query data based on fish
+        List<FluxTable> tables = applicationInterface.QueryOfDuration(activeFishMonitor, "1w", sensorName);
+
+        //Divide tables into individual tables
+        for (FluxTable table : tables) {
+            //Get the records from the table
+            List<FluxRecord> records = table.getRecords();
+
+            for (FluxRecord fluxRecord : records) {
+                //Save date and value to the data series
+                series.getData().add(new XYChart.Data(fluxRecord.getTime(), fluxRecord.getValue()));
+            }
+        }
+
+        //Update the line chart with milked values
+        chart.getData().add(series);
+    }
+
+*/
 
     //  will be added when some solution is found for switching pages (not scenes)
 //    @FXML

@@ -38,6 +38,15 @@ dependencies {
 
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+
+  //Project dependecy: Java-MQTT client
+  // https://mvnrepository.com/artifact/com.influxdb/influxdb-client-java
+  implementation 'com.influxdb:influxdb-client-java:7.0.0'
+
+  //Project dependecy: Java-InfluxDB client
+  // https://mvnrepository.com/artifact/io.joynr.java.messaging.mqtt/paho-mqtt-client
+  implementation 'io.joynr.java.messaging.mqtt:paho-mqtt-client:1.14.2'
+
 }
 
 test {
