@@ -13,11 +13,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.fxml.Initializable;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class SceneController {
+import ui.utilities.ApplicationInterface;
+
+import com.influxdb.query.FluxRecord;
+import com.influxdb.query.FluxTable;
+
+public class SceneController implements Initializable {
+
+    ApplicationInterface applicationInterface = new ApplicationInterface();
 
     private Stage stage;
     private Scene scene;
@@ -69,8 +79,7 @@ public class SceneController {
     @FXML
     private Text lcTextFood;
 
-
-    /*//! Lets set active fish manually for now
+    //! Lets set active fish manually for now
     //! We def need to add a way to switch the fishes
     //! At least based on how the dashboard is designed
 
@@ -82,27 +91,14 @@ public class SceneController {
 
     private void updateAllCharts() {
         //! Should be triggered after a fish change
+        //The current structure of the UI makes this function obsolete since the charts are updated in the initialize function
 
-        //Query data based om fish
-
-        //Create data series for the line chart
-
-        //Add data to the data series
-
-
-        //Update the line chart
-
-        //Do this 4 times???
         updateChart(linechartTemp, "Temperature");
         updateChart(linechartLight, "Light");
         updateChart(linechartPh, "PhLevel");
         updateChart(linechartDisp, "Dispenser");
-
-
-        //Then create a method for it and call it 4 times for each chart
-
-
     }
+
     private void updateChart(LineChart chart, String sensorName) {
         //! A week of data is hardcoded for now
         //! Changing the duration or exporting the full duration would be good.
@@ -111,25 +107,35 @@ public class SceneController {
         //Create data series for the line chart
         XYChart.Series series = new XYChart.Series();
 
-        //Query data based on fish
+        //Affects legend which, at the moment, does not exist
+        series.setName(sensorName);
+
+        //Query data based on active fish monitor and sensor name
         List<FluxTable> tables = applicationInterface.QueryOfDuration(activeFishMonitor, "1w", sensorName);
 
         //Divide tables into individual tables
         for (FluxTable table : tables) {
-            //Get the records from the table
+
+            //Get the records from the table, which correspond to rows in a table
             List<FluxRecord> records = table.getRecords();
 
             for (FluxRecord fluxRecord : records) {
+
+                //This actually works as intended
+                System.out.println("value: " + fluxRecord.getValue() + "    stamp:" + fluxRecord.getTime().toString());
+
                 //Save date and value to the data series
-                series.getData().add(new XYChart.Data(fluxRecord.getTime(), fluxRecord.getValue()));
+                series.getData().add(new XYChart.Data(fluxRecord.getTime().toString(), fluxRecord.getValue()));
+
             }
         }
 
         //Update the line chart with milked values
         chart.getData().add(series);
+
     }
 
-*/
+
 
     //  will be added when some solution is found for switching pages (not scenes)
 //    @FXML
@@ -209,5 +215,40 @@ public class SceneController {
         goToPage("settings.fxml", event);
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
+        //!For testing purposes, but also, cant be removed for now since changing fish is not implemented
+        //Set active fish monitor to pull corresponding data from
+        activeFishMonitor = "test";
+
+        //***********************************************
+        //Check which linechart is not null and update it
+        //***********************************************
+
+        //"test" is a placeholder for the actual sensor name. As an example, check updateAllCharts() function
+        if(linechartTemp != null) {
+            updateChart(linechartTemp, "test");
+        } else {
+            System.out.println("linechartTemp is null");
+        }
+
+        if(linechartDisp!= null) {
+            updateChart(linechartDisp, "test");
+        } else {
+            System.out.println("linechartDisp is null");
+        }
+
+        if(linechartLight != null) {
+            updateChart(linechartLight, "test");
+        } else {
+            System.out.println("linechartLight is null");
+        }
+
+        if(linechartPh!= null) {
+            updateChart(linechartPh, "test");
+        } else {
+            System.out.println("linechartPh is null");
+        }
+    }
 }
