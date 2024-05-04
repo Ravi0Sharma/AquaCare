@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -130,9 +131,44 @@ public class SceneController implements Initializable {
             }
         }
 
+        //Turn off the legend for the line chart, since it takes precious space
+        chart.setLegendVisible(false);
+
+        //Turn off the symbols or dots on the line chart, since they over-crowd the chart
+        chart.setCreateSymbols(false);
+
+        //Turn off the animation of the line chart, since it is not needed
+        chart.setAnimated(false);
+
+        //Instead of turning them off, try shortening time stamps
+        //Giving user about when data is collected is important
+        //Another choice would be to somehow downsample the labels(not data as a whole), to make it less crowded
+
+        //Turn off the horizontal grid labels of the line chart, since they make the chart much smaller
+        chart.getXAxis().setTickLabelsVisible(false);
+        chart.getXAxis().setOpacity(0);
+
+        //Turns off effects on the line chart, since they are not needed
+        chart.setEffect(null);
+
+        //Turn auto-scaling off for the line chart, realistically value will be between two values
+        chart.getYAxis().setAutoRanging(false);
+
+        //These values should be based on sensor type and tresholds set in json file
+        ((NumberAxis) chart.getYAxis()).setLowerBound(0);
+        ((NumberAxis) chart.getYAxis()).setUpperBound(100);
+
+        //*************************************************************************************
+
         //Update the line chart with milked values
         chart.getData().add(series);
 
+        // Add a custom CSS class to modify the style of the series
+        //I gotta make this work for it to look good, or just drop it and never think about it
+        series.getNode().getStyleClass().add("series-class");
+
+        //Apply the CSS to the chart
+        chart.applyCss();
     }
 
 
@@ -228,25 +264,25 @@ public class SceneController implements Initializable {
 
         //"test" is a placeholder for the actual sensor name. As an example, check updateAllCharts() function
         if(linechartTemp != null) {
-            updateChart(linechartTemp, "test");
+            updateChart(linechartTemp, "Temperature");
         } else {
             System.out.println("linechartTemp is null");
         }
 
         if(linechartDisp!= null) {
-            updateChart(linechartDisp, "test");
+            updateChart(linechartDisp, "Feed");
         } else {
             System.out.println("linechartDisp is null");
         }
 
         if(linechartLight != null) {
-            updateChart(linechartLight, "test");
+            updateChart(linechartLight, "Light");
         } else {
             System.out.println("linechartLight is null");
         }
 
         if(linechartPh!= null) {
-            updateChart(linechartPh, "test");
+            updateChart(linechartPh, "Ph");
         } else {
             System.out.println("linechartPh is null");
         }
