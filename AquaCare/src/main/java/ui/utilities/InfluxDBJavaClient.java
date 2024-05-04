@@ -41,6 +41,7 @@ public class InfluxDBJavaClient {
 
     private InfluxDBJavaClient() {
 
+// TODO: create a secret document in gitlab to store those values
         //Defining the connection values
         //!WIP This is not the best way to hold values such as api keys
         //token = "U3_AyxHK1iflHLBaCW4ph-hrQBzc8ECvKuOP02kUwzGAL1CjKEokPG7wMnRtAWIziZT4SmHX7w9qVs0LJQ3AcA==";

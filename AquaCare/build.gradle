@@ -47,6 +47,10 @@ dependencies {
   // https://mvnrepository.com/artifact/io.joynr.java.messaging.mqtt/paho-mqtt-client
   implementation 'io.joynr.java.messaging.mqtt:paho-mqtt-client:1.14.2'
 
+  implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+  implementation 'org.jfree:jfreechart:1.0.19'
+  implementation 'com.fazecast:jSerialComm:2.11.0'
+  implementation 'org.jfree:jcommon:1.0.23'
 }
 
 test {

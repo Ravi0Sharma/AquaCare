@@ -5,8 +5,12 @@ import java.time.Instant;
 import com.influxdb.query.FluxTable;
 
 public class ApplicationInterface {
-    
-    MqttJavaClient mqttJavaClient;
+
+    public MqttJavaClient getMqttJavaClient() {
+        return mqttJavaClient;
+    }
+
+    private MqttJavaClient mqttJavaClient;
     InfluxDBJavaClient influxDBJavaClient;
 
     public ApplicationInterface() {
