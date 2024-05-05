@@ -1,13 +1,53 @@
-# You can override the included template(s) by including variable overrides
-# SAST customization: https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
-# Secret Detection customization: https://docs.gitlab.com/ee/user/application_security/secret_detection/pipeline/#customization
-# Dependency Scanning customization: https://docs.gitlab.com/ee/user/application_security/dependency_scanning/#customizing-the-dependency-scanning-settings
-# Container Scanning customization: https://docs.gitlab.com/ee/user/application_security/container_scanning/#customizing-the-container-scanning-settings
-# Note that environment variables can be set in several places
-# See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
+image: ubuntu:latest
+
+before_script:
+  # run shell script for installing arduino-cli, Wio Terminal core, and project libraries
+  - chmod +x setup-build-env.sh               # change permissions to execute bash shell script
+  - ./setup-build-env.sh                      # execute bash shell script
+
 stages:
-- test
-sast:
-  stage: test
-include:
-- template: Security/SAST.gitlab-ci.yml
+  - build
+  - deploy
+
+compile:
+  stage: build
+  tags:
+    - docker
+  script:
+    - export PATH=$PATH:/root/bin             # set the path to arduino-cli installation folder
+    - pwd                                     # print the current working directory
+    - cd WioTerminal                          # change the directory to arduino folder
+    - echo "$SECRETS_H" > Secrets.h           # import secrets from GitLAB CI/CD Settings -> Variables
+    #- echo "$NETWORK_INFO_H" > NetworkInfo.h  # import secrets for WiFi from Gitlab CI/CD Settings -> Variables
+    #- echo "$BROKER_INFO_H" > BrokerInfo.h    # import secrets for MQTT from Gitlab CI/CD Settings -> Variables
+    - arduino-cli lib list                    # check that libraries are installed
+    
+    # Compile
+    - arduino-cli compile --fqbn Seeeduino:samd:seeed_wio_terminal
+
+    # Upload
+    - arduino-cli board list                  # Check if device is connected
+  except:
+    - tags
+
+release:
+  stage: deploy
+  tags:
+    - upload
+  script:
+    - export PATH=$PATH:/root/bin             # set the path to arduino-cli installation folder
+    - pwd                                     # print the current working directory
+    - cd WioTerminal                         # change the directory to arduino folder
+    - echo "$SECRETS_H" > Secrets.h           # import secrets from GitLAB CI/CD Settings -> Variables
+    #- echo "$NETWORK_INFO_H" > NetworkInfo.h  # import secrets for WiFi from Gitlab CI/CD Settings -> Variables
+    #- echo "$BROKER_INFO_H" > BrokerInfo.h    # import secrets for MQTT from Gitlab CI/CD Settings -> Variables
+    - arduino-cli lib list                    # check that libraries are installed
+    
+    # Compile
+    - arduino-cli compile --fqbn Seeeduino:samd:seeed_wio_terminal
+
+    # Upload
+    - arduino-cli board list                  # Check if device is connected
+    - arduino-cli upload -p $COM_PORT --fqbn Seeeduino:samd:seeed_wio_terminal           # if runnner is on local machine
+  only:
+    - tags
