@@ -21,6 +21,13 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import com.influxdb.query.FluxRecord;
+import com.influxdb.query.FluxTable;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
+import ui.utilities.ApplicationInterface;
+
+import java.util.List;
 
 
 public class SceneController implements Initializable {
@@ -52,14 +59,98 @@ public class SceneController implements Initializable {
     private Label tempLabel;
     @FXML
     private Label feedLabel;
+    ApplicationInterface applicationInterface = new ApplicationInterface();
 
+    @FXML
+    private LineChart<String, Number> linechartPh;
+    @FXML
+    private LineChart<String, Number> linechartTemp;
+    @FXML
+    private LineChart<String, Number> linechartLight;
+    @FXML
+    private LineChart<String, Number> linechartDisp;
+
+    private String activeFishMonitor;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         setDate();
         realTimeData();
+
+        applicationInterface = new ApplicationInterface();
+
+        //"test" is a placeholder for the actual sensor name. As an example, check updateAllCharts() function
+        if(linechartTemp != null) {
+            updateChart(linechartTemp, "test");
+        } else {
+            System.out.println("linechartTemp is null");
+        }
+
+        if(linechartDisp!= null) {
+            updateChart(linechartDisp, "test");
+        } else {
+            System.out.println("linechartDisp is null");
+        }
+
+        if(linechartLight != null) {
+            updateChart(linechartLight, "test");
+        } else {
+            System.out.println("linechartLight is null");
+        }
+
+        if(linechartPh!= null) {
+            updateChart(linechartPh, "test");
+        } else {
+            System.out.println("linechartPh is null");
+        }
     }
 
+    /**
+     * ------- HISTORICAL READINGS VISUALIZATION -------
+     */
+
+    private void updateAllCharts() {
+        updateChart(linechartTemp, "Temperature");
+        updateChart(linechartLight, "Light");
+        updateChart(linechartPh, "PhLevel");
+        updateChart(linechartDisp, "Dispenser");
+    }
+
+    private void updateChart(LineChart chart, String sensorName) {
+        //Create data series for the line chart
+        XYChart.Series series = new XYChart.Series();
+
+        //Affects legend which, at the moment, does not exist
+        series.setName(sensorName);
+
+        //Query data based on active fish monitor and sensor name
+        List<FluxTable> tables = applicationInterface.QueryOfDuration(activeFishMonitor, "1w", sensorName);
+
+        //Divide tables into individual tables
+        for (FluxTable table : tables) {
+
+            //Get the records from the table, which correspond to rows in a table
+            List<FluxRecord> records = table.getRecords();
+
+            for (FluxRecord fluxRecord : records) {
+
+                //This actually works as intended
+                System.out.println("value: " + fluxRecord.getValue() + "stamp:" + fluxRecord.getTime().toString());
+
+                //Save date and value to the data series
+                series.getData().add(new XYChart.Data(fluxRecord.getTime().toString(), fluxRecord.getValue()));
+
+            }
+        }
+        //Update the line chart with milked values
+        chart.getData().add(series);
+
+    }
+
+
+    /**
+     * ------- REAL-TIME DATA VISUALIZATION -------
+     */
     // This method is useless if you start to use MQTT for RT display. because data will be processed in that class.
     private String[] processData(String rawData) {
         // we will use prefixes as "'temperature' : 21" and "'pH':8". to get the data at the right we split by :
@@ -114,10 +205,13 @@ public class SceneController implements Initializable {
                             if (sensorData[0].equals("pH")) {
                                 phLabel.setText("pH: " + sensorData[1]);
                             } else if (sensorData[0].equals("Temperature")) {
-                                tempLabel.setText("Temperature: " + sensorData[1]);
+                                tempLabel.setText("Temperature: " + sensorData[1] + "°C");
                             } else if (sensorData[0].equals("Light")) {
                                 lightLabel.setText("Light: " + sensorData[1]);
                             }
+//                            else if (sensorData[0].equals("Dispenser")) {
+//                                lightLabel.setText("Last Fed: " + sensorData[1]);
+//                            }
                         });
 
                         // sleep to avoid reduce app's CPU usage
@@ -139,6 +233,9 @@ public class SceneController implements Initializable {
         });
     }
 
+    /**
+     * ------- HOME PAGE "BASE" -------
+      */
     public void setDate(){
         // TODO: The date should be able to change while the app is still running.
         LocalDate localDate = LocalDate.now();

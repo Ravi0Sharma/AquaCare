@@ -10,28 +10,16 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Reflection?>
-<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" styleClass="background" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/19.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.aquacare.SceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" styleClass="background" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.aquacare.SceneController">
    <children>
-      <AnchorPane layoutX="108.0" layoutY="1.0" prefHeight="768.0" prefWidth="1178.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.rightAnchor="-6.0">
-         <children>
-            <VBox fx:id="roots" layoutX="816.0" layoutY="227.0" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Button fx:id="connectButton" mnemonicParsing="false" text="Button" />
-                  <ComboBox fx:id="portList" prefWidth="150.0" />
-                    <Label prefWidth="88.0" text="Caribbean cruise" />
-               </children>
-            </VBox>
-         </children></AnchorPane>
       <ImageView fitHeight="65.0" fitWidth="65.0" layoutX="225.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
       <Pane fx:id="frameLeft" layoutX="9.0" layoutY="21.0" opacity="0.62" prefHeight="768.0" prefWidth="102.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -84,19 +72,29 @@
             <Pane fx:id="glow2" layoutX="-5.0" layoutY="366.0" prefHeight="10.0" prefWidth="10.0" style="-fx-background-color: turquoise; -fx-background-radius: 30;" visible="false" />
             <Pane fx:id="glow3" layoutX="-5.0" layoutY="431.0" prefHeight="10.0" prefWidth="10.0" style="-fx-background-color: turquoise; -fx-background-radius: 30;" visible="false" />
             <Pane fx:id="glow4" layoutX="-5.0" layoutY="499.0" prefHeight="10.0" prefWidth="10.0" style="-fx-background-color: turquoise; -fx-background-radius: 30;" visible="false" />
+            <VBox fx:id="roots" layoutX="7.0" layoutY="33.0" prefHeight="90.0" prefWidth="100.0">
+               <children>
+                  <Button fx:id="connectButton" mnemonicParsing="false" prefHeight="41.0" prefWidth="94.0" styleClass="cards2" stylesheets="@stylesheet.css" text="Connect" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <ComboBox fx:id="portList" prefHeight="61.0" prefWidth="116.0" styleClass="cards" stylesheets="@stylesheet.css" />
+               </children>
+            </VBox>
          </children>
       </Pane>
-      <Button id="phButton" fx:id="phButton" alignment="CENTER" layoutX="454.0" layoutY="543.0" mnemonicParsing="false" onAction="#goPhPage" prefHeight="180.0" prefWidth="170.0" styleClass="cards" stylesheets="@stylesheet.css" text="pH Level" textFill="#ffffff70" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="454.0">
+      <Button id="phButton" fx:id="phButton" alignment="CENTER" layoutX="454.0" layoutY="543.0" mnemonicParsing="false" onAction="#goPhPage" prefHeight="180.0" prefWidth="170.0" styleClass="cards" stylesheets="@stylesheet.css" textFill="#ffffff70" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="454.0">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Button fx:id="feedButton" layoutX="761.0" layoutY="543.0" mnemonicParsing="false" onAction="#goFoodPage" prefHeight="180.0" prefWidth="170.0" styleClass="cards" stylesheets="@stylesheet.css" text="Feed" textFill="#ffffff70" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="50.0">
+      <Button fx:id="feedButton" layoutX="761.0" layoutY="543.0" mnemonicParsing="false" onAction="#goFoodPage" prefHeight="180.0" prefWidth="170.0" styleClass="cards" stylesheets="@stylesheet.css" textFill="#ffffff70" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="50.0">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Button id="tempButton" fx:id="tempButton" layoutX="978.0" layoutY="475.0" mnemonicParsing="false" onAction="#goTempPage" prefHeight="180.0" prefWidth="170.0" styleClass="cards" stylesheets="@stylesheet.css" text="Temperature" textFill="#ffffff70" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="761.0" AnchorPane.rightAnchor="349.0">
+      <Button id="tempButton" fx:id="tempButton" layoutX="978.0" layoutY="475.0" mnemonicParsing="false" onAction="#goTempPage" prefHeight="180.0" prefWidth="170.0" styleClass="cards" stylesheets="@stylesheet.css" textFill="#ffffff70" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="761.0" AnchorPane.rightAnchor="349.0">
          <font>
             <Font size="24.0" />
          </font>
@@ -150,23 +148,16 @@
             <DropShadow blurType="TWO_PASS_BOX" height="15.0" radius="7.0" width="15.0" />
          </effect>
       </Button>
-      <LineChart fx:id="linechartLight" layoutX="171.0" layoutY="158.0" prefHeight="360.0" prefWidth="513.0" styleClass="lineChart" stylesheets="@stylesheet.css">
+      <LineChart fx:id="linechartLight" layoutX="171.0" layoutY="158.0" legendSide="LEFT" prefHeight="360.0" prefWidth="513.0" styleClass="lineChart" stylesheets="@stylesheet.css">
          <xAxis>
             <CategoryAxis side="BOTTOM" />
          </xAxis>
          <yAxis>
             <NumberAxis side="LEFT" />
          </yAxis>
-         <effect>
-            <Shadow>
-               <color>
-                  <Color red="0.14509804546833038" green="0.1725490242242813" blue="0.2078431397676468" opacity="0.1599999964237213" />
-               </color>
-            </Shadow>
-         </effect>
       </LineChart>
       <TextField fx:id="textFieldLight" editable="false" layoutX="216.0" layoutY="136.0" prefHeight="33.0" prefWidth="105.0" style="-fx-background-color: #20333D; -fx-background-radius: 5;" />
-      <Button fx:id="lightButton1" layoutX="194.0" layoutY="485.0" mnemonicParsing="false" prefHeight="180.0" prefWidth="170.0" styleClass="cards2" stylesheets="@stylesheet.css" text="Light Level" textFill="#ffffffb2" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="184.0">
+      <Button fx:id="lightButton1" layoutX="194.0" layoutY="485.0" mnemonicParsing="false" prefHeight="180.0" prefWidth="170.0" styleClass="cards2" stylesheets="@stylesheet.css" textFill="#ffffffb2" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="184.0" AnchorPane.rightAnchor="926.0">
          <font>
             <Font size="24.0" />
          </font>
@@ -179,5 +170,13 @@
             <Font size="24.0" />
          </font>
       </Text>
+      <Label fx:id="tempLabel" layoutX="776.0" layoutY="563.0" prefHeight="114.0" prefWidth="141.0" text="Temperature: 20 C" AnchorPane.bottomAnchor="86.0" />
+      <Label fx:id="phLabel" layoutX="461.0" layoutY="603.0" prefHeight="35.0" prefWidth="149.0" text="pH: 7.8" AnchorPane.bottomAnchor="130.0" />
+      <Label fx:id="feedLabel" layoutX="1077.0" layoutY="553.0" prefHeight="134.0" prefWidth="146.0" text="Last Fed: 8 hours ago" AnchorPane.bottomAnchor="81.0" />
+      <Label fx:id="lightLabel" alignment="CENTER" layoutX="190.0" layoutY="606.0" prefHeight="35.0" prefWidth="154.0" text="Light: 400" textFill="#ffffffd7" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="190.0">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

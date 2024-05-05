@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 /**
  * second, as a backup in case the first code won't work
- * without testing you never
+ * without testing you never know
  */
 
 public class SceneController2 {
