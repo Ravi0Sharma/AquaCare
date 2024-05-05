@@ -1,0 +1,48 @@
+.background{
+    -fx-background-color: linear-gradient(to top right, #14141F, #2D2633);
+}
+
+.cards{
+    -fx-background-radius: 20;
+    -fx-background-color: linear-gradient(to top right, #1E1E29, #21242F);
+    -fx-border-color: rgba(24, 24, 35, 0.68);  /*181823*/
+    -fx-border-width: 8;
+    -fx-border-radius: 20;
+/*text color #ffffff70*/
+}
+.cards2{ /* when clicked on */
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(31, 31, 40, 0.68);  /*181823*/
+    -fx-border-width: 8;
+    -fx-border-radius: 20;
+    -fx-background-color: linear-gradient(to top right, #162430, #192935);
+/*text color #c6c5c5*/
+}
+.side_frame-left{
+    -fx-background-color: #425e72;
+    /*-fx-effect: innershadow(gaussian, rgba(0,0,0,0.5), 10, 0.0, 0, 5);*/
+}
+.buttonHP{
+    -fx-background-color: transparent;
+    -fx-background-radius: 20;
+    /*when clicked on*/
+    /*-fx-background-color:#19212A;*/
+}
+.buttonMenuHP{
+    -fx-background-color: #35323D;
+    -fx-background-radius: 20;
+}
+.topBar{
+    -fx-background-color: linear-gradient(to top right, #1F242D, #302B37);
+    -fx-background-radius: 20;
+}
+.lineChart{
+    -fx-border-color: rgba(24, 24, 35, 0.68);  /*181823*/
+    -fx-border-width: 6;
+    -fx-border-radius: 20;
+    /*-fx-background-color: linear-gradient(to right, #20222D, #2A2F38);*/
+}
+
+.table-cell {
+    -fx-text-fill: white;
+}

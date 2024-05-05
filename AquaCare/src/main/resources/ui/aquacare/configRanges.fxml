@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" styleClass="background" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.aquacare.SceneController">
+    <children>
+        <AnchorPane layoutX="108.0" layoutY="1.0" prefHeight="768.0" prefWidth="1178.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.rightAnchor="-6.0" />
+        <Button id="goBackButton" layoutX="486.0" layoutY="264.0" mnemonicParsing="false" onAction="#goHomePage" prefHeight="220.0" prefWidth="356.0" text="Back" AnchorPane.leftAnchor="486.0" />
+        <ImageView fitHeight="65.0" fitWidth="65.0" layoutX="225.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
+        <Pane fx:id="frameLeft" layoutX="9.0" layoutY="21.0" opacity="0.62" prefHeight="768.0" prefWidth="102.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Button fx:id="homeButton" layoutX="30.0" layoutY="285.0" mnemonicParsing="false" onAction="#goHomePage" prefHeight="40.0" prefWidth="40.0" styleClass="buttonHP" stylesheets="@stylesheet.css">
+                    <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
+                            <image>
+                                <Image url="@image/4.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="searchFishButton" layoutX="30.0" layoutY="351.0" mnemonicParsing="false" onAction="#goSearchPage" prefHeight="40.0" prefWidth="40.0" styleClass="buttonHP" stylesheets="@stylesheet.css">
+                    <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
+                            <image>
+                                <Image url="@image/Adsız.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="buttonLeft3" layoutX="30.0" layoutY="417.0" mnemonicParsing="false" onAction="#goConfigPage" prefHeight="40.0" prefWidth="40.0" styleClass="buttonHP" stylesheets="@stylesheet.css">
+                    <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
+                            <image>
+                                <Image url="@image/5.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="buttonLeft4" layoutX="30.0" layoutY="483.0" mnemonicParsing="false" onAction="#goSettings" prefHeight="40.0" prefWidth="40.0" styleClass="buttonHP" stylesheets="@stylesheet.css">
+                    <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
+                            <image>
+                                <Image url="@image/6.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="exitButton" layoutX="15.0" layoutY="690.0" mnemonicParsing="false" onAction="#quit" prefHeight="40.0" prefWidth="40.0" styleClass="buttonHP" stylesheets="@stylesheet.css">
+                    <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="57.0" pickOnBounds="true">
+                            <image>
+                                <Image url="@image/exit2.png" />
+                            </image>
+                        </ImageView>
+                    </graphic></Button>
+                <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="16.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true" />
+                <Pane fx:id="glow3" layoutX="-5.0" layoutY="431.0" prefHeight="10.0" prefWidth="10.0" style="-fx-background-color: turquoise; -fx-background-radius: 30;" />
+            </children>
+        </Pane>
+        <Separator layoutX="102.0" layoutY="32.0" opacity="0.12" orientation="VERTICAL" prefHeight="710.0" style="-fx-background-color: #1D1E29;" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="102.0" />
+        <Pane layoutX="329.0" layoutY="25.0" prefHeight="80.0" prefWidth="924.0" styleClass="topBar" stylesheets="@stylesheet.css" AnchorPane.topAnchor="25.0">
+            <children>
+                <Text fx:id="dateHP" fill="#b8b9bc" layoutX="436.0" layoutY="50.0" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="25 April 2024" wrappingWidth="184.296875">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                </Text>
+            </children>
+        </Pane>
+        <Button fx:id="buttonRight" layoutX="1124.0" layoutY="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="buttonMenuHP" stylesheets="@stylesheet.css" AnchorPane.rightAnchor="105.0" AnchorPane.topAnchor="49.0">
+            <graphic>
+                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@image/b2.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <effect>
+                <DropShadow blurType="TWO_PASS_BOX" height="15.0" radius="7.0" width="15.0" />
+            </effect>
+        </Button>
+        <Button fx:id="buttonRight1" layoutX="1189.0" layoutY="49.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="buttonMenuHP" stylesheets="@stylesheet.css" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="49.0">
+            <graphic>
+                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                    <effect>
+                        <DropShadow blurType="TWO_PASS_BOX" height="15.0" radius="7.0" width="15.0" />
+                    </effect>
+                    <image>
+                        <Image url="@image/b3.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <effect>
+                <DropShadow blurType="TWO_PASS_BOX" height="10.0" radius="4.5" width="10.0" />
+            </effect>
+        </Button>
+        <Button fx:id="buttonRight2" layoutX="1076.0" layoutY="50.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="buttonMenuHP" stylesheets="@stylesheet.css" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="49.0">
+            <graphic>
+                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
+                    <image>
+                        <Image url="@image/b1.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <effect>
+                <DropShadow blurType="TWO_PASS_BOX" height="15.0" radius="7.0" width="15.0" />
+            </effect>
+        </Button>
+    </children>
+</AnchorPane>
