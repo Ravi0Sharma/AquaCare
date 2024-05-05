@@ -18,7 +18,7 @@ public class Fish {
         this.fishURL = fishURL;
         this.fishPh = fishPh;
         this.fishTemp = fishTemp;
-        this.fishLight =fishLight;
+        this.fishLight = fishLight;
     }
 
     public Fish(String name, String species, String imageUrl) {
