@@ -82,15 +82,7 @@ public class SceneController implements Initializable {
     @FXML
     private Text lcTextFood;
 
-    //! Lets set active fish manually for now
-    //! We def need to add a way to switch the fishes
-    //! At least based on how the dashboard is designed
-
     private String activeFishMonitor;
-
-    //! Two choices:
-    //! 1. Update all charts at once after selecting a fish
-    //! 2. Update each chart separately after selecting and selecting a chart( one could even say they update after selecting a chart :-> )
 
     private void updateAllCharts() {
         //! Should be triggered after a fish change
@@ -103,9 +95,6 @@ public class SceneController implements Initializable {
     }
 
     private void updateChart(LineChart chart, String sensorName) {
-        //! A week of data is hardcoded for now
-        //! Changing the duration or exporting the full duration would be good.
-        //! Online db can only hold 30 days of data
 
         //Create data series for the line chart
         XYChart.Series series = new XYChart.Series();
@@ -132,6 +121,9 @@ public class SceneController implements Initializable {
 
             }
         }
+
+        //*************************************************************************************
+        //These can be set up within fxml files themselves.
 
         //Turn off the legend for the line chart, since it takes precious space
         chart.setLegendVisible(false);
@@ -164,13 +156,6 @@ public class SceneController implements Initializable {
 
         //Update the line chart with milked values
         chart.getData().add(series);
-
-        // Add a custom CSS class to modify the style of the series
-        //I gotta make this work for it to look good, or just drop it and never think about it
-        series.getNode().getStyleClass().add("series-class");
-
-        //Apply the CSS to the chart
-        chart.applyCss();
     }
 
 
@@ -256,9 +241,8 @@ public class SceneController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        //!For testing purposes, but also, cant be removed for now since changing fish is not implemented
-        //Set active fish monitor to pull corresponding data from
-        activeFishMonitor = "test";
+        //Set active fish monitor to 1 since owning multiple monitors is not supported yet
+        activeFishMonitor = "1";
 
         Map<LineChart, String> linecharts = new HashMap<>();
         linecharts.put(linechartTemp, "Temperature");
@@ -266,11 +250,9 @@ public class SceneController implements Initializable {
         linecharts.put(linechartLight, "Light");
         linecharts.put(linechartPh, "Ph");
 
-
         //***********************************************
         //Check which linechart is not null and update it
         //***********************************************
-
 
         for (Map.Entry<LineChart, String> chartEntry : linecharts.entrySet()) {
             if (chartEntry.getKey() != null) {
