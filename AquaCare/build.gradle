@@ -25,7 +25,6 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-  mainModule = 'ui.aquacare'
   mainClass = 'ui.aquacare.Main'
 }
 
