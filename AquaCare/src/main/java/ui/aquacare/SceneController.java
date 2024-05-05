@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -27,7 +28,9 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import ui.utilities.ApplicationInterface;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class SceneController implements Initializable {
@@ -41,7 +44,7 @@ public class SceneController implements Initializable {
     @FXML
     private Text dateHP;
 
-//  Real time data
+//  Real-time Data
     static SerialPort chosenPort;
     static int x = 0;   //
     @FXML
@@ -59,8 +62,8 @@ public class SceneController implements Initializable {
     private Label tempLabel;
     @FXML
     private Label feedLabel;
-    ApplicationInterface applicationInterface = new ApplicationInterface();
 
+//  Historical Readings
     @FXML
     private LineChart<String, Number> linechartPh;
     @FXML
@@ -71,38 +74,34 @@ public class SceneController implements Initializable {
     private LineChart<String, Number> linechartDisp;
 
     private String activeFishMonitor;
+    ApplicationInterface applicationInterface = new ApplicationInterface();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         setDate();
         realTimeData();
 
-        applicationInterface = new ApplicationInterface();
+        //Set active fish monitor to 1 since owning multiple monitors is not supported yet
+        activeFishMonitor = "1";
 
-        //"test" is a placeholder for the actual sensor name. As an example, check updateAllCharts() function
-        if(linechartTemp != null) {
-            updateChart(linechartTemp, "test");
-        } else {
-            System.out.println("linechartTemp is null");
+        Map<LineChart, String> linecharts = new HashMap<>();
+        linecharts.put(linechartTemp, "Temperature");
+        linecharts.put(linechartDisp, "Feed");
+        linecharts.put(linechartLight, "Light");
+        linecharts.put(linechartPh, "Ph");
+
+        //***********************************************
+        //Check which linechart is not null and update it
+        //***********************************************
+
+        for (Map.Entry<LineChart, String> chartEntry : linecharts.entrySet()) {
+            if (chartEntry.getKey() != null) {
+                updateChart(chartEntry.getKey(), chartEntry.getValue());
+            } else {
+                System.out.println(chartEntry.getValue() + " is null");
+            }
         }
 
-        if(linechartDisp!= null) {
-            updateChart(linechartDisp, "test");
-        } else {
-            System.out.println("linechartDisp is null");
-        }
-
-        if(linechartLight != null) {
-            updateChart(linechartLight, "test");
-        } else {
-            System.out.println("linechartLight is null");
-        }
-
-        if(linechartPh!= null) {
-            updateChart(linechartPh, "test");
-        } else {
-            System.out.println("linechartPh is null");
-        }
     }
 
     /**
@@ -110,6 +109,8 @@ public class SceneController implements Initializable {
      */
 
     private void updateAllCharts() {
+        //! Should be triggered after a fish change
+        //The current structure of the UI makes this function obsolete since the charts are updated in the initialize function
         updateChart(linechartTemp, "Temperature");
         updateChart(linechartLight, "Light");
         updateChart(linechartPh, "PhLevel");
@@ -117,6 +118,7 @@ public class SceneController implements Initializable {
     }
 
     private void updateChart(LineChart chart, String sensorName) {
+
         //Create data series for the line chart
         XYChart.Series series = new XYChart.Series();
 
@@ -135,16 +137,47 @@ public class SceneController implements Initializable {
             for (FluxRecord fluxRecord : records) {
 
                 //This actually works as intended
-                System.out.println("value: " + fluxRecord.getValue() + "stamp:" + fluxRecord.getTime().toString());
+                System.out.println("value: " + fluxRecord.getValue() + "    stamp:" + fluxRecord.getTime().toString());
 
                 //Save date and value to the data series
                 series.getData().add(new XYChart.Data(fluxRecord.getTime().toString(), fluxRecord.getValue()));
-
             }
         }
+
+        //*************************************************************************************
+        //These can be set up within fxml files themselves.
+
+        //Turn off the legend for the line chart, since it takes precious space
+        chart.setLegendVisible(false);
+
+        //Turn off the symbols or dots on the line chart, since they over-crowd the chart
+        chart.setCreateSymbols(false);
+
+        //Turn off the animation of the line chart, since it is not needed
+        chart.setAnimated(false);
+
+        //Instead of turning them off, try shortening time stamps
+        //Giving user about when data is collected is important
+        //Another choice would be to somehow downsample the labels(not data as a whole), to make it less crowded
+
+        //Turn off the horizontal grid labels of the line chart, since they make the chart much smaller
+        chart.getXAxis().setTickLabelsVisible(false);
+        chart.getXAxis().setOpacity(0);
+
+        //Turns off effects on the line chart, since they are not needed
+        chart.setEffect(null);
+
+        //Turn auto-scaling off for the line chart, realistically value will be between two values
+        chart.getYAxis().setAutoRanging(false);
+
+        //These values should be based on sensor type and tresholds set in json file
+        ((NumberAxis) chart.getYAxis()).setLowerBound(0);
+        ((NumberAxis) chart.getYAxis()).setUpperBound(100);
+
+        //*************************************************************************************
+
         //Update the line chart with milked values
         chart.getData().add(series);
-
     }
 
 
