@@ -1,9 +1,8 @@
 package ui.aquacare;
 
-//  this represents our data
-public class FishSearchModel {
+public class Fish {
 
-    //  declare variables that represents the fields in fish database
+    //  declare variables that represents the fields in fish.json
     private String fishName;
     private String fishSpecies;
     private String favoriteFood;
@@ -12,7 +11,7 @@ public class FishSearchModel {
     private String fishTemp;
     private String fishLight;
 
-    public FishSearchModel(String fishName, String fishSpecies, String favoriteFood, String fishURL, String fishPh, String fishTemp, String fishLight) {
+    public Fish(String fishName, String fishSpecies, String favoriteFood, String fishURL, String fishPh, String fishTemp, String fishLight) {
         this.fishName = fishName;
         this.fishSpecies = fishSpecies;
         this.favoriteFood = favoriteFood;
@@ -20,6 +19,9 @@ public class FishSearchModel {
         this.fishPh = fishPh;
         this.fishTemp = fishTemp;
         this.fishLight = fishLight;
+    }
+
+    public Fish(String name, String species, String imageUrl) {
     }
 
     public String getFishName() {

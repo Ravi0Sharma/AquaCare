@@ -1,137 +1,84 @@
 package ui.aquacare;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
+import javafx.scene.layout.VBox;
+import javafx.scene.image.ImageView;
+import javafx.scene.control.Label;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.ResultSet;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+
+import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 
 public class FishSearchController implements Initializable {
-
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-
     @FXML
-    private TableView<FishSearchModel> fishTableView;
+    private Pane fishContainer;
     @FXML
-    private TableColumn<FishSearchModel, String> fNameTableColumn;
+    private Label fishName;
     @FXML
-    private TableColumn<FishSearchModel, String> fSpeciesTableColumn;
-    @FXML
-    private TableColumn<FishSearchModel, String> fFavFoodTableColumn;
-    @FXML
-    private TableColumn<FishSearchModel, String> fURLTableColumn;
-    @FXML
-    private TableColumn<FishSearchModel, String> fPhTableColumn;
-    @FXML
-    private TableColumn<FishSearchModel, String> fTempTableColumn;
-    @FXML
-    private TableColumn<FishSearchModel, String> fLightTableColumn;
-    @FXML
-    private TextField searchBarSP;
-
-ObservableList<FishSearchModel> fishSearchModelObservableList = FXCollections.observableArrayList();
+    private Label fishSpecies;
 
     @Override
-    public void initialize(URL url, ResourceBundle resource) {
-        FishDBManager connectNow = new FishDBManager();
-        Connection connectDB = connectNow.getDBConnection();
+    public void initialize(URL location, ResourceBundle resources) {
+        JSONArray fishData = parseJSONFile("/ui/aquacare/fish.json");
 
-        String fishViewQuery = "SELECT fishName, fishSpecies, favoriteFood, fishURL, fishPh, fishTemp, fishLight FROM fish";
-
-        try{
-            Statement statement = connectDB.createStatement();
-            ResultSet queryOutput = statement.executeQuery(fishViewQuery);
-
-            while (queryOutput.next()){
-                String queryfName = queryOutput.getString("fishName");
-                String queryfSpecies = queryOutput.getString("fishSpecies");
-                String queryfFavFood = queryOutput.getString("favoriteFood");
-                String queryfURL = queryOutput.getString("fishURL");
-                String queryfPh = queryOutput.getString("fishPh");
-                String queryfTemp = queryOutput.getString("fishTemp");
-                String queryfLight = queryOutput.getString("fishLight");
-
-                // popluate observable list
-                fishSearchModelObservableList.add(new FishSearchModel(queryfName,queryfSpecies, queryfFavFood, queryfURL, queryfPh, queryfTemp, queryfLight));
+        for (Object obj : fishData) {
+            JSONObject fishObj = (JSONObject) obj;
+            Fish fish = new Fish(
+                    (String) fishObj.get("Name"),
+                    (String) fishObj.get("Species"),
+                    (String) fishObj.get("URL")
+            );
+            Pane fishPane = null;
+            try {
+                fishPane = createFishPane(fish);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-
-            fNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("fishName"));
-            fSpeciesTableColumn.setCellValueFactory(new PropertyValueFactory<>("fishSpecies"));
-            fFavFoodTableColumn.setCellValueFactory(new PropertyValueFactory<>("favoriteFood"));
-            fURLTableColumn.setCellValueFactory(new PropertyValueFactory<>("fishURL"));
-            fPhTableColumn.setCellValueFactory(new PropertyValueFactory<>("fishPh"));
-            fTempTableColumn.setCellValueFactory(new PropertyValueFactory<>("fishTemp"));
-            fLightTableColumn.setCellValueFactory(new PropertyValueFactory<>("fishLight"));
-
-            fishTableView.setItems(fishSearchModelObservableList);
-
-
-            FilteredList<FishSearchModel> filteredFList = new FilteredList<>(fishSearchModelObservableList, x -> true);
-            searchBarSP.textProperty().addListener((observable, oldValue, newValue) -> {
-                filteredFList.setPredicate(fishSearchModel -> {
-
-                    //  if no input is entered, no changes in the list
-                    if(newValue.isEmpty() || newValue.isBlank() || newValue == null) {return true;}
-
-                    //  to simplify search turn input to lowercase
-                    String searchKey = newValue.toLowerCase();
-
-                    //  return true if fish name or species matches the search
-                    if(fishSearchModel.getFishName().toLowerCase().indexOf(searchKey)>-1){
-                        return true;
-                    } else if(fishSearchModel.getFishSpecies().toLowerCase().indexOf(searchKey)>-1) {
-                        return true;
-                    } else
-                        return false;
-                });
-            });
-
-
-            SortedList<FishSearchModel> sortedFList = new SortedList<>(filteredFList);
-
-            //  bind sorted list to the table view
-            sortedFList.comparatorProperty().bind(fishTableView.comparatorProperty());
-
-            //  with this filtered/sorted data visible in the table view
-            fishTableView.setItems(sortedFList);
-
-
-        }catch (SQLException e){
-            Logger.getLogger(FishSearchController.class.getName()).log(Level.SEVERE, null, e);
-            e.printStackTrace();
+            fishContainer.getChildren().add(fishPane);
         }
+    }
+
+    private JSONArray parseJSONFile(String filename) {
+        JSONParser parser = new JSONParser();
+        try {
+            // Load the JSON file from the resources directory
+            InputStreamReader reader = new InputStreamReader(getClass().getResourceAsStream("fish.json"));
+            Object obj = parser.parse(reader);
+            return (JSONArray) obj;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private Pane createFishPane(Fish fish) throws IOException {
+        // Load FXML file for a single fish pane
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("fish-search2.fxml"));
+        Pane fishPane = loader.load();
+
+        // Access elements in the fish pane
+        Label fishNameLabel = (Label) fishPane.lookup("#fishNameLabel");
+        Label fishSpeciesLabel = (Label) fishPane.lookup("#fishSpeciesLabel");
+//        ImageView fishImageView = (ImageView) fishPane.lookup("#fishImageView");
+
+        // Populate elements with fish information
+        fishNameLabel.setText(fish.getFishName());
+        fishSpeciesLabel.setText(fish.getFishSpecies());
+//        fishImageView.setImage(new Image(fish.getFishURL()));
+
+        return fishPane;
+    }
 
 
-    }
-    @FXML
-    public void goHomePage2(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("homepage.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
 }

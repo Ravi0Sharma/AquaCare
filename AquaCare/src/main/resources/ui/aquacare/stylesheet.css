@@ -1,22 +1,35 @@
 .background{
     -fx-background-color: linear-gradient(to top right, #14141F, #2D2633);
 }
+.label{
+    -fx-text-fill: rgba(255, 255, 255, 0.68);
+    -fx-font-size: 22px;
+    -fx-wrap-text: true;
+    -fx-alignment: center;
+    /*-fx-font-weight: bold;*/
+}
+.lineChart{
+    -fx-border-color: rgba(24, 24, 35, 0.68);
+    -fx-border-width: 6;
+    -fx-border-radius: 30;
+    /*-fx-background-color: #4a4545;*/
+    -fx-text-fill: #00ffc4;
+}
+.cards{ /* when button is not pressed */
+    accent-color: #000000;
 
-.cards{
     -fx-background-radius: 20;
     -fx-background-color: linear-gradient(to top right, #1E1E29, #21242F);
     -fx-border-color: rgba(24, 24, 35, 0.68);  /*181823*/
     -fx-border-width: 8;
     -fx-border-radius: 20;
-/*text color #ffffff70*/
 }
-.cards2{ /* when clicked on */
+.cards2{ /* when button is pressed */
     -fx-background-radius: 20;
     -fx-border-color: rgba(31, 31, 40, 0.68);  /*181823*/
     -fx-border-width: 8;
     -fx-border-radius: 20;
     -fx-background-color: linear-gradient(to top right, #162430, #192935);
-/*text color #c6c5c5*/
 }
 .side_frame-left{
     -fx-background-color: #425e72;
@@ -35,12 +48,6 @@
 .topBar{
     -fx-background-color: linear-gradient(to top right, #1F242D, #302B37);
     -fx-background-radius: 20;
-}
-.lineChart{
-    -fx-border-color: rgba(24, 24, 35, 0.68);  /*181823*/
-    -fx-border-width: 6;
-    -fx-border-radius: 20;
-    /*-fx-background-color: linear-gradient(to right, #20222D, #2A2F38);*/
 }
 
 .table-cell {

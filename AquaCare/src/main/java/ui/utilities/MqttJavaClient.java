@@ -158,7 +158,7 @@ public class MqttJavaClient implements MqttCallback {
 
     // subscribe a topic with qos
 
-    private void Subscribe(String topic, int qos){
+    public void Subscribe(String topic, int qos){
         try {
             mqttAsyncJavaClient.subscribe(topic, qos);
             System.out.println("Subscribed");
@@ -179,4 +179,5 @@ public class MqttJavaClient implements MqttCallback {
             System.out.println("disconnect error" + e);
         }
     }
+
 }
