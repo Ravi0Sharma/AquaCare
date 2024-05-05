@@ -73,12 +73,12 @@ public class ApplicationInterface {
      */
 
     public List<FluxTable> MeanOfDuration(String sensorName, String duration, String deviceID) {
-        //Example parameters ("Temparature", "1d", "001")
+        //Example parameters ("Temperature", "1d", "001")
         return influxDBJavaClient.QueryDatabase(duration, sensorName, "value", deviceID, true);
     }
 
     public List<FluxTable> QueryOfDuration(String sensorName, String duration, String deviceID) {
-        //Example parameters ("Temparature", "1d", "001")
+        //Example parameters ("Temperature", "1d", "001")
         return influxDBJavaClient.QueryDatabase(duration, sensorName, "value", deviceID, false);
     }
 

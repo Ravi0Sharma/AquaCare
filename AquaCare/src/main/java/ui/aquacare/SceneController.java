@@ -18,7 +18,9 @@ import javafx.fxml.Initializable;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import ui.utilities.ApplicationInterface;
@@ -258,33 +260,25 @@ public class SceneController implements Initializable {
         //Set active fish monitor to pull corresponding data from
         activeFishMonitor = "test";
 
+        Map<LineChart, String> linecharts = new HashMap<>();
+        linecharts.put(linechartTemp, "Temperature");
+        linecharts.put(linechartDisp, "Feed");
+        linecharts.put(linechartLight, "Light");
+        linecharts.put(linechartPh, "Ph");
+
+
         //***********************************************
         //Check which linechart is not null and update it
         //***********************************************
 
-        //"test" is a placeholder for the actual sensor name. As an example, check updateAllCharts() function
-        if(linechartTemp != null) {
-            updateChart(linechartTemp, "Temperature");
-        } else {
-            System.out.println("linechartTemp is null");
+
+        for (Map.Entry<LineChart, String> chartEntry : linecharts.entrySet()) {
+            if (chartEntry.getKey() != null) {
+                updateChart(chartEntry.getKey(), chartEntry.getValue());
+            } else {
+                System.out.println(chartEntry.getValue() + " is null");
+            }
         }
 
-        if(linechartDisp!= null) {
-            updateChart(linechartDisp, "Feed");
-        } else {
-            System.out.println("linechartDisp is null");
-        }
-
-        if(linechartLight != null) {
-            updateChart(linechartLight, "Light");
-        } else {
-            System.out.println("linechartLight is null");
-        }
-
-        if(linechartPh!= null) {
-            updateChart(linechartPh, "Ph");
-        } else {
-            System.out.println("linechartPh is null");
-        }
     }
 }
