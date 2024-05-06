@@ -2,25 +2,15 @@ package ui.aquacare;
 
 import com.fazecast.jSerialComm.SerialPort;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.fxml.Initializable;
 
-import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import com.influxdb.query.FluxRecord;
 import com.influxdb.query.FluxTable;
@@ -33,16 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class SceneController implements Initializable {
-
-//  General
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-    @FXML
-    private Button exitButton;
-    @FXML
-    private Text dateHP;
+public class ReadingsController extends NavigationController implements Initializable {
 
 //  Real-time Readings
     static SerialPort chosenPort;
@@ -264,63 +245,6 @@ public class SceneController implements Initializable {
                 x = 0;
             }
         });
-    }
-
-    /**
-     * ------- HOME PAGE "BASE" -------
-      */
-    public void setDate(){
-        // TODO: The date should be able to change while the app is still running.
-        LocalDate localDate = LocalDate.now();
-        DateTimeFormatter theFormat = DateTimeFormatter.ofPattern("d MMMM YYYY");
-        String formattedDate = localDate.format(theFormat);
-        dateHP.setText("" + formattedDate);
-    }
-
-    @FXML
-    private void quit(){
-        exitButton.setOnAction(event -> {
-            Platform.exit();
-        });
-        // TODO: add new exit function to close sensor readings too.
-        //  + should be able to quit with single click.
-    }
-
-    private void goToPage(String fxmlFileName, ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource(fxmlFileName));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    @FXML
-    private void goHomePage(ActionEvent event) throws IOException {
-        goToPage("homepage.fxml", event);
-    }
-    @FXML
-    private void goSearchPage(ActionEvent event) throws IOException {
-        goToPage("fish-search.fxml", event);
-    }
-    @FXML
-    private void goPhPage(ActionEvent event) throws IOException {
-        goToPage("ph-scene.fxml", event);
-    }
-    @FXML
-    private void goFoodPage(ActionEvent event) throws IOException {
-        goToPage("food-scene.fxml", event);
-    }
-    @FXML
-    private void goTempPage(ActionEvent event) throws IOException {
-        goToPage("temperature-scene.fxml", event);
-    }
-    @FXML
-    private void goConfigPage(ActionEvent event) throws IOException {
-        goToPage("configRanges.fxml", event);
-    }
-    @FXML
-    private void goSettings(ActionEvent event) throws IOException {
-        goToPage("settings.fxml", event);
     }
 
 }

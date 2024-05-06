@@ -1,10 +1,7 @@
 package ui.aquacare;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.VBox;
-import javafx.scene.image.ImageView;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
@@ -18,10 +15,9 @@ import org.json.simple.parser.JSONParser;
 
 
 import javafx.fxml.FXML;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
-public class FishSearchController implements Initializable {
+public class FishSearchController extends NavigationController implements Initializable {
     @FXML
     private Pane fishContainer;
     @FXML
@@ -81,20 +77,4 @@ public class FishSearchController implements Initializable {
         return fishPane;
     }
 
-// TODO: do we need to create and interface or an abstract class to avoid redundancy?
-
-    public void goSearchPage(ActionEvent actionEvent) {
-    }
-
-    public void goConfigPage(ActionEvent actionEvent) {
-    }
-
-    public void quit(ActionEvent actionEvent) {
-    }
-
-    public void goSettings(ActionEvent actionEvent) {
-    }
-
-    public void goHomePage(ActionEvent actionEvent) {
-    }
 }
