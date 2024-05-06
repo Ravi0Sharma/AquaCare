@@ -8,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -17,20 +16,13 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.fxml.Initializable;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
-import com.influxdb.query.FluxRecord;
-import com.influxdb.query.FluxTable;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.XYChart;
-import ui.utilities.ApplicationInterface;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Scanner;
 
 
 public class SceneController implements Initializable {
@@ -44,7 +36,7 @@ public class SceneController implements Initializable {
     @FXML
     private Text dateHP;
 
-//  Real-time Readings
+//  Real time data
     static SerialPort chosenPort;
     static int x = 0;   //
     @FXML
@@ -63,127 +55,13 @@ public class SceneController implements Initializable {
     @FXML
     private Label feedLabel;
 
-//  Historical Readings
-    @FXML
-    private LineChart<String, Number> linechartPh;
-    @FXML
-    private LineChart<String, Number> linechartTemp;
-    @FXML
-    private LineChart<String, Number> linechartLight;
-    @FXML
-    private LineChart<String, Number> linechartDisp;
-
-    private String activeFishMonitor;
-    ApplicationInterface applicationInterface = new ApplicationInterface();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         setDate();
         realTimeData();
-
-        //Set active fish monitor to 1 since owning multiple monitors is not supported yet
-        activeFishMonitor = "1";
-
-        Map<LineChart, String> linecharts = new HashMap<>();
-        linecharts.put(linechartTemp, "Temperature");
-        linecharts.put(linechartDisp, "Feed");
-        linecharts.put(linechartLight, "Light");
-        linecharts.put(linechartPh, "Ph");
-
-        //***********************************************
-        //Check which line chart is not null and update it
-        //***********************************************
-
-        for (Map.Entry<LineChart, String> chartEntry : linecharts.entrySet()) {
-            if (chartEntry.getKey() != null) {
-                updateChart(chartEntry.getKey(), chartEntry.getValue());
-            } else {
-                System.out.println(chartEntry.getValue() + " is null");
-            }
-        }
-
     }
 
-    /**
-     * ------- HISTORICAL READINGS VISUALIZATION -------
-     */
-
-    private void updateAllCharts() {
-        //! Should be triggered after a fish change
-        //The current structure of the UI makes this function obsolete since the charts are updated in the initialize function
-        updateChart(linechartTemp, "Temperature");
-        updateChart(linechartLight, "Light");
-        updateChart(linechartPh, "PhLevel");
-        updateChart(linechartDisp, "Dispenser");
-    }
-
-    private void updateChart(LineChart chart, String sensorName) {
-
-        //Create data series for the line chart
-        XYChart.Series series = new XYChart.Series();
-
-        //Affects legend which, at the moment, does not exist
-        series.setName(sensorName);
-
-        //Query data based on active fish monitor and sensor name
-        List<FluxTable> tables = applicationInterface.QueryOfDuration(activeFishMonitor, "1w", sensorName);
-
-        //Divide tables into individual tables
-        for (FluxTable table : tables) {
-
-            //Get the records from the table, which correspond to rows in a table
-            List<FluxRecord> records = table.getRecords();
-
-            for (FluxRecord fluxRecord : records) {
-
-                //This actually works as intended
-                System.out.println("value: " + fluxRecord.getValue() + "    stamp:" + fluxRecord.getTime().toString());
-
-                //Save date and value to the data series
-                series.getData().add(new XYChart.Data(fluxRecord.getTime().toString(), fluxRecord.getValue()));
-            }
-        }
-
-        //*************************************************************************************
-        //These can be set up within fxml files themselves.
-
-        //Turn off the legend for the line chart, since it takes precious space
-        chart.setLegendVisible(false);
-
-        //Turn off the symbols or dots on the line chart, since they over-crowd the chart
-        chart.setCreateSymbols(false);
-
-        //Turn off the animation of the line chart, since it is not needed
-        chart.setAnimated(false);
-
-        //Instead of turning them off, try shortening time stamps
-        //Giving user about when data is collected is important
-        //Another choice would be to somehow downsample the labels(not data as a whole), to make it less crowded
-
-        //Turn off the horizontal grid labels of the line chart, since they make the chart much smaller
-        chart.getXAxis().setTickLabelsVisible(false);
-        chart.getXAxis().setOpacity(0);
-
-        //Turns off effects on the line chart, since they are not needed
-        chart.setEffect(null);
-
-        //Turn auto-scaling off for the line chart, realistically value will be between two values
-        chart.getYAxis().setAutoRanging(false);
-
-        //These values should be based on sensor type and tresholds set in json file
-        ((NumberAxis) chart.getYAxis()).setLowerBound(0);
-        ((NumberAxis) chart.getYAxis()).setUpperBound(100);
-
-        //*************************************************************************************
-
-        //Update the line chart with milked values
-        chart.getData().add(series);
-    }
-
-
-    /**
-     * ------- REAL-TIME DATA VISUALIZATION -------
-     */
     // This method is useless if you start to use MQTT for RT display. because data will be processed in that class.
     private String[] processData(String rawData) {
         // we will use prefixes as "'temperature' : 21" and "'pH':8". to get the data at the right we split by :
@@ -238,13 +116,10 @@ public class SceneController implements Initializable {
                             if (sensorData[0].equals("pH")) {
                                 phLabel.setText("pH: " + sensorData[1]);
                             } else if (sensorData[0].equals("Temperature")) {
-                                tempLabel.setText("Temperature: " + sensorData[1] + "°C");
+                                tempLabel.setText("Temperature: " + sensorData[1]);
                             } else if (sensorData[0].equals("Light")) {
                                 lightLabel.setText("Light: " + sensorData[1]);
                             }
-//                            else if (sensorData[0].equals("Dispenser")) {
-//                                lightLabel.setText("Last Fed: " + sensorData[1]);
-//                            }
                         });
 
                         // sleep to avoid reduce app's CPU usage
@@ -256,6 +131,8 @@ public class SceneController implements Initializable {
                     }
                 });
                 thread.start();
+
+
             } else {
                 // disconnect from the serial port
                 chosenPort.closePort();
@@ -266,9 +143,6 @@ public class SceneController implements Initializable {
         });
     }
 
-    /**
-     * ------- HOME PAGE "BASE" -------
-      */
     public void setDate(){
         // TODO: The date should be able to change while the app is still running.
         LocalDate localDate = LocalDate.now();
@@ -283,7 +157,6 @@ public class SceneController implements Initializable {
             Platform.exit();
         });
         // TODO: add new exit function to close sensor readings too.
-        //  + should be able to quit with single click.
     }
 
     private void goToPage(String fxmlFileName, ActionEvent event) throws IOException {
