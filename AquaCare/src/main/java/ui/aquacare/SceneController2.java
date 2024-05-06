@@ -2,10 +2,14 @@ package ui.aquacare;
 
 import com.fazecast.jSerialComm.SerialPort;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 /**
@@ -13,7 +17,7 @@ import java.util.Scanner;
  * without testing you never know
  */
 
-public class SceneController2 {
+public class SceneController2 extends NavigationController implements Initializable {
 
     @FXML
     private ComboBox<String> portList;
@@ -31,6 +35,11 @@ public class SceneController2 {
     private VBox roots;
 
     private static SerialPort chosenPort;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
 
     public void initialize() {
         // populate the box with available serial ports
@@ -101,5 +110,7 @@ public class SceneController2 {
             }
         });
     }
+
+
 }
 
