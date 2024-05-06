@@ -60,14 +60,14 @@ public class ReadingsController extends NavigationController implements Initiali
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         setDate();
-        realTimeData();
+        //realTimeData();
 
         //Set active fish monitor to 1 since owning multiple monitors is not supported yet
         activeFishMonitor = "1";
 
         Map<LineChart, String> linecharts = new HashMap<>();
         linecharts.put(linechartTemp, "Temperature");
-        linecharts.put(linechartDisp, "Feed");
+        linecharts.put(linechartDisp, "Dispenser");
         linecharts.put(linechartLight, "Light");
         linecharts.put(linechartPh, "Ph");
 
@@ -107,7 +107,7 @@ public class ReadingsController extends NavigationController implements Initiali
         series.setName(sensorName);
 
         //Query data based on active fish monitor and sensor name
-        List<FluxTable> tables = applicationInterface.QueryOfDuration(activeFishMonitor, "1w", sensorName);
+        List<FluxTable> tables = applicationInterface.QueryOfDuration(sensorName, "1w", activeFishMonitor);
 
         //Divide tables into individual tables
         for (FluxTable table : tables) {

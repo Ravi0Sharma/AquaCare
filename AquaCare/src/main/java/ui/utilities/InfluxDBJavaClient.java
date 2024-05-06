@@ -45,7 +45,7 @@ public class InfluxDBJavaClient {
         //Defining the connection values
         //!WIP This is not the best way to hold values such as api keys
         //token = "U3_AyxHK1iflHLBaCW4ph-hrQBzc8ECvKuOP02kUwzGAL1CjKEokPG7wMnRtAWIziZT4SmHX7w9qVs0LJQ3AcA==";
-        token = "ryImwF2R21ptUl337MqSxGX0m-oiGM5hszxDo-QuyunRLAuFuPACWAwQrqzWZilV2JH1L3tAxOJc2NSyE-9Yvw==";
+        token = "ZK-vVqNlD2iFXpKPWfQsvkFFe_wl4mNlAm3FHCzBCbjzPnXKBZDswr5RKRFb8KDinw_b4mSWQIx3xMNnIFDvkA==";
         bucket = "Storage";
         org = "DIT113";
 
