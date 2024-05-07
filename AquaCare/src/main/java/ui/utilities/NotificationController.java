@@ -17,26 +17,12 @@ import com.influxdb.query.FluxTable;
 
 public class NotificationController {
 
-    //Made the function static, this may be redundant
     private ApplicationInterface appInterface;
 
     //Expected Structure: deviceID, <sensor, (lower threshold, upper threshold)>
     HashMap<String, HashMap<String, Threshold>> deviceMap;
 
-    //List of all fishes
-    //List all their sensors
-    //List all their thresholds
-
-    //Get real time sensor data and compare with thresholds for each sensor one by one
-    //Change the fish into the next one
-
-    //When loop is done, start again from the first fish after the interval
-
-
-
-
-    private Map<String, JSONObject> fishThresholds;
-
+    //Scheduled executor service to run the checkTresholds method every interval
     private ScheduledExecutorService executorService;
 
     // Sensor name to be used for the query
@@ -51,8 +37,8 @@ public class NotificationController {
 
     private void updateTresholds() {
         deviceMap = new HashMap<String, HashMap<String, Threshold>>();
-        //Get the latest data from the json
-        //Write it off to a java variable
+        //Get the latest data from the json - or maybe influxDB after the recent developements
+        //Write it off to a java object
     }
 
     private void checkTresholds() {
@@ -88,22 +74,7 @@ public class NotificationController {
                         }
                     }
                 }
-
-
-
-
             }
         }
-
-                //Get the latest data from the database
-                //Check if it is within the treshold
-                //If not, send a notification
-
-        //Checks every treshold for every fish
-        //In case of a failure, send a notification
     }
-
-
-
-
 }

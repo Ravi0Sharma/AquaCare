@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class NotificationClient {
 
-    public void displayTray(String alertTitle, String alertBody) throws AWTException {
+    public static void displayTray(String alertTitle, String alertBody) throws AWTException {
         SystemTray tray = SystemTray.getSystemTray();
 
         //If the icon is a file
