@@ -60,7 +60,7 @@ public class ReadingsController extends NavigationController implements Initiali
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         setDate();
-        realTimeData();
+        //realTimeData();
 
         //Set active fish monitor to 1 since owning multiple monitors is not supported yet
         activeFishMonitor = "1";
