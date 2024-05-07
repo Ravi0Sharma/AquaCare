@@ -10,10 +10,10 @@ public class MqttJavaClient implements MqttCallbackExtended {
     DatabaseInputParser databaseInputParser;
 
     // private variables
-    private String broker ;
-    private String clientId;
-    private String userName;
-    private String password;
+    private final String broker ;
+    private final String clientId;
+    private final String userName;
+    private final String password;
 
     // private instance variable
 
