@@ -1,13 +1,9 @@
 package ui.utilities;
 
-import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
-import org.eclipse.paho.client.mqttv3.MqttAsyncClient;
-import org.eclipse.paho.client.mqttv3.MqttCallback;
-import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
-public class MqttJavaClient implements MqttCallback {
+public class MqttJavaClient implements MqttCallbackExtended {
     //Signleton class
     private static MqttJavaClient mqttJavaClient = null;
 
@@ -77,10 +73,14 @@ public class MqttJavaClient implements MqttCallback {
 
     }
 
+    @Override
+    public void connectComplete(boolean reconnect, String serverURI) {
+        SubscribeRelatedTopics();
+    }
 
     // constructor
      private MqttJavaClient(){
-        // Do initialization here 
+        // Do initialization here
         databaseInputParser = new DatabaseInputParser();
 
         //!Will be changed so credidential are not hardcoded
@@ -88,7 +88,7 @@ public class MqttJavaClient implements MqttCallback {
         clientId = "AquaCareApp";
         userName = "username";
         password = "password";
-        
+
 
         try {
             persistence = new MemoryPersistence();
@@ -99,13 +99,12 @@ public class MqttJavaClient implements MqttCallback {
             System.out.println(e);
 
         }
-        
+
         Connect();
 
-        Subscribe("AquaCare/#",1); //Was for testing purposes
      }
-    
-     
+
+
     // connect to broker
 
     private void Connect(){
@@ -128,7 +127,7 @@ public class MqttJavaClient implements MqttCallback {
 
     public void Publish(String topic, String message, int qos){
         try {
-             
+
              IMqttDeliveryToken token = null;
              MqttMessage Mqttmsg = new MqttMessage(message.getBytes());
              Mqttmsg.setQos(qos);
@@ -153,7 +152,7 @@ public class MqttJavaClient implements MqttCallback {
         } catch (Exception e){
             System.out.println("sub error :"+e);
         }
-        
+
     }
 
     // subscribe a topic with qos
@@ -165,7 +164,17 @@ public class MqttJavaClient implements MqttCallback {
         } catch (Exception e){
             System.out.println("sub error: " +e);
         }
-        
+
+    }
+
+    // subscribe to related topics
+
+    private void SubscribeRelatedTopics(){
+        Subscribe("AquaCare/+/Temperature",1);
+        Subscribe("AquaCare/+/Light",1);
+        Subscribe("AquaCare/+/Ph",1);
+        Subscribe("AquaCare/+/Dispenser",1);
+
     }
 
     // disconnect from a broker
