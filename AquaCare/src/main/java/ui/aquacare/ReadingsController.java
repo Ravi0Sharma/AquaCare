@@ -107,7 +107,7 @@ public class ReadingsController extends NavigationController implements Initiali
         series.setName(sensorName);
 
         //Query data based on active fish monitor and sensor name
-        List<FluxTable> tables = applicationInterface.QueryOfDuration(activeFishMonitor, "1w", sensorName);
+        List<FluxTable> tables = applicationInterface.QueryOfDuration(sensorName, "1w", activeFishMonitor);
 
         //Divide tables into individual tables
         for (FluxTable table : tables) {
