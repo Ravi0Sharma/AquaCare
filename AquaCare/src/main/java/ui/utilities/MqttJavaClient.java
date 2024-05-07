@@ -110,6 +110,7 @@ public class MqttJavaClient implements MqttCallbackExtended {
     private void Connect(){
         try {
             connOpts.setCleanSession(true);
+            connOpts.setAutomaticReconnect(true);
             mqttAsyncJavaClient.setCallback(this);
             System.out.println("Connecting to broker: " + broker);
             //connOpts.setUserName("username");
