@@ -1,5 +1,6 @@
 package ui.utilities;
 
+import java.awt.*;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
@@ -15,8 +16,9 @@ import com.influxdb.query.FluxTable;
 
 public class NotificationController {
     
-    //private NotificationManager notificationManager;   }
+    private NotificationClient notificationClient;
     private ApplicationInterface appInterface;
+
     //List of all fishes
     //List all their sensors
     //List all their thresholds
@@ -40,6 +42,10 @@ public class NotificationController {
     // Device ID to be used for the query
     private String deviceID;
 
+    //notificationClient.displayTray("Aquarium " + deviceID, "Treshold Breach on " + sensorName);
 
-    //Library to be used for notifications
+
+
+
+
 }
