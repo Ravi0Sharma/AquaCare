@@ -36,11 +36,13 @@ void MQTT_connect() {
     } else {
       Serial.print("failed, state=");
       Serial.print(client.state());
-      Serial.println(" try again in 3 seconds");
+      Serial.println(" try again in 5 seconds");
       
-      delay(3000);
+      delay(5000);
     }
   }
+  Serial.println();
+  Serial.print("Connected");
 }
 
 void callback(char* topic, byte* payload, unsigned int length) {
@@ -54,9 +56,11 @@ void callback(char* topic, byte* payload, unsigned int length) {
     buff_p[i] = (char)payload[i];
   }
 
-  if(topic == TOPIC_SUB_FOOD){
+ if (strcmp(topic, TOPIC_SUB_FOOD) == 0) {
     servo();
-    client.publish(TOPIC_PUB_FOOD, String(1).c_str());
-  }
+    client.publish(TOPIC_PUB_FOOD, "1");
+
+}
+
 
 }

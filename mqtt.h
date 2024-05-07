@@ -4,6 +4,7 @@
 extern PubSubClient client; 
 extern const char* mqtt_server;
 
+extern PubSubClient client; 
 extern const char* TOPIC_SUB;
 extern void MQTT_connect(); 
 
