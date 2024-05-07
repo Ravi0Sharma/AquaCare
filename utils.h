@@ -1,21 +1,6 @@
-#include <math.h>
-#include "pin.h"
-#include <Servo.h>
-#include <Arduino.h>
+#include "TFT_eSPI.h"
 
-#define MAX_READING 1023           
-#define MIN_READING 0
-#define Vref 4.95
+extern TFT_eSprite spr; 
+extern TFT_eSPI tft;
 
-#ifndef DISPENSER_H
-#define DISPENSER_H
-
-extern Servo dispenser;
-
-#endif
-
-extern const int serial_Begin_Rate;
-extern int mapToPercentage(int signal);
-extern int convertTemp(int temp);
-extern int convertPh(int temp);
-extern void servo();
+extern void Screen_draw();
