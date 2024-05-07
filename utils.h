@@ -12,7 +12,6 @@
 
 extern Servo dispenser;
 
-#endif
 
 extern const int serial_Begin_Rate;
 extern int mapToPercentage(int signal);
