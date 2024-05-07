@@ -1,13 +1,58 @@
 image: ubuntu:latest
 
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"    # disable gradle demon >_< since he fast but may prove inaccurate for CI
+
 before_script:
   # run shell script for installing arduino-cli, Wio Terminal core, and project libraries
   - chmod +x setup-build-env.sh               # change permissions to execute bash shell script
   - ./setup-build-env.sh                      # execute bash shell script
+  
+  # *cool description*
+  - chmod +x AquaCare/gradlew                 # elevates permissions
+  - GRADLE_USER_HOME="$(pwd)/AquaCare/.gradle"         # set gradle home location as .gradle
+  - export GRADLE_USER_HOME                   # export it so its available for gradle
+
 
 stages:
   - build
+  - test
   - deploy
+
+  
+build application:
+  stage: build
+  image: amd64/gradle:8.0.1-jdk19-alpine            # overwrite image 
+  tags:
+    - docker                                        # without explicit tags, docker wont love you
+  script:                                           # builds the application 
+    - cd AquaCare                                   # navigate to correct directory
+    - ./gradlew --build-cache assemble  
+
+  artifacts:                                        # saves the built app               
+    paths:
+      - AquaCare/build/distributions/*
+  cache:                                            # caches test related files
+    key: "$CI_COMMIT_REF_NAME"
+    policy: push
+    paths:
+      - AquaCare/build                              # whole build directory is cached for test stage
+      - AquaCare/.gradle
+
+test:
+  stage: test
+  image: amd64/gradle:8.0.1-jdk19-alpine    # an image with gradle and java installed just for us to use gradlew
+  tags:
+    - docker
+  script:
+    - cd AquaCare                            # gets into correct path
+    - ./gradlew check                        # exactly same as gradle test, which runs all the detected unit tests
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: pull                             # pulls from previously pushed cache
+    paths:
+      - build
+      - .gradle
 
 compile:
   stage: build
