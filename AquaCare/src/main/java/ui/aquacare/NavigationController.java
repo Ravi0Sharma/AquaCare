@@ -66,7 +66,7 @@ public class NavigationController {
     }
     @FXML
     public void goSearchPage(ActionEvent event) throws IOException {
-        goToPage("fish-search.fxml", event);
+        goToPage("fish-search2.fxml", event);
     }
     @FXML
     public void goPhPage(ActionEvent event) throws IOException {
