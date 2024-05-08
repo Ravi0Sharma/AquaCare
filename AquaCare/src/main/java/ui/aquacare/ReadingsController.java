@@ -43,6 +43,8 @@ public class ReadingsController extends NavigationController implements Initiali
     private Label tempLabel;
     @FXML
     private Label feedLabel;
+    @FXML
+    private Button feedFishButton;
 
 //  Historical Readings
     @FXML
@@ -67,7 +69,7 @@ public class ReadingsController extends NavigationController implements Initiali
 
         Map<LineChart, String> linecharts = new HashMap<>();
         linecharts.put(linechartTemp, "Temperature");
-        linecharts.put(linechartDisp, "Feed");
+        linecharts.put(linechartDisp, "Dispenser");
         linecharts.put(linechartLight, "Light");
         linecharts.put(linechartPh, "Ph");
 
@@ -94,7 +96,7 @@ public class ReadingsController extends NavigationController implements Initiali
         //The current structure of the UI makes this function obsolete since the charts are updated in the initialize function
         updateChart(linechartTemp, "Temperature");
         updateChart(linechartLight, "Light");
-        updateChart(linechartPh, "PhLevel");
+        updateChart(linechartPh, "Ph");
         updateChart(linechartDisp, "Dispenser");
     }
 
@@ -245,6 +247,10 @@ public class ReadingsController extends NavigationController implements Initiali
                 x = 0;
             }
         });
+    }
+
+    public void feedFish(){
+        applicationInterface.ActivateFeeder(activeFishMonitor);
     }
 
 }
