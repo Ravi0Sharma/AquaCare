@@ -10,13 +10,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Reflection?>
-<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -173,7 +171,7 @@
                 <Font size="24.0" />
             </font>
         </Text>
-        <Label fx:id="tempLabel" layoutX="776.0" layoutY="563.0"  prefHeight="114.0" prefWidth="141.0" text="Temperature: 20 C" AnchorPane.bottomAnchor="86.0" />
+        <Label fx:id="tempLabel" layoutX="776.0" layoutY="563.0" prefHeight="114.0" prefWidth="141.0" text="Temperature: 20 C" AnchorPane.bottomAnchor="86.0" />
         <Label fx:id="phLabel" layoutX="461.0" layoutY="603.0" prefHeight="35.0" prefWidth="149.0" text="pH: 7.8" AnchorPane.bottomAnchor="130.0" />
         <Label fx:id="feedLabel" layoutX="1077.0" layoutY="553.0" prefHeight="134.0" prefWidth="146.0" text="Last Fed: 8 hours ago" AnchorPane.bottomAnchor="81.0" />
         <Label fx:id="lightLabel" alignment="CENTER" layoutX="190.0" layoutY="606.0" prefHeight="35.0" prefWidth="154.0" text="Light: 400" textFill="#ffffffd7" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="190.0">
@@ -185,6 +183,11 @@
         <Button layoutX="772.0" layoutY="558.0" mnemonicParsing="false" onAction="#goTempPage" prefHeight="159.0" prefWidth="156.0" style="-fx-background-color: transparent;" />
 <!--        <Button layoutX="1068.0" layoutY="556.0" mnemonicParsing="false" onAction="#goFoodPage" prefHeight="159.0" prefWidth="156.0" style="-fx-background-color: transparent;" />-->
         <Button layoutX="191.0" layoutY="560.0" mnemonicParsing="false" onAction="#goHomePage" prefHeight="159.0" prefWidth="156.0" style="-fx-background-color: transparent;" />
+      <Button id="feedFishButton" fx:id="feedFishButton" layoutX="350.0" layoutY="106.0" mnemonicParsing="false" onAction="#feedFish" prefHeight="67.0" prefWidth="305.0" styleClass="cards" stylesheets="@stylesheet.css" text="Feed Fish" textFill="#ffffffe5">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
 
     </children>
 </AnchorPane>
