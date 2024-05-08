@@ -1,7 +1,6 @@
 package ui.aquacare;
 
 import javafx.application.Application;
-import ui.utilities.ApplicationInterface;
 import ui.utilities.MqttJavaClient;
 import ui.utilities.InfluxDBJavaClient;
 
