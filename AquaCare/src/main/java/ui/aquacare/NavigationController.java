@@ -16,6 +16,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class NavigationController {
+
+    // TODO: close influxdb client for real-time readings when scenes switched
+    //          public void close() {
+    //        if (databaseClient != null) {
+    //            databaseClient.close();
+    //        }
+    //        ***
+
+
     //  General
     private Stage stage;
     private Scene scene;
@@ -37,6 +46,7 @@ public class NavigationController {
     public void quit(){
         exitButton.setOnAction(event -> {
             Platform.exit();
+
         });
         // TODO: add new exit function to close sensor readings too.
         //  + should be able to quit with single click.
@@ -56,7 +66,7 @@ public class NavigationController {
     }
     @FXML
     public void goSearchPage(ActionEvent event) throws IOException {
-        goToPage("fish-search.fxml", event);
+        goToPage("fish-search2.fxml", event);
     }
     @FXML
     public void goPhPage(ActionEvent event) throws IOException {
