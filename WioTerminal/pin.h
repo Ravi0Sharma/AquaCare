@@ -1,5 +1,5 @@
 
-#define pinTempSensor A0
+#define pinTempSensor A4
 #define pinLightSensor A2
-#define pinPhSensor A1
-#define pinfoodDispenser A5
+#define pinPhSensor A6
+#define pinfoodDispenser A1

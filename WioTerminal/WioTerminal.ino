@@ -49,18 +49,19 @@ if (!client.connected()) {
   int lightResult = mapToPercentage(valueLight);
   int phResult = convertPh(valuePh);
 
+
   if (currentMillis - previousMillis >= interval) {
       previousMillis = currentMillis;
       Serial.print("Publish reading");
       Serial.println(msg);
       client.publish(TOPIC_PUB_TEMP, String(tempResult).c_str());
       client.publish(TOPIC_PUB_LIGHT, String(lightResult).c_str());
-      client.publish(TOPIC_PUB_PH, String(phResult).c_str());
+      client.publish(TOPIC_PUB_PH, String(pinPhSensor).c_str());
 
       tft.fillRect(0, 50, 320, 200, TFT_WHITE);
-      tft.drawNumber(valueTemp,50,95); 
-      tft.drawNumber(valueLight,50,190); 
-      tft.drawNumber(valuePh,210,95); 
+      tft.drawNumber(tempResult,50,95); 
+      tft.drawNumber(lightResult,50,190); 
+      tft.drawNumber(pinPhSensor,210,95); 
       tft.drawNumber(1,225,190); 
      
     }
