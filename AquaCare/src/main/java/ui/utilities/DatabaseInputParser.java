@@ -27,13 +27,30 @@ public class DatabaseInputParser {
         String[] messageParts = message.split(",");         //Split the message into parts
         String value = messageParts[0].trim();              //Get the value
 
+        //Ensure the message is in the correct format
         if (isParsableToDouble(value) == false) {
             System.out.println("Value not in correct format");
-            return;
+
         } else {
             System.out.println("Writing data to InfluxDB");
             //If there is no timestamp, write the data with the current time
             dataBaseHandler.WriteData(measurement, "deviceID", deviceID, "value", Double.parseDouble(value));
+            System.out.println("Have written data to InfluxDB");
+            return;
+
+        }
+
+        if (messageParts.length >= 2) {
+
+            String timestamp = messageParts[1].trim();          //Get the unixnano timestamp
+
+            if (isParsableToLong(timestamp) == false) {         //Ensure the timestamp is in the correct format
+                System.out.println("Timestamp not in correct format");
+                return;
+            }
+            System.out.println("Writing data to InfluxDB");
+            // Forward the parsed timestamped data to database
+            dataBaseHandler.WriteData(measurement, "deviceID", deviceID, "value", Double.parseDouble(value), Long.parseLong(timestamp));
             System.out.println("Have written data to InfluxDB");
             return;
         }
@@ -47,17 +64,10 @@ public class DatabaseInputParser {
                 System.out.println("Have written data to InfluxDB");
                 return;
         }
-        String timestamp = messageParts[1].trim();          //Get the unixnano timestamp
 
-        if (isParsableToLong(timestamp) == false) {         //Ensure the timestamp is in the correct format
-            System.out.println("Timestamp not in correct format");
-            return;
-
-            System.out.println("Writing data to InfluxDB");
-            // Forward the parsed data to database
-            dataBaseHandler.WriteData(measurement, "deviceID", deviceID, "value", Double.parseDouble(value), Long.parseLong(timestamp));
-            System.out.println("Have written data to InfluxDB");
         }*/
+
+        return;
 
     }
 
