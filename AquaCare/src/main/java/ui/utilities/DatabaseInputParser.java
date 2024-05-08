@@ -30,6 +30,10 @@ public class DatabaseInputParser{
         if (messageParts.length != 2) {                     //Ensure the message is in the correct format
 
             if (messageParts.length == 1) {
+                if (!isParsableToDouble(value)) {
+                    System.out.println("Value not in correct format");
+                    return;
+                }
                 System.out.println("Writing data to InfluxDB");
                 //If there is no timestamp, write the data with the current time
                 dataBaseHandler.WriteData(measurement, "deviceID", deviceID, "value", Double.parseDouble(value));
@@ -47,6 +51,14 @@ public class DatabaseInputParser{
         // Forward the parsed data to database
         dataBaseHandler.WriteData(measurement, "deviceID", deviceID, "value", Double.parseDouble(value), Long.parseLong(timestamp));
         System.out.println("Have written data to InfluxDB");
+    }
+    public boolean isParsableToDouble(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
     
 }
