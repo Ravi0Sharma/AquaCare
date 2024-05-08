@@ -30,9 +30,15 @@ public class ApplicationInterface {
 
     public void ActivateFeeder(String deviceID, String content) {
         // Default topic, qos and (content?) settings are used
+        System.out.println(String.format("AquaCareApp/%s/actuator", deviceID));
         Publish(String.format("AquaCareApp/%s/actuator", deviceID), content, 1);
         //We may implement duplicate command control system on the terminal side based on the sent content? -Just maybe
         //Other QoS settings may be more appropriate
+    }
+
+    // Only trigger before exiting the application
+    public void DisconnectFromMqtt(){
+        mqttJavaClient.Disconnect();
     }
 
     /*****************************/

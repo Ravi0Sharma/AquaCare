@@ -85,7 +85,10 @@ public class MqttJavaClient implements MqttCallbackExtended {
 
         //!Will be changed so credidential are not hardcoded
         broker = "tcp://broker.hivemq.com:1883";
-        clientId = "AquaCareApp";
+
+        //I have discovered that Client ID may cause improper connection, such as constant disconnecting and re-connecting
+        clientId = "AquaCareApplication";
+
         userName = "username";
         password = "password";
 
@@ -128,7 +131,7 @@ public class MqttJavaClient implements MqttCallbackExtended {
 
     public void Publish(String topic, String message, int qos){
         try {
-
+            System.out.println("Publishing message: " + message);
              IMqttDeliveryToken token = null;
              MqttMessage Mqttmsg = new MqttMessage(message.getBytes());
              Mqttmsg.setQos(qos);
@@ -180,7 +183,7 @@ public class MqttJavaClient implements MqttCallbackExtended {
 
     // disconnect from a broker
 
-    private void Disconnect(){
+    public void Disconnect(){
         try {
             mqttAsyncJavaClient.disconnect();
             System.out.println("Disconnected");
