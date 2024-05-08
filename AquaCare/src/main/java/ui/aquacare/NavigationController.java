@@ -46,7 +46,7 @@ public class NavigationController {
     public void quit(){
         exitButton.setOnAction(event -> {
             Platform.exit();
-
+            System.exit(0);
         });
         // TODO: add new exit function to close sensor readings too.
         //  + should be able to quit with single click.

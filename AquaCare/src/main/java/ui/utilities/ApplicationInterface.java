@@ -17,7 +17,7 @@ public class ApplicationInterface {
     }
 
     // Publishing a message to the MQTT broker
-    // Excpected topic format is "AquaCareApp/001/Temperature" - "AquaCareApp/deviceID/sensorType"
+    // Excpected topic format is "AquaCare/001/Temperature" - "AquaCare/deviceID/sensorType"
     public void Publish(String topic, String content, int qos) {
         mqttJavaClient.Publish(topic, content ,qos);
     }
@@ -28,9 +28,9 @@ public class ApplicationInterface {
         Publish(topic, content, 1);
     }
 
-    public void ActivateFeeder(String deviceID, String content) {
+    public void ActivateFeeder(String deviceID) {
         // Default topic, qos and (content?) settings are used
-        Publish(String.format("AquaCareApp/%s/actuator", deviceID), content, 1);
+        Publish(String.format("AquaCare/%s/Feed", deviceID), "1", 1);
         //We may implement duplicate command control system on the terminal side based on the sent content? -Just maybe
         //Other QoS settings may be more appropriate
     }
