@@ -181,18 +181,22 @@ public class ReadingsController extends NavigationController implements Initiali
                 List<FluxTable> tablesPh = applicationInterface.MeanOfDuration("Ph", "30s", activeFishMonitor);
                 List<FluxTable> tablesTemp = applicationInterface.MeanOfDuration("Temperature", "30s", activeFishMonitor);
                 List<FluxTable> tablesLight = applicationInterface.MeanOfDuration("Light", "30s", activeFishMonitor);
-                List<FluxTable> tablesDisp = applicationInterface.MeanOfDuration("Dispenser", "30s", activeFishMonitor);
+                List<FluxTable> tablesDisp = applicationInterface.LastOfDuration("Dispenser", "25d", activeFishMonitor);
 
                 // Extract the mean values from the tables
                 double meanPh = ApplicationInterface.extractMeanValue(tablesPh);
                 double meanTemp = ApplicationInterface.extractMeanValue(tablesTemp);
                 double meanLight = ApplicationInterface.extractMeanValue(tablesLight);
+                double lastFedHour = ApplicationInterface.extractLastRowTimeDifferenceWithNow(tablesDisp);
 
                 Platform.runLater(() -> {
                     // update labels with the mean values
                     phLabel.setText("pH: " + meanPh);
                     tempLabel.setText("Temperature: " + meanTemp + "°C");
                     lightLabel.setText("Light: " + meanLight);
+                    feedLabel.setText("Fed " + lastFedHour + " hours ago");
+
+
                 });
 
                 // sleep to avoid reduce app's CPU usage
