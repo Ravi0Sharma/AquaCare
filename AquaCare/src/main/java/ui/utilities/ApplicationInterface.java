@@ -2,6 +2,8 @@ package ui.utilities;
 
 import java.util.List;
 import java.time.Instant;
+
+import com.influxdb.query.FluxRecord;
 import com.influxdb.query.FluxTable;
 
 public class ApplicationInterface {
@@ -19,7 +21,7 @@ public class ApplicationInterface {
     // Publishing a message to the MQTT broker
     // Excpected topic format is "AquaCare/001/Temperature" - "AquaCare/deviceID/sensorType"
     public void Publish(String topic, String content, int qos) {
-        mqttJavaClient.Publish(topic, content ,qos);
+        mqttJavaClient.Publish(topic, content, qos);
     }
 
     //Default qos is 1
@@ -56,6 +58,7 @@ public class ApplicationInterface {
 
     /**********************************************************/
     //Query database
+
     /**********************************************************/
 
     /*  1ns // 1 nanosecond
@@ -71,7 +74,6 @@ public class ApplicationInterface {
 
         3d12h4m25s // 3 days, 12 hours, 4 minutes, and 25 seconds
      */
-
     public List<FluxTable> MeanOfDuration(String sensorName, String duration, String deviceID) {
         //Example parameters ("Temperature", "1d", "001")
         return influxDBJavaClient.QueryDatabase(duration, sensorName, "value", deviceID, true);
@@ -82,4 +84,25 @@ public class ApplicationInterface {
         return influxDBJavaClient.QueryDatabase(duration, sensorName, "value", deviceID, false);
     }
 
+    public static double extractMeanValue(List<FluxTable> tables) {
+        //Extracts the mean value from the query result
+        //Returns the mean value
+
+        //Code copied from another branch >:)
+        //Get the latest data from the database
+        //Rather than real-realtime data, we are using the mean of 30s of data from the database
+        if (!tables.isEmpty()) {
+            FluxTable fluxTable = tables.get(0);
+            List<FluxRecord> records = fluxTable.getRecords();
+            if (!records.isEmpty()) {
+                //Get the first entry value
+                double value = (double) records.get(0).getValue();
+                System.out.println("Returning: "+ value);
+                return value;
+            }
+        }
+
+        System.out.println("Returning: -1");
+        return -1;
+    }
 }
