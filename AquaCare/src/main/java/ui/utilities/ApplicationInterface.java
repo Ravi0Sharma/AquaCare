@@ -1,5 +1,6 @@
 package ui.utilities;
 
+import java.time.Duration;
 import java.util.List;
 import java.time.Instant;
 
@@ -103,12 +104,34 @@ public class ApplicationInterface {
             if (!records.isEmpty()) {
                 //Get the first entry value
                 double value = (double) records.get(0).getValue();
-                System.out.println("Returning: "+ value);
+                System.out.println("Returning: " + value);
                 return value;
             }
         }
 
         System.out.println("Returning: -1");
+        return -1;
+    }
+
+    public static double extractLastRowTimeDifferenceWithNow(List<FluxTable> tables) {
+        //Should get the last row's time and calculate the difference with the current time
+        //Returns the time difference in integer hours
+
+        if (!tables.isEmpty()) {
+            FluxTable fluxTable = tables.get(0);
+            List<FluxRecord> records = fluxTable.getRecords();
+            if (!records.isEmpty()) {
+                //Get the first entry value
+
+                Instant lastMoment = records.get(0).getTime();
+
+                //Find the difference between the last moment and now
+                Duration duration = Duration.between(lastMoment, Instant.now());
+
+                return duration.toHours();
+            }
+        }
+        System.out.println("Returning: -1 :(");
         return -1;
     }
 }
