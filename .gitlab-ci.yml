@@ -5,10 +5,11 @@ variables:
 
 before_script:
   # run shell script for installing arduino-cli, Wio Terminal core, and project libraries
+  - cd AquaCare 
   - chmod +x setup-build-env.sh               # change permissions to execute bash shell script
   - ./setup-build-env.sh                      # execute bash shell script
   
-  # *cool description*
+  #
   - chmod +x AquaCare/gradlew                 # elevates permissions
   - GRADLE_USER_HOME="$(pwd)/AquaCare/.gradle"         # set gradle home location as .gradle
   - export GRADLE_USER_HOME                   # export it so its available for gradle
@@ -26,12 +27,14 @@ build application:
   tags:
     - docker                                        # without explicit tags, docker wont love you
   script:                                           # builds the application 
-    - cd AquaCare                                   # navigate to correct directory
+
+  # is chaging directories required here?
+   - cd AquaCare                                   # navigate to correct directory
     - ./gradlew --build-cache assemble  
 
   artifacts:                                        # saves the built app               
     paths:
-      - AquaCare/build/distributions/*
+      - AquaCare/build/distributions/AquaCare-1.0-SNAPSHOT/bin/Aquacare.bat
   cache:                                            # caches test related files
     key: "$CI_COMMIT_REF_NAME"
     policy: push
@@ -47,12 +50,16 @@ test:
   script:
     - cd AquaCare                            # gets into correct path
     - ./gradlew check                        # exactly same as gradle test, which runs all the detected unit tests
+    - echo "detected unit tests are run"
+    - sleep 1
+
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: pull                             # pulls from previously pushed cache
     paths:
       - build
       - .gradle
+
 
 compile:
   stage: build
@@ -75,6 +82,7 @@ compile:
   except:
     - tags
 
+
 release:
   stage: deploy
   tags:
@@ -83,7 +91,7 @@ release:
     - export PATH=$PATH:/root/bin             # set the path to arduino-cli installation folder
     - pwd                                     # print the current working directory
     - cd WioTerminal                         # change the directory to arduino folder
-    - echo "$SECRETS_H" > Secrets.h           # import secrets from GitLAB CI/CD Settings -> Variables
+    - echo $SECRET_KEY > Secrets.h 
     #- echo "$NETWORK_INFO_H" > NetworkInfo.h  # import secrets for WiFi from Gitlab CI/CD Settings -> Variables
     #- echo "$BROKER_INFO_H" > BrokerInfo.h    # import secrets for MQTT from Gitlab CI/CD Settings -> Variables
     - arduino-cli lib list                    # check that libraries are installed
