@@ -84,6 +84,12 @@ public class ApplicationInterface {
         return influxDBJavaClient.QueryDatabase(duration, sensorName, "value", deviceID, false);
     }
 
+    public List<FluxTable> LastOfDuration(String sensorName, String duration, String deviceID) {
+        //Example parameters ("Temperature", "1d", "001")
+        return influxDBJavaClient.QueryDatabaseSensorCustom(duration, sensorName, deviceID, "|> last()");
+    }
+
+
     public static double extractMeanValue(List<FluxTable> tables) {
         //Extracts the mean value from the query result
         //Returns the mean value
