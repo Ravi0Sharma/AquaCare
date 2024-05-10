@@ -5,7 +5,6 @@ variables:
 
 before_script:
   # run shell script for installing arduino-cli, Wio Terminal core, and project libraries
-  - cd AquaCare
   - chmod +x setup-build-env.sh               # change permissions to execute bash shell script
   - ./setup-build-env.sh                      # execute bash shell script
   
@@ -24,15 +23,13 @@ stages:
   - deploy
 
 
-build stage:
+build:
   stage: build
   image: amd64/gradle:8.0.1-jdk19-alpine            # overwrite image
   tags:
     - docker                                        # without explicit tags, docker wont love you
   script:                                           # builds the application
-
-    # is chaging directories required here?
-    #- cd AquaCare                                   # navigate to correct directory
+    - cd AquaCare                                   # navigate to correct directory
     - ./gradlew --build-cache assemble
 
   artifacts:                                        # saves the built app
