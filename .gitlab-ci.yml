@@ -16,16 +16,11 @@ build application:
     - docker
   script:
     - export PATH=$PATH:/root/bin             # set the path to arduino-cli installation folder
-    - pwd                                     # print the current working directory
-    - cd WioTerminal                          # change the directory to arduino folder
-    - echo "$SECRET_KEY" > Secrets.h
     - arduino-cli lib list                    # check that libraries are installed
-
-    # Compile
-    - arduino-cli compile --fqbn Seeeduino:samd:seeed_wio_terminal
-
-    # Upload
-    - arduino-cli board list                  # Check if device is connected
+    - pwd                                     # print the current working directory
+#    - cd WioTerminal                          # change the directory to arduino folder
+    - arduino-cli compile --fqbn Seeeduino:samd:seeed_wio_terminal  # Compile
+  #    - arduino-cli board list                  # Upload. Check if device is connected
   except:
     - tags
 
