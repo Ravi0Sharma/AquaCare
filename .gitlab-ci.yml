@@ -71,6 +71,7 @@ compile:
     - docker
   script:
     - export PATH=$PATH:/root/bin             # set the path to arduino-cli installation folder.
+    - cd ~                                     # go back to the home directory
     - pwd                                     # print the current working directory
     - cd WioTerminal                          # change the directory to arduino folder
     - echo "$SECRETS_H" > Secrets.h           # import secrets from GitLAB CI/CD Settings -> Variables
