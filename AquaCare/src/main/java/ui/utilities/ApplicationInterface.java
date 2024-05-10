@@ -113,7 +113,7 @@ public class ApplicationInterface {
         return -1;
     }
 
-    public static double extractLastRowTimeDifferenceWithNow(List<FluxTable> tables) {
+    public static double extractLastRowHourlyTimeDifference(List<FluxTable> tables) {
         //Should get the last row's time and calculate the difference with the current time
         //Returns the time difference in integer hours
 

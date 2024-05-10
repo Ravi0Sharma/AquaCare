@@ -61,12 +61,15 @@ public class ReadingsController extends NavigationController implements Initiali
 
     ApplicationInterface applicationInterface = new ApplicationInterface();
 
-    private volatile boolean running = true;
+    private volatile double threadCordinator = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         setDate();
-        realTimeData();
+
+        threadCordinator = Math.random();
+        realTimeData(threadCordinator);
 
         //Set active fish monitor to 1 since owning multiple monitors is not supported yet
         activeFishMonitor = "1";
@@ -171,11 +174,11 @@ public class ReadingsController extends NavigationController implements Initiali
      * ------- REAL-TIME DATA VISUALIZATION -------
      */
 
-    public void realTimeData() {
+    public void realTimeData(double threadIndex) {
         // create a new thread that listens for incoming text and populates the graph
         Thread thread = new Thread(() -> {
 
-            while (running) {
+            while (threadIndex == threadCordinator) {
 
                 // Query data based on active fish monitor and sensor name
                 List<FluxTable> tablesPh = applicationInterface.MeanOfDuration("Ph", "30s", activeFishMonitor);
@@ -187,7 +190,7 @@ public class ReadingsController extends NavigationController implements Initiali
                 double meanPh = ApplicationInterface.extractMeanValue(tablesPh);
                 double meanTemp = ApplicationInterface.extractMeanValue(tablesTemp);
                 double meanLight = ApplicationInterface.extractMeanValue(tablesLight);
-                double lastFedHour = ApplicationInterface.extractLastRowTimeDifferenceWithNow(tablesDisp);
+                double lastFedHour = ApplicationInterface.extractLastRowHourlyTimeDifference(tablesDisp);
 
                 Platform.runLater(() -> {
                     // update labels with the mean values
@@ -201,18 +204,14 @@ public class ReadingsController extends NavigationController implements Initiali
 
                 // sleep to avoid reduce app's CPU usage
                 try {
-                    Thread.sleep(15000); // 1000 = 1 sec
+                    Thread.sleep(3000); // 1000 = 1 sec
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
+            return;
         });
         thread.start();
-    }
-
-    //To turn off the real-time data visualization
-    private void stopRealTimeData() {
-        running = false;
     }
 
     private double extractMeanValue(List<FluxTable> tables) {
