@@ -29,7 +29,7 @@ build application:
   script:                                           # builds the application 
 
   # is chaging directories required here?
-   - cd AquaCare                                   # navigate to correct directory
+    - cd AquaCare                                   # navigate to correct directory
     - ./gradlew --build-cache assemble  
 
   artifacts:                                        # saves the built app               
