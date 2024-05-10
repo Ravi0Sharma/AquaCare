@@ -70,20 +70,14 @@ compile:
   tags:
     - docker
   script:
-    - export PATH=$PATH:/root/bin             # set the path to arduino-cli installation folder.
-    - cd ~                                    # go back to the home directory
+    - export PATH=$PATH:/root/WioTerminal            # set the path to arduino-cli installation folder.
     - pwd                                     # print the current working directory
 #    - cd WioTerminal                          # change the directory to arduino folder
-    - echo "$SECRET_KEY" > Secrets.h
+#    - echo "$SECRET_KEY" > Secrets.h
     #- echo "$NETWORK_INFO_H" > NetworkInfo.h  # import secrets for WiFi from Gitlab CI/CD Settings -> Variables
     #- echo "$BROKER_INFO_H" > BrokerInfo.h    # import secrets for MQTT from Gitlab CI/CD Settings -> Variables
     - arduino-cli lib list                    # check that libraries are installed
 
-    - ls -l
-    - cd ~                                    # go back to the home directory
-    - ls -l
-
-    - cd WioTerminal
     # Compile
     - arduino-cli compile --fqbn Seeeduino:samd:seeed_wio_terminal
 
