@@ -5,14 +5,13 @@ variables:
 
 before_script:
   # run shell script for installing arduino-cli, Wio Terminal core, and project libraries
-  - cd AquaCare
+#  - cd AquaCare
   - chmod +x setup-build-env.sh               # change permissions to execute bash shell script
   - ./setup-build-env.sh                      # execute bash shell script
   
   #
-
-  #  - chmod +x AquaCare/gradlew                 # elevates permissions
-  #  - GRADLE_USER_HOME="$(pwd)/AquaCare/.gradle"         # set gradle home location as .gradle
+  - chmod +x AquaCare/gradlew                 # elevates permissions
+  - GRADLE_USER_HOME="$(pwd)/AquaCare/.gradle"         # set gradle home location as .gradle
 
   - chmod +x gradlew                 # elevates permissions
   - GRADLE_USER_HOME="$(pwd)/AquaCare/.gradle"         # set gradle home location as .gradle
@@ -70,12 +69,13 @@ compile:
   tags:
     - docker
   script:
-    - export PATH=$PATH:/root/WioTerminal            # set the path to arduino-cli installation folder.
+    - export PATH=$PATH:/root/bin             # set the path to arduino-cli installation folder.
+    - cd ~                                    # go back to the home directory
     - pwd                                     # print the current working directory
 #    - cd WioTerminal                          # change the directory to arduino folder
 #    - echo "$SECRET_KEY" > Secrets.h
-    #- echo "$NETWORK_INFO_H" > NetworkInfo.h  # import secrets for WiFi from Gitlab CI/CD Settings -> Variables
-    #- echo "$BROKER_INFO_H" > BrokerInfo.h    # import secrets for MQTT from Gitlab CI/CD Settings -> Variables
+#    - echo "$NETWORK_INFO_H" > NetworkInfo.h  # import secrets for WiFi from Gitlab CI/CD Settings -> Variables
+#    - echo "$BROKER_INFO_H" > BrokerInfo.h    # import secrets for MQTT from Gitlab CI/CD Settings -> Variables
     - arduino-cli lib list                    # check that libraries are installed
 
     # Compile
@@ -83,7 +83,6 @@ compile:
 
     # Upload
     - arduino-cli board list                  # Check if device is connected
-
   except:
     - tags
 
@@ -96,8 +95,9 @@ release:
     - export PATH=$PATH:/root/bin             # set the path to arduino-cli installation folder
     - pwd                                     # print the current working directory
     - cd WioTerminal                         # change the directory to arduino folder
-    #- echo "$NETWORK_INFO_H" > NetworkInfo.h  # import secrets for WiFi from Gitlab CI/CD Settings -> Variables
-    #- echo "$BROKER_INFO_H" > BrokerInfo.h    # import secrets for MQTT from Gitlab CI/CD Settings -> Variables
+#    - echo "$SECRET_KEY" > Secrets.h
+#    - echo "$NETWORK_INFO_H" > NetworkInfo.h  # import secrets for WiFi from Gitlab CI/CD Settings -> Variables
+#    - echo "$BROKER_INFO_H" > BrokerInfo.h    # import secrets for MQTT from Gitlab CI/CD Settings -> Variables
     - arduino-cli lib list                    # check that libraries are installed
     
     # Compile
