@@ -18,7 +18,6 @@ arduino-cli core install Seeeduino:samd --config-file .arduino-cli.yaml
 # Install 'native' packages (libraries that do not come with the core)
 
 # Define the libraries to be installed
-arduino-cli lib list
 libraries=(
     "PubSubClient"
     "TFT_eSPI"
@@ -34,10 +33,9 @@ for lib in "${libraries[@]}"; do
     arduino-cli lib install "$lib"    # Install each library using arduino-cli
 done
 
-arduino-cli lib list
 arduino-cli lib install "ArduinoSTL"
 arduino-cli lib install "WiFiNINA"
-arduino-cli lib install "rpcUnified"
+arduino-cli lib list
 
 cp MQTT.h /root/Arduino/libraries/PubSubClient/src
 #cp math.h /usr/include/math.h
@@ -48,6 +46,7 @@ cd -
 apt-get install git -y
 cd `arduino-cli config dump | grep sketchbook | sed 's/.*\ //'`/libraries
 git clone https://gist.github.com/4033545.git
+
 arduino-cli lib list
 
 ## Install 'third-party' packages / libraries: find proper location and 'git clone'
