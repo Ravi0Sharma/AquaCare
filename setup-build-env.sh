@@ -40,17 +40,19 @@ arduino-cli lib install "rpcUnified"
 arduino-cli lib install "Seeed_Arduino_rpcWiFi"
 arduino-cli lib install "Seeed_Arduino_rpcUnified"
 
-cd -
-cd WioTerminal
-cd lib
-git clone https://gist.github.com/4033545.git
 cp MQTT.h /root/Arduino/libraries/PubSubClient/src
 #cp math.h /usr/include/math.h
 
-# Install 'third-party' packages / libraries: find proper location and 'git clone'
-#apt-get install git -y
-#cd `arduino-cli config dump | grep sketchbook | sed 's/.*\ //'`/libraries
-#git clone https://github.com/ThingPulse/esp8266-oled-ssd1306.git
-#git clone https://github.com/Seeed-Studio/Seeed_Arduino_RTC.git
+cd -
+#cd WioTerminal/lib
+#cd lib
+apt-get install git -y
+cd `arduino-cli config dump | grep sketchbook | sed 's/.*\ //'`/libraries
+git clone https://gist.github.com/4033545.git
 
-#cd -
+## Install 'third-party' packages / libraries: find proper location and 'git clone'
+# apt-get install git -y
+# cd `arduino-cli config dump | grep sketchbook | sed 's/.*\ //'`/libraries
+# git clone https://github.com/ThingPulse/esp8266-oled-ssd1306.git
+# git clone https://github.com/Seeed-Studio/Seeed_Arduino_RTC.git
+
