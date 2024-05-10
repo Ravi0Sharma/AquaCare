@@ -78,7 +78,8 @@ compile:
     #- echo "$NETWORK_INFO_H" > NetworkInfo.h  # import secrets for WiFi from Gitlab CI/CD Settings -> Variables
     #- echo "$BROKER_INFO_H" > BrokerInfo.h    # import secrets for MQTT from Gitlab CI/CD Settings -> Variables
     - arduino-cli lib list                    # check that libraries are installed
-    
+
+    - cd WioTerminal
     # Compile
     - arduino-cli compile --fqbn Seeeduino:samd:seeed_wio_terminal
 
