@@ -10,12 +10,12 @@ const char* mqtt_server = "broker.hivemq.com";
 const char* TOPIC_PUB_TEMP  = "AquaCare/deviceID/Sensors/Temperature";
 const char* TOPIC_PUB_LIGHT = "AquaCare/deviceID/Sensors/Light";
 const char* TOPIC_PUB_PH  = "AquaCare/deviceID/Sensors/pH";
-const char* TOPIC_PUB_FOOD = "AquaCare/deviceID/motor/Food";
+//const char* TOPIC_PUB_FOOD = "AquaCare/deviceID/motor/Food";
 
 const char* TOPIC_SUB_TEMP =  "AquaCare/deviceID/Range/Temperature";
 const char* TOPIC_SUB_LIGHT = "AquaCare/deviceID/Range/Light";
 const char* TOPIC_SUB_PH = "AquaCare/deviceID/Range/pH";
-const char* TOPIC_SUB_FOOD = "AquaCare/deviceID/Request/Food";
+//const char* TOPIC_SUB_FOOD = "AquaCare/deviceID/Request/Food";
 
 void MQTT_connect() {
 
@@ -31,7 +31,7 @@ void MQTT_connect() {
       
       client.subscribe(TOPIC_SUB_LIGHT);
       client.subscribe(TOPIC_SUB_PH);
-      client.subscribe(TOPIC_SUB_FOOD);
+//      client.subscribe(TOPIC_SUB_FOOD);
       
     } else {
       Serial.print("failed, state=");
@@ -56,11 +56,11 @@ void callback(char* topic, byte* payload, unsigned int length) {
     buff_p[i] = (char)payload[i];
   }
 
- if (strcmp(topic, TOPIC_SUB_FOOD) == 0) {
-    servo();
-    client.publish(TOPIC_PUB_FOOD, "1");
-
-}
+// if (strcmp(topic, TOPIC_SUB_FOOD) == 0) {
+//    servo();
+//    client.publish(TOPIC_PUB_FOOD, "1");
+//
+//}
 
 
 }
