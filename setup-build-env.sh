@@ -29,7 +29,7 @@ libraries=(
     "Seeed_Arduino_mbedtls@3.0.1"
     "ArduinoSTL"
     "WiFiNINA"
-#    "TFT_eSPI"
+    "TFT_eSPI"
 )
 for lib in "${libraries[@]}"; do
     arduino-cli lib install "$lib"    # Install each library using arduino-cli
