@@ -37,14 +37,14 @@ arduino-cli lib install "ArduinoSTL"
 arduino-cli lib install "WiFiNINA"
 arduino-cli lib list
 
-cp MQTT.h /root/Arduino/libraries/PubSubClient/src
 #cp math.h /usr/include/math.h
 
 cd -
-#cd WioTerminal/lib
-#cd lib
 apt-get install git -y
-cd `arduino-cli config dump | grep sketchbook | sed 's/.*\ //'`Arduino/libraries
+cd arduino-cli config dump | grep sketchbook | sed 's/.*\ //'
+ls -l
+cd Arduino/libraries
+cp MQTT.h /root/Arduino/libraries/PubSubClient/src
 git clone https://gist.github.com/4033545.git
 
 arduino-cli lib list
