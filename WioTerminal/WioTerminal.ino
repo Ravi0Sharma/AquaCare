@@ -1,9 +1,8 @@
 #include "Screen_draw.h"
 #include "WiFi.h"
 #include "pin.h"
-#include "mqtt.h"
 #include "utils.h"
-
+#include "mqtt.h"
 
 char msg[50];
 const long interval = 5000;
