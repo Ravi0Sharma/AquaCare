@@ -44,7 +44,7 @@ cd -
 #cd WioTerminal/lib
 #cd lib
 apt-get install git -y
-cd `arduino-cli config dump | grep sketchbook | sed 's/.*\ //'`WioTerminal/lib
+cd `arduino-cli config dump | grep sketchbook | sed 's/.*\ //'`Arduino/libraries
 git clone https://gist.github.com/4033545.git
 
 arduino-cli lib list
