@@ -20,7 +20,6 @@ arduino-cli core install Seeeduino:samd --config-file .arduino-cli.yaml
 # Define the libraries to be installed
 libraries=(
     "PubSubClient@2.8"
-    "Servo@1.2.1"
 #    "Seeed Arduino FS@2.1.1"               # To write on SD card
     "Seeed Arduino rpcUnified@2.1.4"
     "Seeed Arduino rpcWiFi@1.0.7"
@@ -47,6 +46,8 @@ cd Arduino/libraries
 #cp MQTT.h /root/Arduino/libraries/PubSubClient/src
 git clone https://github.com/arduino-libraries/Servo.git
 git clone https://gist.github.com/4033545.git
+
+arduino-cli lib install "Servo@1.1.4"
 
 arduino-cli lib list
 
