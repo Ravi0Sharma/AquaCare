@@ -1,6 +1,4 @@
 # Credits to Pasha Klimenkov for writing esp32 CI guide: https://codeblog.dotsandbrackets.com/gitlab-ci-esp32-arduino/
-# I have modified his code to work with Wio Terminal, which is not the esp32, but still uses arduino-cli and GitLab.
-
 #!/bin/bash
 
 apt-get update
@@ -21,23 +19,33 @@ arduino-cli core install Seeeduino:samd --config-file .arduino-cli.yaml
 
 # Define the libraries to be installed
 libraries=(
-    "PubSubClient@2.8"
-    "Seeed Arduino FS@2.1.1"
-    "Seeed Arduino rpcUnified@2.1.4"
-    "Seeed Arduino rpcWiFi@1.0.6"
-    "Seeed Arduino RTC@2.0.0"
+    "PubSubClient"
+    "TFT_eSPI"
+    "Servo"
+#    "Seeed Arduino FS@2.1.1"               # To write on SD card
+#    "Seeed Arduino rpcUnified@2.1.4"
+#    "Seeed Arduino rpcWiFi@1.0.6"
+#    "Seeed Arduino RTC@2.0.0"              # Realtime clock component
     "Seeed Arduino SFUD@2.0.2"
     "Seeed_Arduino_mbedtls@3.0.1"
 )
-for lib in "${libraries[@]}"; do    # Install each library using arduino-cli
-    arduino-cli lib install "$lib"
+for lib in "${libraries[@]}"; do
+    arduino-cli lib install "$lib"    # Install each library using arduino-cli
 done
 
-#arduino-cli lib install "Seeed Arduino rpcWiFi@1.0.6"
-#arduino-cli lib install "PubSubClient@2.8"
-#arduino-cli lib install "Seeed Arduino RTC@2.0.0"
+arduino-cli lib install "ArduinoSTL"
+arduino-cli lib install "WiFiNINA"
+arduino-cli lib install "rpcWiFi"
+arduino-cli lib install "rpcUnified"
+arduino-cli lib install "Seeed_Arduino_rpcWiFi"
+arduino-cli lib install "Seeed_Arduino_rpcUnified"
 
 cd -
+cd WioTerminal
+cd lib
+git clone https://gist.github.com/4033545.git
+cp MQTT.h /root/Arduino/libraries/PubSubClient/src
+#cp math.h /usr/include/math.h
 
 # Install 'third-party' packages / libraries: find proper location and 'git clone'
 #apt-get install git -y
