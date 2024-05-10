@@ -18,13 +18,14 @@ arduino-cli core install Seeeduino:samd --config-file .arduino-cli.yaml
 # Install 'native' packages (libraries that do not come with the core)
 
 # Define the libraries to be installed
+arduino-cli lib list
 libraries=(
     "PubSubClient"
     "TFT_eSPI"
     "Servo"
 #    "Seeed Arduino FS@2.1.1"               # To write on SD card
-#    "Seeed Arduino rpcUnified@2.1.4"
-#    "Seeed Arduino rpcWiFi@1.0.6"
+    "Seeed Arduino rpcUnified@2.1.4"
+    "Seeed Arduino rpcWiFi@1.0.6"
 #    "Seeed Arduino RTC@2.0.0"              # Realtime clock component
     "Seeed Arduino SFUD@2.0.2"
     "Seeed_Arduino_mbedtls@3.0.1"
@@ -33,12 +34,10 @@ for lib in "${libraries[@]}"; do
     arduino-cli lib install "$lib"    # Install each library using arduino-cli
 done
 
+arduino-cli lib list
 arduino-cli lib install "ArduinoSTL"
 arduino-cli lib install "WiFiNINA"
-arduino-cli lib install "rpcWiFi"
 arduino-cli lib install "rpcUnified"
-arduino-cli lib install "Seeed_Arduino_rpcWiFi"
-arduino-cli lib install "Seeed_Arduino_rpcUnified"
 
 cp MQTT.h /root/Arduino/libraries/PubSubClient/src
 #cp math.h /usr/include/math.h
@@ -49,10 +48,10 @@ cd -
 apt-get install git -y
 cd `arduino-cli config dump | grep sketchbook | sed 's/.*\ //'`/libraries
 git clone https://gist.github.com/4033545.git
+arduino-cli lib list
 
 ## Install 'third-party' packages / libraries: find proper location and 'git clone'
 # apt-get install git -y
 # cd `arduino-cli config dump | grep sketchbook | sed 's/.*\ //'`/libraries
 # git clone https://github.com/ThingPulse/esp8266-oled-ssd1306.git
 # git clone https://github.com/Seeed-Studio/Seeed_Arduino_RTC.git
-
