@@ -20,7 +20,6 @@ arduino-cli core install Seeeduino:samd --config-file .arduino-cli.yaml
 # Define the libraries to be installed
 libraries=(
     "PubSubClient@2.8"
-    "TFT_eSPI"
     "Servo@1.1.4"
 #    "Seeed Arduino FS@2.1.1"               # To write on SD card
     "Seeed Arduino rpcUnified@2.1.4"
@@ -28,13 +27,14 @@ libraries=(
 #    "Seeed Arduino RTC@2.0.0"              # Realtime clock component
     "Seeed Arduino SFUD@2.0.2"
     "Seeed_Arduino_mbedtls@3.0.1"
+    "ArduinoSTL"
+    "WiFiNINA"
+#    "TFT_eSPI"
 )
 for lib in "${libraries[@]}"; do
     arduino-cli lib install "$lib"    # Install each library using arduino-cli
 done
 
-arduino-cli lib install "ArduinoSTL"
-arduino-cli lib install "WiFiNINA"
 arduino-cli lib list
 
 #cp math.h /usr/include/math.h
@@ -44,7 +44,7 @@ apt-get install git -y
 cd arduino-cli config dump | grep sketchbook | sed 's/.*\ //'
 ls -l
 cd Arduino/libraries
-cp MQTT.h /root/Arduino/libraries/PubSubClient/src
+#cp MQTT.h /root/Arduino/libraries/PubSubClient/src
 git clone https://gist.github.com/4033545.git
 
 arduino-cli lib list

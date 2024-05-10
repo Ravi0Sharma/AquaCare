@@ -42,9 +42,7 @@ release:
     - echo "$SECRET_KEY" > Secrets.h
     - arduino-cli lib list                    # check that libraries are installed
     
-    # Compile
-    - arduino-cli compile --fqbn Seeeduino:samd:seeed_wio_terminal
-
+    - arduino-cli compile --fqbn Seeeduino:samd:seeed_wio_terminal  # Compile
     # Upload
     - arduino-cli board list                  # Check if device is connected
     - arduino-cli upload -p $COM_PORT --fqbn Seeeduino:samd:seeed_wio_terminal           # if runnner is on local machine
