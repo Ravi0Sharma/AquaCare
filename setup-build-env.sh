@@ -19,12 +19,12 @@ arduino-cli core install Seeeduino:samd --config-file .arduino-cli.yaml
 
 # Define the libraries to be installed
 libraries=(
-    "PubSubClient"
+    "PubSubClient@2.8"
     "TFT_eSPI"
-    "Servo"
+    "Servo@1.1.4"
 #    "Seeed Arduino FS@2.1.1"               # To write on SD card
     "Seeed Arduino rpcUnified@2.1.4"
-    "Seeed Arduino rpcWiFi@1.0.6"
+    "Seeed Arduino rpcWiFi@1.0.7"         # wifi 101?
 #    "Seeed Arduino RTC@2.0.0"              # Realtime clock component
     "Seeed Arduino SFUD@2.0.2"
     "Seeed_Arduino_mbedtls@3.0.1"

@@ -19,8 +19,6 @@ build application:
     - pwd                                     # print the current working directory
     - cd WioTerminal                          # change the directory to arduino folder
     - echo "$SECRET_KEY" > Secrets.h
-    #- echo "$NETWORK_INFO_H" > NetworkInfo.h
-    #- echo "$BROKER_INFO_H" > BrokerInfo.h
     - arduino-cli lib list                    # check that libraries are installed
 
     # Compile
@@ -47,8 +45,6 @@ release:
     - pwd                                     # print the current working directory
     - cd WioTerminal                          # change the directory to arduino folder
     - echo "$SECRET_KEY" > Secrets.h
-    #- echo "$NETWORK_INFO_H" > NetworkInfo.h
-    #- echo "$BROKER_INFO_H" > BrokerInfo.h
     - arduino-cli lib list                    # check that libraries are installed
     
     # Compile
