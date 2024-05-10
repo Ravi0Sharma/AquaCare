@@ -17,3 +17,5 @@ extern int mapToPercentage(int signal);
 extern int convertTemp(int temp);
 extern int convertPh(int ph);
 extern void servo();
+
+#endif
