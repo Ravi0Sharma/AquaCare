@@ -18,27 +18,35 @@ arduino-cli core install Seeeduino:samd --config-file .arduino-cli.yaml
 # Install 'native' packages (libraries that do not come with the core)
 
 # Define the libraries to be installed
-libraries=(
-    "PubSubClient@2.8"
-    "Seeed Arduino FS@2.1.1"               # To write on SD card
-    "Seeed Arduino rpcUnified@2.1.4"
-    "Seeed Arduino rpcWiFi@1.0.7"
-#    "Seeed Arduino RTC@2.0.0"              # Realtime clock component
-    "Seeed Arduino SFUD@2.0.2"
-    "Seeed_Arduino_mbedtls@3.0.1"
-    "ArduinoSTL"
-    "WiFiNINA"
-    "Seeed Arduino rpcBLE@1.0.0"
-#    "UnixTime@1.1"
-#    "TFT_eSPI"
-)
-for lib in "${libraries[@]}"; do
-    arduino-cli lib install "$lib"    # Install each library using arduino-cli
-done
+#libraries=(
+#    "PubSubClient@2.8"
+#    "Seeed Arduino FS@2.1.1"               # To write on SD card
+#    "Seeed Arduino rpcUnified@2.1.4"
+#    "Seeed Arduino rpcWiFi@1.0.7"
+##    "Seeed Arduino RTC@2.0.0"              # Realtime clock component
+#    "Seeed Arduino SFUD@2.0.2"
+#    "Seeed_Arduino_mbedtls@3.0.1"
+#    "ArduinoSTL"
+#    "WiFiNINA"
+#    "Seeed Arduino rpcBLE@1.0.0"
+##    "UnixTime@1.1"
+##    "TFT_eSPI"
+#)
+#for lib in "${libraries[@]}"; do
+#    arduino-cli lib install "$lib"    # Install each library using arduino-cli
+#done
 
-arduino-cli lib list
-
-#cp math.h /usr/include/math.h
+arduino-cli lib install "PubSubClient@2.8"
+arduino-cli lib install "Seeed Arduino FS@2.1.1"
+arduino-cli lib install "Seeed Arduino rpcUnified@2.1.4"
+arduino-cli lib install "Seeed Arduino rpcWiFi@1.0.7"
+arduino-cli lib install "Seeed Arduino RTC@2.0.0"
+arduino-cli lib install "Seeed Arduino SFUD@2.0.2"
+arduino-cli lib install "Seeed_Arduino_mbedtls@3.0.1"
+arduino-cli lib install "ArduinoSTL"
+arduino-cli lib install "WiFiNINA"
+arduino-cli lib install "Seeed Arduino rpcBLE@1.0.0"
+arduino-cli lib install "Servo@1.1.4"
 
 cd -
 apt-get install git -y
@@ -48,8 +56,6 @@ cd Arduino/libraries
 #cp MQTT.h /root/Arduino/libraries/PubSubClient/src
 git clone https://github.com/arduino-libraries/Servo.git
 git clone https://gist.github.com/4033545.git
-
-arduino-cli lib install "Servo@1.1.4"
 
 arduino-cli lib list
 

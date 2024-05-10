@@ -22,7 +22,7 @@ stages:
   - test
   - deploy
 
-build wio:
+build app:
   stage: build
   tags:
     - docker
@@ -36,7 +36,7 @@ build wio:
   except:
     - tags
 
-build app:
+build wio:
   stage: build
   image: amd64/gradle:8.0.1-jdk19-alpine            # overwrite image
   tags:
