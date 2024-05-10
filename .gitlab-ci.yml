@@ -22,7 +22,7 @@ stages:
   - test
   - deploy
 
-build application:
+build wio:
   stage: build
   tags:
     - docker
@@ -36,7 +36,7 @@ build application:
   except:
     - tags
 
-build:
+build app:
   stage: build
   image: amd64/gradle:8.0.1-jdk19-alpine            # overwrite image
   tags:
@@ -54,6 +54,7 @@ build:
     paths:
       - AquaCare/build                              # whole build directory is cached for test stage
       - AquaCare/.gradle
+
 
 test:
   stage: test
