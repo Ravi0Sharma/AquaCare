@@ -79,7 +79,10 @@ compile:
     #- echo "$BROKER_INFO_H" > BrokerInfo.h    # import secrets for MQTT from Gitlab CI/CD Settings -> Variables
     - arduino-cli lib list                    # check that libraries are installed
 
+    - ls -l
     - cd ~                                    # go back to the home directory
+    - ls -l
+
     - cd WioTerminal
     # Compile
     - arduino-cli compile --fqbn Seeeduino:samd:seeed_wio_terminal
