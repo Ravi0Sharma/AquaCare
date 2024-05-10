@@ -17,7 +17,7 @@ compile:
   script:
     - export PATH=$PATH:/root/bin             # set the path to arduino-cli installation folder
     - pwd                                     # print the current working directory
-    - cd WioTeminal                          # change the directory to arduino folder
+    - cd WioTerminal                          # change the directory to arduino folder
     - echo "$SECRETS_KEY" > Secrets.h           # import secrets from GitLAB CI/CD Settings -> Variables
     #- echo "$NETWORK_INFO_H" > NetworkInfo.h  # import secrets for WiFi from Gitlab CI/CD Settings -> Variables
     #- echo "$BROKER_INFO_H" > BrokerInfo.h    # import secrets for MQTT from Gitlab CI/CD Settings -> Variables
