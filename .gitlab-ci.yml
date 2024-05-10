@@ -18,7 +18,7 @@ build application:
     - export PATH=$PATH:/root/bin             # set the path to arduino-cli installation folder
     - arduino-cli lib list                    # check that libraries are installed
     - pwd                                     # print the current working directory
-#    - cd WioTerminal                          # change the directory to arduino folder
+    - cd WioTerminal                          # change the directory to arduino folder
     - arduino-cli compile --fqbn Seeeduino:samd:seeed_wio_terminal  # Compile
   #    - arduino-cli board list                  # Upload. Check if device is connected
   except:
