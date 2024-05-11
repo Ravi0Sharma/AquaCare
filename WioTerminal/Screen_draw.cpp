@@ -5,8 +5,8 @@ void Screen_draw(){
 
 tft.fillRect(0,0,320,50,TFT_BLUE); 
 
-// verticle and horizontal line
-tft.drawFastVLine(150,50,190,TFT_BLUE); //Drawing verticle line
+// vertical and horizontal line
+tft.drawFastVLine(150,50,190,TFT_BLUE); //Drawing vertical line
 tft.drawFastHLine(0,140,320,TFT_BLUE); //Drawing horizontal line
 
 // temperature display
@@ -27,7 +27,7 @@ tft.drawString("PH",225,65);
 tft.setTextSize(3);
 
 
-//Dispensor
+//Dispenser
 tft.setTextSize(2);
 tft.drawString("Dispensed",180,160);
 tft.setTextSize(3);

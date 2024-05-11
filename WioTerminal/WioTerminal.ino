@@ -11,7 +11,7 @@ unsigned long previousMillis = 0;
 
 TFT_eSPI tft;
 TFT_eSprite spr = TFT_eSprite(&tft);
-Servo dispenser;
+// Servo dispenser;
 
 void setup() {
   
@@ -26,7 +26,7 @@ void setup() {
   client.setServer(mqtt_server, 1883); // Connect the MQTT Server
 
   client.setCallback(callback);
-  dispenser.attach(pinfoodDispenser);
+//   dispenser.attach(pinfoodDispenser);
   
 }
 

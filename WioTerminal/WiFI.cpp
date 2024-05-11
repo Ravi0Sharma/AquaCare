@@ -18,4 +18,4 @@ void WiFi_setup() {
         WiFi.begin(ssid, password);
     }
     Serial.println("Connected to the WiFi network");
-    }
+}
