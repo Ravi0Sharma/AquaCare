@@ -128,16 +128,6 @@ public class ReadingsController extends NavigationController implements Initiali
      * ------- HISTORICAL READINGS VISUALIZATION -------
      */
 
-    private void updateAllCharts() {
-        //! Should be triggered after a fish change
-        //The current structure of the UI makes this function obsolete since the charts are updated in the initialize function
-        initializeChartContents(linechartTemp, "Temperature");
-        initializeChartContents(linechartLight, "Light");
-        initializeChartContents(linechartPh, "Ph");
-        initializeChartContents(linechartDisp, "Dispenser");
-    }
-
-
     private void initializeChartContents(LineChart chart, String sensorName) {
 
         //Create data series for the line chart
@@ -228,8 +218,8 @@ public class ReadingsController extends NavigationController implements Initiali
                     //Logic for checking if the data is already in the chart
 
                     if (seriesIsDataDuplicate(series, fluxRecord) == false) {
-                    //Save date and value to the data series, if the data is not already in the chart
-                    series.getData().add(new XYChart.Data(fluxRecord.getTime().toString(), fluxRecord.getValue()));
+                        //Save date and value to the data series, if the data is not already in the chart
+                        series.getData().add(new XYChart.Data(fluxRecord.getTime().toString(), fluxRecord.getValue()));
                     }
 
                 }
