@@ -33,7 +33,10 @@ cd arduino-cli config dump | grep sketchbook | sed 's/.*\ //'
 ls -l
 apt-get install git -y
 cd /root/AquaCare/libraries
-git clone https://github.com/arduino-libraries/Servo.git
+#git clone https://github.com/arduino-libraries/Servo.git
+git clone https://github.com/arduino-libraries/Servo/blob/master/src/sam/Servo.cpp /root/Arduino/libraries/Servo/src/megaavr
+
+# math.h
 git clone https://gist.github.com/4033545.git
 
 #arduino-cli lib list
