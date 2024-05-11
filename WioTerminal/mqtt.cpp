@@ -1,21 +1,20 @@
 #include "mqtt.h"
 #include "WiFi.h" 
-#include "utils.h"  
+#include "utils.h"
+#include "Screen_draw.h"
                       
 WiFiClient wioClient;
 PubSubClient client(wioClient);
 
 const char* mqtt_server = "broker.hivemq.com";
 
-const char* TOPIC_PUB_TEMP  = "AquaCare/deviceID/Sensors/Temperature";
-const char* TOPIC_PUB_LIGHT = "AquaCare/deviceID/Sensors/Light";
-const char* TOPIC_PUB_PH  = "AquaCare/deviceID/Sensors/pH";
-const char* TOPIC_PUB_FOOD = "AquaCare/deviceID/motor/Food";
+const char* TOPIC_PUB_TEMP  = "AquaCare/1/Temperature";
+const char* TOPIC_PUB_LIGHT = "AquaCare/1/Light";
+const char* TOPIC_PUB_PH  = "AquaCare/1/Ph";
+const char* TOPIC_PUB_FOOD = "AquaCare/1/Dispenser";
 
-const char* TOPIC_SUB_TEMP =  "AquaCare/deviceID/Range/Temperature";
-const char* TOPIC_SUB_LIGHT = "AquaCare/deviceID/Range/Light";
-const char* TOPIC_SUB_PH = "AquaCare/deviceID/Range/pH";
-const char* TOPIC_SUB_FOOD = "AquaCare/deviceID/Request/Food";
+
+const char* TOPIC_SUB_FOOD = "AquaCare/1/Feed"; 
 
 void MQTT_connect() {
 
