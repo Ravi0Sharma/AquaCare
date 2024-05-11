@@ -26,17 +26,19 @@ arduino-cli lib install "Seeed_Arduino_mbedtls@3.0.1"
 arduino-cli lib install "ArduinoSTL"
 arduino-cli lib install "WiFiNINA"
 arduino-cli lib install "Seeed Arduino rpcBLE@1.0.0"
-arduino-cli lib install "Servo@1.1.4"
+#arduino-cli lib install "Servo@1.1.4"
 
 cd -
 cd arduino-cli config dump | grep sketchbook | sed 's/.*\ //'
 ls -l
 apt-get install git -y
+
 #cd /root/AquaCare/libraries
-#git clone https://github.com/arduino-libraries/Servo.git
-rm /root/Arduino/libraries/Servo/src/megaavr/Servo.h
-git clone https://github.com/arduino-libraries/Servo/blob/master/src/sam/Servo.cpp /root/Arduino/libraries/Servo/src/megaavr
-cp -f Servo.h /root/Arduino/libraries/Servo/src/megaavr
+git clone https://github.com/arduino-libraries/Servo.git
+#rm /root/Arduino/libraries/Servo/src/megaavr/Servo.h
+#git clone https://github.com/arduino-libraries/Servo/blob/master/src/sam/Servo.cpp /root/Arduino/libraries/Servo/src/megaavr
+#cp -f Servo.h /root/Arduino/libraries/Servo/src/megaavr
+
 # math.h
 git clone https://gist.github.com/4033545.git
 
