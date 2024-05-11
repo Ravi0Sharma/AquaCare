@@ -12,10 +12,12 @@ float R = (1023.0 / temp - 1.0 ) * 100000 ;
 return temp = 1.0/(log(R/100000)/4275+1/298.15)-273.15;
 }
 
+// Map a light to a percentage scale (0-100)
 int mapToPercentage(int signal) {
 return map(signal, MIN_READING, MAX_READING, 0, 100);
-}                                
+}             
 
+// Calculates the pH value based on the input signal.
 int convertPh(int valuePh){
     long sensorSum;
      for(int m=0; m < 50;m++){
@@ -26,6 +28,7 @@ int convertPh(int valuePh){
     return valuePh = (7-1000*(valuePh-372)*Vref/59.16/1023);
 } 
 
+// Controls a servo motor to dispense food.
 void servo(){
     for (pos = 0; pos <= 90; pos += 1) {
         dispenser.write(pos);
