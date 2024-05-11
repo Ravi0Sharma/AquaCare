@@ -28,7 +28,7 @@ arduino-cli lib install "WiFiNINA"
 arduino-cli lib install "Seeed Arduino rpcBLE@1.0.0"
 arduino-cli lib install "Servo@1.1.4"
 
-#cd -
+cd -
 #ls -l
 #apt-get install git -y
 #cd arduino-cli config dump | grep sketchbook | sed 's/.*\ //' /libraries
