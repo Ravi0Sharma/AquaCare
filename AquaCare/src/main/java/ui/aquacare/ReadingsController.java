@@ -296,6 +296,8 @@ public class ReadingsController extends NavigationController implements Initiali
 
     private boolean seriesIsDataDuplicate(XYChart.Series<String, Number> series, FluxRecord newRecord) {
 
+        System.out.println("Checking if the data is duplicate");
+
         // Check if the series is empty
         if (!series.getData().isEmpty()) {
             // Get the last data point in the series
