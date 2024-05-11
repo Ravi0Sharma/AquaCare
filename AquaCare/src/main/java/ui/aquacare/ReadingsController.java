@@ -65,17 +65,22 @@ public class ReadingsController extends NavigationController implements Initiali
     private Timeline timeline;
 
     //  Units in seconds
-    private int dynamicChartUpdateInterval = 5;
+    private int dynamicChartUpdateInterval = 10;
 
 
     //  Units in seconds
     private int realTimeLabelUpdateInterval = 5;
 
+
+    //  Units in days
+    private int chartDataAge = 7;
+
     ApplicationInterface applicationInterface = new ApplicationInterface();
 
     private volatile double threadCordinator = 0;
 
-    Map<LineChart, String> linecharts = new HashMap<>();;
+    Map<LineChart, String> linecharts = new HashMap<>();
+    ;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -90,33 +95,31 @@ public class ReadingsController extends NavigationController implements Initiali
         threadCordinator = Math.random();
         realTimeData(threadCordinator);
 
-        if (timeline == null) {
-
-            // Create a Timeline that updates the chart every few seconds
-            timeline = new Timeline(new KeyFrame(Duration.seconds(dynamicChartUpdateInterval), event -> {
-                //updateChartData();
-
-                //Wonder if we could put realTimeData() here as well instead of creating a thread
-            }));
-            timeline.setCycleCount(Timeline.INDEFINITE);
-            timeline.play();
-        }
-
-
-
-
-
         //***********************************************
         //Check which line chart is not null and update it
         //***********************************************
-
         for (Map.Entry<LineChart, String> chartEntry : linecharts.entrySet()) {
             if (chartEntry.getKey() != null) {
-                updateChart(chartEntry.getKey(), chartEntry.getValue());
+                System.out.println(chartEntry.getKey() + "      " + chartEntry.getValue());
+                initializeChartContents(chartEntry.getKey(), chartEntry.getValue());
+
+                if (timeline == null) {
+                    System.out.println("Timeline is null");
+                    // Create a Timeline that updates the chart every few seconds
+                    timeline = new Timeline(new KeyFrame(Duration.seconds(dynamicChartUpdateInterval), event -> {
+                        //Wonder if we could put realTimeData() here as well instead of creating a thread
+                        System.out.println("Initiated a timeline");
+                        updateChart(chartEntry.getKey(), chartEntry.getValue());
+                    }));
+                    timeline.setCycleCount(Timeline.INDEFINITE);
+                    timeline.play();
+                }
+
             } else {
                 System.out.println(chartEntry.getValue() + " is null");
             }
         }
+        //updateChartData();
 
     }
 
@@ -127,13 +130,14 @@ public class ReadingsController extends NavigationController implements Initiali
     private void updateAllCharts() {
         //! Should be triggered after a fish change
         //The current structure of the UI makes this function obsolete since the charts are updated in the initialize function
-        updateChart(linechartTemp, "Temperature");
-        updateChart(linechartLight, "Light");
-        updateChart(linechartPh, "Ph");
-        updateChart(linechartDisp, "Dispenser");
+        initializeChartContents(linechartTemp, "Temperature");
+        initializeChartContents(linechartLight, "Light");
+        initializeChartContents(linechartPh, "Ph");
+        initializeChartContents(linechartDisp, "Dispenser");
     }
 
-    private void updateChart(LineChart chart, String sensorName) {
+
+    private void initializeChartContents(LineChart chart, String sensorName) {
 
         //Create data series for the line chart
         XYChart.Series series = new XYChart.Series();
@@ -142,7 +146,7 @@ public class ReadingsController extends NavigationController implements Initiali
         series.setName(sensorName);
 
         //Query data based on active fish monitor and sensor name
-        List<FluxTable> tables = applicationInterface.QueryOfDuration(sensorName, "1d", activeFishMonitor);
+        List<FluxTable> tables = applicationInterface.QueryOfDuration(sensorName, String.valueOf(chartDataAge) + "d", activeFishMonitor);
 
         //Divide tables into individual tables
         for (FluxTable table : tables) {
@@ -196,6 +200,40 @@ public class ReadingsController extends NavigationController implements Initiali
 
         //Update the line chart with milked values
         chart.getData().add(series);
+    }
+
+    private void updateChart(LineChart chart, String sensorName) {
+
+        //Query data based on active fish monitor and sensor name
+        List<FluxTable> tables = applicationInterface.QueryOfDuration(sensorName, String.valueOf(dynamicChartUpdateInterval) + "s", activeFishMonitor);
+
+        // Check if the chart already has data
+        if (!chart.getData().isEmpty()) {
+
+            // Get the first (and in this case, only) series from the chart
+
+            XYChart.Series<String, Number> series = (XYChart.Series<String, Number>) chart.getData().get(0);
+
+            //Divide tables into individual tables
+            for (FluxTable table : tables) {
+
+                //Get the records from the table, which correspond to rows in a table
+                List<FluxRecord> records = table.getRecords();
+
+                for (FluxRecord fluxRecord : records) {
+
+                    System.out.println("value: " + fluxRecord.getValue() + "    stamp:" + fluxRecord.getTime().toString());
+
+                    //Logic for checking if the data is already in the chart
+
+                    if (seriesIsDataDuplicate(series, fluxRecord) == false) {
+                    //Save date and value to the data series, if the data is not already in the chart
+                    series.getData().add(new XYChart.Data(fluxRecord.getTime().toString(), fluxRecord.getValue()));
+                    }
+
+                }
+            }
+        }
     }
 
     /*
@@ -253,5 +291,17 @@ public class ReadingsController extends NavigationController implements Initiali
             linecharts.put(linechartLight, "Light");
             linecharts.put(linechartPh, "Ph");
         }
+    }
+
+    private boolean seriesIsDataDuplicate(XYChart.Series<String, Number> series, FluxRecord newRecord) {
+        for (XYChart.Data<String, Number> data : series.getData()) {
+            // Compare the timestamp of the new data with the timestamps of the existing data
+            if (data.getXValue().equals(newRecord.getTime().toString())) {
+                // If the timestamp of the new data matches any of the timestamps of the existing data, return true
+                return true;
+            }
+        }
+        // If the timestamp of the new data does not match any of the timestamps of the existing data, return false
+        return false;
     }
 }
