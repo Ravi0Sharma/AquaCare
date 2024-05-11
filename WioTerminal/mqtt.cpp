@@ -58,10 +58,10 @@ void callback(char* topic, byte* payload, unsigned int length) {
     buff_p[i] = (char)payload[i];
   }
 
- if (strcmp(topic, TOPIC_SUB_FOOD) == 0) {
-    servo();
-    client.publish(TOPIC_PUB_FOOD, "1");
-
-}
+// if (strcmp(topic, TOPIC_SUB_FOOD) == 0) {
+//    servo();
+//    client.publish(TOPIC_PUB_FOOD, "1");
+//
+//}
 
 }
