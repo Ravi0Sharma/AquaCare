@@ -12,9 +12,6 @@ before_script:
   #
   - chmod +x AquaCare/gradlew                   # elevates permissions
   - GRADLE_USER_HOME="$(pwd)/AquaCare/.gradle"  # set gradle home location as .gradle
-
-  - chmod +x gradlew                            # elevates permissions
-  - GRADLE_USER_HOME="$(pwd)/AquaCare/.gradle"  # set gradle home location as .gradle
   - export GRADLE_USER_HOME                     # export it so its available for gradle
 
 stages:
