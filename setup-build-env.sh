@@ -40,7 +40,7 @@ arduino-cli lib install "Servo@1.1.4"
 #cp -f Servo.cpp /root/Arduino/libraries/Servo/src/megaavr
 
 # math.h
-git clone https://gist.github.com/4033545.git
+#git clone https://gist.github.com/4033545.git
 
 #arduino-cli lib list
 
