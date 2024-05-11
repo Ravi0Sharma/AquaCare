@@ -1,6 +1,7 @@
 package ui.aquacare;
 
 import com.fazecast.jSerialComm.SerialPort;
+import javafx.animation.KeyFrame;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.chart.NumberAxis;
@@ -9,6 +10,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.fxml.Initializable;
+import javafx.animation.Timeline;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,6 +19,7 @@ import com.influxdb.query.FluxRecord;
 import com.influxdb.query.FluxTable;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
+import javafx.util.Duration;
 import ui.utilities.ApplicationInterface;
 
 import java.util.HashMap;
@@ -59,26 +62,45 @@ public class ReadingsController extends NavigationController implements Initiali
 
     private String activeFishMonitor;
 
+    private Timeline timeline;
+
+    //  Units in seconds
+    private int dynamicChartUpdateInterval = 5;
+
     ApplicationInterface applicationInterface = new ApplicationInterface();
 
     private volatile double threadCordinator = 0;
 
+    Map<LineChart, String> linecharts = new HashMap<>();;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        //Set active fish monitor to 1 since owning multiple monitors is not supported yet
+        activeFishMonitor = "1";
+
+        populateSensorMap();
 
         setDate();
 
         threadCordinator = Math.random();
         realTimeData(threadCordinator);
 
-        //Set active fish monitor to 1 since owning multiple monitors is not supported yet
-        activeFishMonitor = "1";
+        if (timeline == null) {
 
-        Map<LineChart, String> linecharts = new HashMap<>();
-        linecharts.put(linechartTemp, "Temperature");
-        linecharts.put(linechartDisp, "Dispenser");
-        linecharts.put(linechartLight, "Light");
-        linecharts.put(linechartPh, "Ph");
+            // Create a Timeline that updates the chart every few seconds
+            timeline = new Timeline(new KeyFrame(Duration.seconds(dynamicChartUpdateInterval), event -> {
+                //updateChartData();
+
+                //Wonder if we could put realTimeData() here as well instead of creating a thread
+            }));
+            timeline.setCycleCount(Timeline.INDEFINITE);
+            timeline.play();
+        }
+
+
+
+
 
         //***********************************************
         //Check which line chart is not null and update it
@@ -164,6 +186,8 @@ public class ReadingsController extends NavigationController implements Initiali
         ((NumberAxis) chart.getYAxis()).setLowerBound(0);
         ((NumberAxis) chart.getYAxis()).setUpperBound(100);
 
+        //XYChart.Data.setNode(hoverPane);
+
         //*************************************************************************************
 
         //Update the line chart with milked values
@@ -216,5 +240,14 @@ public class ReadingsController extends NavigationController implements Initiali
 
     public void feedFish() {
         applicationInterface.ActivateFeeder(activeFishMonitor);
+    }
+
+    private void populateSensorMap() {
+        if (linecharts.isEmpty()) {
+            linecharts.put(linechartTemp, "Temperature");
+            linecharts.put(linechartDisp, "Dispenser");
+            linecharts.put(linechartLight, "Light");
+            linecharts.put(linechartPh, "Ph");
+        }
     }
 }
