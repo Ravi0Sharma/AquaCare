@@ -26,13 +26,14 @@ arduino-cli lib install "Seeed_Arduino_mbedtls@3.0.1"
 arduino-cli lib install "ArduinoSTL"
 arduino-cli lib install "WiFiNINA"
 arduino-cli lib install "Seeed Arduino rpcBLE@1.0.0"
-arduino-cli lib install "Servo@1.2.1"
+#arduino-cli lib install "Servo@1.2.1"
 
 #cd -
 #ls -l
-#apt-get install git -y
+apt-get install git -y
 #cd arduino-cli config dump | grep sketchbook | sed 's/.*\ //' /libraries
-#git clone -- force https://github.com/PaintYourDragon/Servo.git /root/Arduino/libraries
+rm -rf /root/Arduino/libraries/Servo/*
+git clone -- force https://github.com/PaintYourDragon/Servo.git /root/Arduino/libraries/Servo
 
 #cd /root/AquaCare/libraries
 #git clone https://github.com/arduino-libraries/Servo.git
