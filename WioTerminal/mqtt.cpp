@@ -59,7 +59,7 @@ void MQTT_connect() {
       
     }
   }
-
+  // Display and serial output Connected.
   Serial.println();
   Serial.print("Connected");
   tft.fillScreen(TFT_BLACK);
@@ -70,8 +70,8 @@ void MQTT_connect() {
   tft.fillScreen(TFT_WHITE);
 }
 
-
-void callback(char* topic, byte* payload, unsigned int length) {
+  //Handles incoming MQTT messages
+  void callback(char* topic, byte* payload, unsigned int length) {
  
   Serial.print("Message arrived [");
   Serial.print(topic);
@@ -82,7 +82,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
     buff_p[i] = (char)payload[i];
   }
 
- 
+ // Triggers servo if topic matches TOPIC_SUB_FOOD, and publishes confirmation.
  if (strcmp(topic, TOPIC_SUB_FOOD) == 0) {
     servo();
     client.publish(TOPIC_PUB_FOOD, "1");
