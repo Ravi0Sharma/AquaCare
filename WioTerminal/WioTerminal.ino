@@ -31,24 +31,25 @@ void setup() {
 
 void loop() {
 
-unsigned long currentMillis = millis();
+unsigned long currentMillis = millis(); //Store the current time in milliseconds since the program started
 
 Screen_draw();
 
-if (!client.connected()) {
+if (!client.connected()) { // Connect to Mqtt if not connected 
      MQTT_connect();
 }
   client.loop();
   
-  int valueTemp = analogRead(pinTempSensor);        
-  int valueLight = analogRead(pinLightSensor); 
-  int valuePh = analogRead(pinPhSensor);   
+  int valueTemp = analogRead(pinTempSensor);   // read temperature sensor signal     
+  int valueLight = analogRead(pinLightSensor); // read light sensor signal
+  int valuePh = analogRead(pinPhSensor);       // read ph sensor signal
 
-  int tempResult = convertTemp(valueTemp);
+  int tempResult = convertTemp(valueTemp);  // read temperature sensor signal
   int lightResult = mapToPercentage(valueLight);
   int phResult = convertPh(valuePh);
 
 
+  // Publish sensor readings and update display if interval has elapsed
   if (currentMillis - previousMillis >= interval) {
       previousMillis = currentMillis;
       Serial.print("Publish reading");
