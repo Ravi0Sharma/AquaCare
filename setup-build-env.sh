@@ -32,7 +32,7 @@ cd -
 ls -l
 apt-get install git -y
 cd arduino-cli config dump | grep sketchbook | sed 's/.*\ //' /libraries
-git clone -- force https://github.com/PaintYourDragon/Servo.git #/root/Arduino/libraries
+git clone -- force https://github.com/PaintYourDragon/Servo.git /root/Arduino/libraries
 #cd /root/AquaCare/libraries
 #git clone https://github.com/arduino-libraries/Servo.git
 #rm /root/Arduino/libraries/Servo/src/megaavr/Servo.cpp
