@@ -73,7 +73,7 @@ public class InfluxDBJavaClient {
     /**********************************************************/
 
     public void WriteData(String measurement, String tagKey, String tagValue, String fieldKey, double fieldValue,
-            Long timestamp) {
+                          Long timestamp) {
 
         // Creating a write point and filling it with values
         Point point = Point
@@ -86,7 +86,7 @@ public class InfluxDBJavaClient {
         writeApi.writePoint(bucket, org, point);
 
         //!For testing purposes
-        System.out.println("Wrote data to InfluxDB"); 
+        System.out.println("Wrote data to InfluxDB");
     }
 
     /**********************************************************/
@@ -94,7 +94,7 @@ public class InfluxDBJavaClient {
     // Write Overloads
 
     /**********************************************************/
-    
+
     // Overlaods are for testing purposes, this class is not meant to have anything
     // to do with what is going to be saved.
     // Its job is to save and retrieve data
@@ -106,17 +106,17 @@ public class InfluxDBJavaClient {
         WriteData(measurement, tagKey, tagValue, fieldKey, fieldValue, Instant.now().toEpochMilli() * 1000000);
         // Time is saved in apoch nano rather than mili so a conversion is needed
     }
-    
+
     // Able to not excpilictly state fieldKey - default is "value" and tagkey - default is "deviceID"
     public void WriteData(String measurement, String tagValue, double fieldValue, Long timestamp) {
         WriteData(measurement, "deviceID", tagValue, "value", fieldValue, timestamp);
     }
-    
+
     // Able to not excpilictly state fieldKey - default is "value" and tagkey - default is "deviceID" and timestamp default is current time
     public void WriteData(String measurement, String tagValue, double fieldValue) {
-            WriteData(measurement, "deviceID", tagValue, "value", fieldValue);
+        WriteData(measurement, "deviceID", tagValue, "value", fieldValue);
     }
-    
+
     /**********************************************************/
 
     // Querying the database
@@ -124,7 +124,7 @@ public class InfluxDBJavaClient {
     /**********************************************************/
 
     public List<FluxTable> QueryDatabase(String duration, String measurement, String field,
-            String deviceID, boolean mean) {
+                                         String deviceID, boolean mean) {
         // Field could be "value" at default
 
         //Declaring the query
@@ -134,18 +134,18 @@ public class InfluxDBJavaClient {
         //If mean is true, the query will return the mean value of the data
         if (mean) {
             query = String.format(
-                "from(bucket: \"%s\") |> range(start: -%s) |> filter(fn: (r) => r[\"_measurement\"] == \"%s\") |> filter(fn: (r) => r[\"_field\"] == \"%s\") |> filter(fn: (r) => r[\"deviceID\"] == \"%s\") |> mean() |> yield()",
-                bucket, duration, measurement, field, deviceID);
+                    "from(bucket: \"%s\") |> range(start: -%s) |> filter(fn: (r) => r[\"_measurement\"] == \"%s\") |> filter(fn: (r) => r[\"_field\"] == \"%s\") |> filter(fn: (r) => r[\"deviceID\"] == \"%s\") |> mean() |> yield()",
+                    bucket, duration, measurement, field, deviceID);
         } else {
             query = String.format(
-                "from(bucket: \"%s\") |> range(start: -%s) |> filter(fn: (r) => r[\"_measurement\"] == \"%s\") |> filter(fn: (r) => r[\"_field\"] == \"%s\") |> filter(fn: (r) => r[\"deviceID\"] == \"%s\") |> yield()",
-                bucket, duration, measurement, field, deviceID);
+                    "from(bucket: \"%s\") |> range(start: -%s) |> filter(fn: (r) => r[\"_measurement\"] == \"%s\") |> filter(fn: (r) => r[\"_field\"] == \"%s\") |> filter(fn: (r) => r[\"deviceID\"] == \"%s\") |> yield()",
+                    bucket, duration, measurement, field, deviceID);
         }
 
         //Querying the database
         List<FluxTable> tables = client.getQueryApi().query(query, org);
         System.out.println("Queried data from InfluxDB");
-        
+
         //Printing the data
         //!For testing purposes
         for (FluxTable fluxTable : tables) {
@@ -161,19 +161,38 @@ public class InfluxDBJavaClient {
 
     /**********************************************************/
     // Query Overloads
+
     /**********************************************************/
     //! May be implemented in ApplicationInterface class instead
 
     // Able to not excpilictly state mean
     public List<FluxTable> QueryDatabase(String duration, String measurement, String field,
-    String deviceID) {
+                                         String deviceID) {
         return QueryDatabase(duration, measurement, field, deviceID, false);
     }
 
     // Able to not excpilictly state field - default is "value"
     public List<FluxTable> QueryDatabase(String duration, String measurement,
-    String deviceID) {
+                                         String deviceID) {
         return QueryDatabase(duration, measurement, "value", deviceID, false);
     }
 
+    public List<FluxTable> QueryDatabaseSensorCustom(String duration, String measurement, String deviceID, String customQuery) {
+
+        //Declaring the query
+        String query;
+
+        //Defining the query
+        //If mean is true, the query will return the mean value of the data
+        query = String.format(
+                "from(bucket: \"%s\") |> range(start: -%s) |> filter(fn: (r) => r[\"_measurement\"] == \"%s\") |> filter(fn: (r) => r[\"_field\"] == \"%s\") |> filter(fn: (r) => r[\"deviceID\"] == \"%s\") %s |> yield()",
+                bucket, duration, measurement, "value", deviceID, customQuery);
+
+        //Querying the database
+        List<FluxTable> tables = client.getQueryApi().query(query, org);
+        System.out.println("Queried data from InfluxDB");
+
+        return tables;
+    }
 }
+
