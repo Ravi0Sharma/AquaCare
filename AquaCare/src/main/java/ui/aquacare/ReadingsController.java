@@ -110,7 +110,7 @@ public class ReadingsController extends NavigationController implements Initiali
                     timeline = new Timeline(new KeyFrame(Duration.seconds(dynamicChartUpdateInterval), event -> {
                         //Wonder if we could put realTimeData() here as well instead of creating a thread
                         System.out.println("Initiated a timeline");
-                        updateChart(chartEntry.getKey(), chartEntry.getValue());
+                        updateChart(chartEntry.getKey(), chartEntry.getValue()); //Will enter new values dynamically to the chart
                     }));
                     timeline.setCycleCount(Timeline.INDEFINITE);
                     timeline.play();
@@ -224,6 +224,7 @@ public class ReadingsController extends NavigationController implements Initiali
 
                 }
             }
+            removeOldEntries(series); //Will remove old entries dynamically from the chart
         }
     }
 
@@ -306,4 +307,35 @@ public class ReadingsController extends NavigationController implements Initiali
         // If the series is empty or the timestamp of the new data is greater than the timestamp of the last data, return false
         return false;
     }
+
+    private void removeOldEntries(XYChart.Series<String, Number> series){
+        // Get the current time
+        Instant currentTime = Instant.now();
+
+        // Iterate through the data points in the series
+        for (int i = 0; i < series.getData().size(); i++) {
+            // Get the data point
+            XYChart.Data<String, Number> data = series.getData().get(i);
+
+            // Parse the timestamp of the data point to Instant
+            Instant dataTime = Instant.parse(data.getXValue());
+
+            // Calculate the difference in seconds between the current time and the timestamp of the data point
+            long diffInSeconds = currentTime.getEpochSecond() - dataTime.getEpochSecond();
+
+            // If the difference is greater than the threshold, remove the data point from the series
+            // chartDataAge is the threshold in days so we need to convert it to seconds
+            if (diffInSeconds > chartDataAge * 24 * 60 * 60) {
+                series.getData().remove(i);
+                // Decrement the counter as we have removed an element
+                i--;
+            }
+            else {
+                return;
+            }
+        }
+    }
+
+
+
 }
