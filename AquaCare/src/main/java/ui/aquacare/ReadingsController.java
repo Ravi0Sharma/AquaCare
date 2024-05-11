@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.animation.Timeline;
 
 import java.net.URL;
+import java.time.Instant;
 import java.util.ResourceBundle;
 
 import com.influxdb.query.FluxRecord;
@@ -294,14 +295,23 @@ public class ReadingsController extends NavigationController implements Initiali
     }
 
     private boolean seriesIsDataDuplicate(XYChart.Series<String, Number> series, FluxRecord newRecord) {
-        for (XYChart.Data<String, Number> data : series.getData()) {
-            // Compare the timestamp of the new data with the timestamps of the existing data
-            if (data.getXValue().equals(newRecord.getTime().toString())) {
-                // If the timestamp of the new data matches any of the timestamps of the existing data, return true
+
+        // Check if the series is empty
+        if (!series.getData().isEmpty()) {
+            // Get the last data point in the series
+            XYChart.Data<String, Number> lastData = series.getData().get(series.getData().size() - 1);
+
+            // Parse the timestamps to Instant for comparison
+            Instant lastDataTime = Instant.parse(lastData.getXValue());
+            Instant newRecordTime = newRecord.getTime();
+
+            // Compare the timestamp of the new data with the timestamp of the last data
+            if (newRecordTime.isBefore(lastDataTime) || newRecordTime.equals(lastDataTime)) {
+                // If the timestamp of the new data is smaller or equal to the timestamp of the last data, return true
                 return true;
             }
         }
-        // If the timestamp of the new data does not match any of the timestamps of the existing data, return false
+        // If the series is empty or the timestamp of the new data is greater than the timestamp of the last data, return false
         return false;
     }
 }
