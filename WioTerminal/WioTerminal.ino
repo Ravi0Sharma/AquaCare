@@ -16,7 +16,7 @@ void setup() {
   
   tft.begin();
   tft.setRotation(3);
-  tft.fillScreen(TFT_WHITE);
+  tft.fillScreen(TFT_WHITE); // Fill Wio Terminal screen white.
 
   Serial.begin(serial_Begin_Rate);  //start serial communication
 
@@ -24,8 +24,8 @@ void setup() {
   delay (3000);
   client.setServer(mqtt_server, 1883); // Connect the MQTT Server
 
-  client.setCallback(callback);
-  dispenser.attach(pinfoodDispenser);
+  client.setCallback(callback); // Define behavior when message recvided from mqtt broker
+  dispenser.attach(pinfoodDispenser); // Set up servo motor 
   
 }
 
