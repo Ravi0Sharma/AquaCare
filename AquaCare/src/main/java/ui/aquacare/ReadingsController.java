@@ -67,6 +67,10 @@ public class ReadingsController extends NavigationController implements Initiali
     //  Units in seconds
     private int dynamicChartUpdateInterval = 5;
 
+
+    //  Units in seconds
+    private int realTimeLabelUpdateInterval = 5;
+
     ApplicationInterface applicationInterface = new ApplicationInterface();
 
     private volatile double threadCordinator = 0;
@@ -205,9 +209,9 @@ public class ReadingsController extends NavigationController implements Initiali
             while (threadIndex == threadCordinator) {
 
                 // Query data based on active fish monitor and sensor name
-                List<FluxTable> tablesPh = applicationInterface.MeanOfDuration("Ph", "30s", activeFishMonitor);
-                List<FluxTable> tablesTemp = applicationInterface.MeanOfDuration("Temperature", "30s", activeFishMonitor);
-                List<FluxTable> tablesLight = applicationInterface.MeanOfDuration("Light", "30s", activeFishMonitor);
+                List<FluxTable> tablesPh = applicationInterface.MeanOfDuration("Ph", String.valueOf(realTimeLabelUpdateInterval) + "s", activeFishMonitor);
+                List<FluxTable> tablesTemp = applicationInterface.MeanOfDuration("Temperature", String.valueOf(realTimeLabelUpdateInterval) + "s", activeFishMonitor);
+                List<FluxTable> tablesLight = applicationInterface.MeanOfDuration("Light", String.valueOf(realTimeLabelUpdateInterval) + "s", activeFishMonitor);
                 List<FluxTable> tablesDisp = applicationInterface.LastOfDuration("Dispenser", "25d", activeFishMonitor);
 
                 // Extract the mean values from the tables
