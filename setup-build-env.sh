@@ -29,15 +29,14 @@ arduino-cli lib install "Seeed Arduino rpcBLE@1.0.0"
 arduino-cli lib install "Servo@1.1.4"
 
 cd -
-apt-get install git -y
 cd arduino-cli config dump | grep sketchbook | sed 's/.*\ //'
 ls -l
-cd Arduino/libraries
-#cp MQTT.h /root/Arduino/libraries/PubSubClient/src
-git clone https://github.com/arduino-libraries/Servo.git
-git clone https://gist.github.com/4033545.git
+apt-get install git -y
+#cd /root/AquaCare/libraries
+git clone https://github.com/arduino-libraries/Servo.git /root/AquaCare/libraries
+git clone https://gist.github.com/4033545.git /root/Arduino/libraries
 
-arduino-cli lib list
+#arduino-cli lib list
 
 ## Install 'third-party' packages / libraries: find proper location and 'git clone'
 # apt-get install git -y
