@@ -28,9 +28,9 @@ void MQTT_connect() {
     // Attempt to connect
     if (client.connect(clientId.c_str())) {
       client.subscribe(TOPIC_SUB_TEMP);
+      
       client.subscribe(TOPIC_SUB_LIGHT);
       client.subscribe(TOPIC_SUB_PH);
-
       client.subscribe(TOPIC_SUB_FOOD);
       
     } else {
@@ -50,18 +50,17 @@ void callback(char* topic, byte* payload, unsigned int length) {
   Serial.print("Message arrived [");
   Serial.print(topic);
   Serial.print("] ");
-//  Serial.print("Message arrived [" + topic + "]");
-
   char buff_p[length];
   for (int i = 0; i < length; i++) {
     Serial.print((char)payload[i]);
     buff_p[i] = (char)payload[i];
   }
 
-// if (strcmp(topic, TOPIC_SUB_FOOD) == 0) {
-//    servo();
-//    client.publish(TOPIC_PUB_FOOD, "1");
-//
-//}
+ if (strcmp(topic, TOPIC_SUB_FOOD) == 0) {
+    servo();
+    client.publish(TOPIC_PUB_FOOD, "1");
+
+}
+
 
 }
