@@ -10,7 +10,6 @@ const long interval = 5000;
 unsigned long previousMillis = 0;  
 
 TFT_eSPI tft;
-TFT_eSprite spr = TFT_eSprite(&tft);
 Servo dispenser;
 
 void setup() {
@@ -57,8 +56,9 @@ if (!client.connected()) {
       client.publish(TOPIC_PUB_TEMP, String(tempResult).c_str());
       client.publish(TOPIC_PUB_LIGHT, String(lightResult).c_str());
       client.publish(TOPIC_PUB_PH, String(pinPhSensor).c_str());
-
-      tft.fillRect(0, 50, 320, 200, TFT_WHITE);
+      
+      delay(1000);
+      tft.fillScreen(TFT_WHITE);
       tft.drawNumber(tempResult,50,95); 
       tft.drawNumber(lightResult,50,190); 
       tft.drawNumber(pinPhSensor,210,95); 
