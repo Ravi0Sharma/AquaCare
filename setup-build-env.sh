@@ -16,26 +16,6 @@ arduino-cli core update-index --config-file .arduino-cli.yaml
 arduino-cli core install Seeeduino:samd --config-file .arduino-cli.yaml
 
 # Install 'native' packages (libraries that do not come with the core)
-
-# Define the libraries to be installed
-#libraries=(
-#    "PubSubClient@2.8"
-#    "Seeed Arduino FS@2.1.1"               # To write on SD card
-#    "Seeed Arduino rpcUnified@2.1.4"
-#    "Seeed Arduino rpcWiFi@1.0.7"
-##    "Seeed Arduino RTC@2.0.0"              # Realtime clock component
-#    "Seeed Arduino SFUD@2.0.2"
-#    "Seeed_Arduino_mbedtls@3.0.1"
-#    "ArduinoSTL"
-#    "WiFiNINA"
-#    "Seeed Arduino rpcBLE@1.0.0"
-##    "UnixTime@1.1"
-##    "TFT_eSPI"
-#)
-#for lib in "${libraries[@]}"; do
-#    arduino-cli lib install "$lib"    # Install each library using arduino-cli
-#done
-
 arduino-cli lib install "PubSubClient@2.8"
 arduino-cli lib install "Seeed Arduino FS@2.1.1"
 arduino-cli lib install "Seeed Arduino rpcUnified@2.1.4"

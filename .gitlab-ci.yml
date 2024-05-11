@@ -22,39 +22,24 @@ stages:
   - test
   - deploy
 
-build app:
-  stage: build
-  tags:
-    - docker
-  script:
-    - export PATH=$PATH:/root/bin             # set the path to arduino-cli installation folder
-    - arduino-cli lib list                    # check that libraries are installed
-    - pwd                                     # print the current working directory
-    - cd WioTerminal                          # change the directory to arduino folder
-    - arduino-cli compile --fqbn Seeeduino:samd:seeed_wio_terminal  # Compile
-  #    - arduino-cli board list                  # Upload. Check if device is connected
-  except:
-    - tags
-
-build wio:
+build application:
   stage: build
   image: amd64/gradle:8.0.1-jdk19-alpine            # overwrite image
   tags:
     - docker                                        # without explicit tags, docker wont love you
-  script: # builds the application
+  script:                                           # builds the application
     - cd AquaCare                                   # navigate to correct directory
     - ./gradlew --build-cache assemble
 
-  artifacts: # saves the built app
+  artifacts:                                        # saves the built app
     paths:
-      - AquaCare/build/distributions/AquaCare-1.0-SNAPSHOT/bin/Aquacare.bat
-  cache: # caches test related files
+      - AquaCare/build/distributions/*
+  cache:                                            # caches test related files
     key: "$CI_COMMIT_REF_NAME"
     policy: push
     paths:
       - AquaCare/build                              # whole build directory is cached for test stage
       - AquaCare/.gradle
-
 
 test:
   stage: test
@@ -64,9 +49,6 @@ test:
   script:
     - cd AquaCare                            # gets into correct path
     - ./gradlew check                        # exactly same as gradle test, which runs all the detected unit tests
-    - echo "detected unit tests are run"
-    - sleep 1
-
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: pull                             # pulls from previously pushed cache
@@ -74,6 +56,27 @@ test:
       - build
       - .gradle
 
+
+compile:
+  stage: build
+  tags:
+    - docker
+  script:
+    - export PATH=$PATH:/root/bin             # set the path to arduino-cli installation folder.
+    - pwd                                     # print the current working directory
+    - cd WioTerminal                          # change the directory to arduino folder
+    - echo "$SECRETS_H" > Secrets.h           # import secrets from GitLAB CI/CD Settings -> Variables
+    #- echo "$NETWORK_INFO_H" > NetworkInfo.h  # import secrets for WiFi from Gitlab CI/CD Settings -> Variables
+    #- echo "$BROKER_INFO_H" > BrokerInfo.h    # import secrets for MQTT from Gitlab CI/CD Settings -> Variables
+    - arduino-cli lib list                    # check that libraries are installed
+
+    # Compile
+    - arduino-cli compile --fqbn Seeeduino:samd:seeed_wio_terminal
+
+    # Upload
+    - arduino-cli board list                  # Check if device is connected
+  except:
+    - tags
 
 release:
   stage: deploy
