@@ -1,35 +1,34 @@
 image: ubuntu:latest
 
-variables:
-  GRADLE_OPTS: "-Dorg.gradle.daemon=false"    # disable gradle demon >_< since he fast but may prove inaccurate for CI
+
+#variables:
+#  GRADLE_OPTS: "-Dorg.gradle.daemon=false"    # disable gradle demon >_< since he fast but may prove inaccurate for CI
 
 before_script:
   # run shell script for installing arduino-cli, Wio Terminal core, and project libraries
-  - chmod +x setup-build-env.sh               # change permissions to execute bash shell script
-  - ./setup-build-env.sh                      # execute bash shell script
-  
-  # *cool description*
-  - chmod +x AquaCare/gradlew                 # elevates permissions
-  - GRADLE_USER_HOME="$(pwd)/AquaCare/.gradle"         # set gradle home location as .gradle
-  - export GRADLE_USER_HOME                   # export it so its available for gradle
+  - chmod +x setup-build-env.sh                 # change permissions to execute bash shell script
+  - ./setup-build-env.sh                        # execute bash shell script
 
+  #
+  - chmod +x AquaCare/gradlew                   # elevates permissions
+  - GRADLE_USER_HOME="$(pwd)/AquaCare/.gradle"  # set gradle home location as .gradle
+  - export GRADLE_USER_HOME                     # export it so its available for gradle
 
 stages:
   - build
   - test
   - deploy
 
-  
 build application:
   stage: build
-  image: amd64/gradle:8.0.1-jdk19-alpine            # overwrite image 
+  image: amd64/gradle:8.0.1-jdk19-alpine            # overwrite image
   tags:
     - docker                                        # without explicit tags, docker wont love you
-  script:                                           # builds the application 
+  script:                                           # builds the application
     - cd AquaCare                                   # navigate to correct directory
-    - ./gradlew --build-cache assemble  
+    - ./gradlew --build-cache assemble
 
-  artifacts:                                        # saves the built app               
+  artifacts:                                        # saves the built app
     paths:
       - AquaCare/build/distributions/*
   cache:                                            # caches test related files
@@ -62,16 +61,11 @@ compile:
     - export PATH=$PATH:/root/bin             # set the path to arduino-cli installation folder.
     - pwd                                     # print the current working directory
     - cd WioTerminal                          # change the directory to arduino folder
-    - echo "$SECRETS_H" > Secrets.h           # import secrets from GitLAB CI/CD Settings -> Variables
-    #- echo "$NETWORK_INFO_H" > NetworkInfo.h  # import secrets for WiFi from Gitlab CI/CD Settings -> Variables
-    #- echo "$BROKER_INFO_H" > BrokerInfo.h    # import secrets for MQTT from Gitlab CI/CD Settings -> Variables
+    - echo "$SECRET_KEY" > Secrets.h           # import secrets from GitLAB CI/CD Settings -> Variables
     - arduino-cli lib list                    # check that libraries are installed
-    
-    # Compile
-    - arduino-cli compile --fqbn Seeeduino:samd:seeed_wio_terminal
 
-    # Upload
-    - arduino-cli board list                  # Check if device is connected
+    - arduino-cli compile --fqbn Seeeduino:samd:seeed_wio_terminal
+  #    - arduino-cli board list                  # Check if device is connected
   except:
     - tags
 
@@ -82,15 +76,12 @@ release:
   script:
     - export PATH=$PATH:/root/bin             # set the path to arduino-cli installation folder
     - pwd                                     # print the current working directory
-    - cd WioTerminal                         # change the directory to arduino folder
-    - echo "$SECRETS_H" > Secrets.h           # import secrets from GitLAB CI/CD Settings -> Variables
-    #- echo "$NETWORK_INFO_H" > NetworkInfo.h  # import secrets for WiFi from Gitlab CI/CD Settings -> Variables
-    #- echo "$BROKER_INFO_H" > BrokerInfo.h    # import secrets for MQTT from Gitlab CI/CD Settings -> Variables
+    - cd WioTerminal                          # change the directory to arduino folder
+    - echo "$SECRET_KEY" > Secrets.h
     - arduino-cli lib list                    # check that libraries are installed
-    
-    # Compile
-    - arduino-cli compile --fqbn Seeeduino:samd:seeed_wio_terminal
 
+    - arduino-cli compile --fqbn Seeeduino:samd:seeed_wio_terminal  # Compile
+    - echo "project deployed"
     # Upload
     - arduino-cli board list                  # Check if device is connected
     - arduino-cli upload -p $COM_PORT --fqbn Seeeduino:samd:seeed_wio_terminal           # if runnner is on local machine

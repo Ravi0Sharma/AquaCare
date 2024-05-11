@@ -27,14 +27,14 @@ int convertPh(int valuePh){
 } 
 
 void servo(){
-  for (pos = 0; pos <= 90; pos += 1) { 
-    dispenser.write(pos);              
-    delay(4);                      
-  }
-  for (pos = 90; pos >= 0; pos -= 1) { 
-    dispenser.write(pos);              
-    delay(4);          
-  }
+    for (pos = 0; pos <= 90; pos += 1) {
+        dispenser.write(pos);
+        delay(4);
+    }
+    for (pos = 90; pos >= 0; pos -= 1) {
+        dispenser.write(pos);
+        delay(4);
+    }
 }
 
 

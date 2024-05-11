@@ -1,8 +1,8 @@
 #include "Screen_draw.h"
 #include "WiFi.h"
 #include "pin.h"
-#include "mqtt.h"   
 #include "utils.h"
+#include "mqtt.h"
 
 
 char msg[50];
@@ -26,7 +26,7 @@ void setup() {
   client.setServer(mqtt_server, 1883); // Connect the MQTT Server
 
   client.setCallback(callback);
-  dispenser.attach(pinfoodDispenser); 
+  dispenser.attach(pinfoodDispenser);
   
 }
 

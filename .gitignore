@@ -22,9 +22,9 @@
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
 
-### Gradle
-.idea/**/gradle.xml
-.idea/**/libraries
+#### Gradle
+#.idea/**/gradle.xml
+#.idea/**/libraries
 
 ### Gradle and Maven with auto-import
 # When using Gradle or Maven with auto-import, you should exclude module files,
@@ -39,12 +39,12 @@
  *.iml
  *.ipr
 
-### Gradle ###
-*.gradle
-AquaCare/build/
-!gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
+#### Gradle ###
+#*.gradle
+#AquaCare/build/
+#!gradle/wrapper/gradle-wrapper.jar
+#!**/src/main/**/build/
+#!**/src/test/**/build/
 
 ### VS Code ###
 *.vscode/
