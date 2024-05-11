@@ -33,8 +33,8 @@ arduino-cli lib install "Seeed Arduino rpcBLE@1.0.0"
 apt-get install git -y
 #cd arduino-cli config dump | grep sketchbook | sed 's/.*\ //' /libraries
 #rm -rf /root/Arduino/libraries/Servo/*
-mkdir "Servo" /root/Arduino/libraries
-git clone -- force https://github.com/PaintYourDragon/Servo.git /root/Arduino/libraries/Servo
+mkdir -p /root/Arduino/libraries
+git clone --force https://github.com/PaintYourDragon/Servo.git /root/Arduino/libraries/Servo
 
 #cd /root/AquaCare/libraries
 #git clone https://github.com/arduino-libraries/Servo.git
