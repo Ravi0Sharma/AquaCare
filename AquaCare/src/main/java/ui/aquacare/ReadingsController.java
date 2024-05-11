@@ -214,17 +214,6 @@ public class ReadingsController extends NavigationController implements Initiali
         thread.start();
     }
 
-    private double extractMeanValue(List<FluxTable> tables) {
-        double meanValue = 0.0;
-        for (FluxTable table : tables) {
-            List<FluxRecord> records = table.getRecords();
-            for (FluxRecord fluxRecord : records) {
-                meanValue = (double) fluxRecord.getValue();
-            }
-        }
-        return meanValue;
-    }
-
     public void feedFish() {
         applicationInterface.ActivateFeeder(activeFishMonitor);
     }
