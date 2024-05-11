@@ -35,9 +35,9 @@ apt-get install git -y
 
 #cd /root/AquaCare/libraries
 git clone https://github.com/arduino-libraries/Servo.git
-#rm /root/Arduino/libraries/Servo/src/megaavr/Servo.h
-#git clone https://github.com/arduino-libraries/Servo/blob/master/src/sam/Servo.cpp /root/Arduino/libraries/Servo/src/megaavr
-#cp -f Servo.h /root/Arduino/libraries/Servo/src/megaavr
+rm /root/Arduino/libraries/Servo/src/megaavr/Servo.cpp
+git clone https://github.com/arduino-libraries/Servo/blob/master/src/sam/Servo.cpp
+cp -f Servo.cpp /root/Arduino/libraries/Servo/src/megaavr
 
 # math.h
 git clone https://gist.github.com/4033545.git
