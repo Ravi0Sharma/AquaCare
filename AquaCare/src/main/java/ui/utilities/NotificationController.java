@@ -13,16 +13,7 @@ import com.influxdb.query.FluxTable;
 
 public class NotificationController {
 
-    private final ApplicationInterface appInterface;
-
-    //Expected Structure: deviceID, <sensor, (lower threshold, upper threshold)>
-    HashMap<String, HashMap<String, Threshold>> deviceMap;
-
-    private int counter;
-
-    public NotificationController() {
-
-        appInterface = new ApplicationInterface();
+    private NotificationController() {
 
     }
 
