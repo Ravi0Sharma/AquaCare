@@ -4,7 +4,9 @@ import java.awt.*;
 
 public class NotificationClient {
 
-    public static void displayTray(String alertTitle, String alertBody) throws AWTException {
+    public static void displayTray(String alertTitle, String alertBody) {
+
+        try {
         SystemTray tray = SystemTray.getSystemTray();
 
         //If the icon is a file
@@ -24,6 +26,11 @@ public class NotificationClient {
         tray.add(trayIcon);
 
         trayIcon.displayMessage(alertTitle, alertBody, TrayIcon.MessageType.INFO);
+    }
+    catch (AWTException e) {
+        System.err.println("TrayIcon could not be added.");
+    }
+
     }
 
 
