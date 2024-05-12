@@ -195,6 +195,7 @@ public class ReadingsController extends NavigationController implements Initiali
                 double lastFedHour = ApplicationInterface.extractLastRowHourlyTimeDifference(tablesDisp);
 
                 if (!(meanPh == -1 || meanTemp == -1)) {
+                    System.out.println("Checking for threshold breaches");
                     NotificationController.checkThresholds(meanTemp, meanPh);
                 }
                     System.out.println("No data available for threshold comparison");
