@@ -100,15 +100,6 @@ public class ReadingsController extends NavigationController implements Initiali
      * ------- HISTORICAL READINGS VISUALIZATION -------
      */
 
-    private void updateAllCharts() {
-        //! Should be triggered after a fish change
-        //The current structure of the UI makes this function obsolete since the charts are updated in the initialize function
-        updateChart(linechartTemp, "Temperature");
-        updateChart(linechartLight, "Light");
-        updateChart(linechartPh, "Ph");
-        updateChart(linechartDisp, "Dispenser");
-    }
-
     private void updateChart(LineChart chart, String sensorName) {
 
         //Create data series for the line chart
