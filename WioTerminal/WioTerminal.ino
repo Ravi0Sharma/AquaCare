@@ -1,59 +1,69 @@
-/******************************************************************************
-* Thank you Nas for your helpful presentation and providing valuable resources
-******************************************************************************/
+#include "Screen_draw.h"
+#include "WiFi.h"
+#include "pin.h"
+#include "utils.h"
+#include "mqtt.h"
 
-#include "RTC_SAMD51.h"
-#include "DateTime.h"
-#include <TFT_eSPI.h>
-#include "Secrets.h"
 
-#define TIME_ZONE_OFFSET 2 // Gothenburg is UTC+2 currently
+char msg[50];
+const long interval = 5000;
+unsigned long previousMillis = 0;  
 
-RTC_SAMD51 rtc; // initialize RTC clock object
-TFT_eSPI tft = TFT_eSPI(); // Initialize TFT screen
+TFT_eSPI tft;
+Servo dispenser;
 
-void setup()
-{
-    rtc.begin(); // Begin RTC clock
+void setup() {
+  
+  tft.begin();
+  tft.setRotation(3);
+  tft.fillScreen(TFT_WHITE); // Fill Wio Terminal screen white.
 
-    Serial.begin(115200); // Begin Serial communication
+  Serial.begin(serial_Begin_Rate);  //start serial communication
 
-    tft.init(); // Initialize TFT screen
-    tft.setRotation(1); // Set screen rotation if needed
+  WiFi_setup(); // Establishes a connection between the Wio Terminal and a WiFi network.
+  delay (3000);
+  client.setServer(mqtt_server, 1883); // Connect the MQTT Server
 
-    DateTime now = DateTime(F(__DATE__), F(__TIME__)); // Create DateTime object
-    Serial.println("adjust time!");
-    rtc.adjust(now); // set initial time
-
-    now = rtc.now(); // get current time
-
-    // Clear screen
-    tft.fillScreen(TFT_BLACK);
-
-    // Print date and time on TFT screen
-    tft.setTextColor(TFT_WHITE);
-    tft.setTextSize(2);
-    tft.setCursor(10, 0);
-    tft.print(now.year(), DEC);
-    tft.print('/');
-    tft.print(now.month(), DEC);
-    tft.print('/');
-    tft.print(now.day(), DEC);
-    tft.print(" ");
-    tft.print(now.hour() + TIME_ZONE_OFFSET, DEC);
-    tft.print(':');
-    tft.print(now.minute(), DEC);
-    tft.print(':');
-    tft.print(now.second(), DEC);
-
-    // Print super secret message from author
-    tft.setTextFont(1);
-    tft.setCursor(10, 100);
-    #define MY_MESSAGE "Happy Birthday!"
-    tft.print(MY_MESSAGE);
+  client.setCallback(callback); // Define behavior when message recvided from mqtt broker
+  dispenser.attach(pinfoodDispenser); // Set up servo motor 
+  
 }
 
-void loop()
-{
-    // Your loop code here, if any
+void loop() {
+
+unsigned long currentMillis = millis(); //Store the current time in milliseconds since the program started
+
+Screen_draw();
+
+if (!client.connected()) { // Connect to Mqtt if not connected 
+     MQTT_connect();
 }
+  client.loop();
+  
+  int valueTemp = analogRead(pinTempSensor);   // read temperature sensor signal     
+  int valueLight = analogRead(pinLightSensor); // read light sensor signal
+  int valuePh = analogRead(pinPhSensor);       // read ph sensor signal
+
+  int tempResult = convertTemp(valueTemp);  // read temperature sensor signal
+  int lightResult = mapToPercentage(valueLight);
+  int phResult = convertPh(valuePh);
+
+
+  // Publish sensor readings and update display if interval has elapsed
+  if (currentMillis - previousMillis >= interval) {
+      previousMillis = currentMillis;
+      Serial.print("Publish reading");
+      Serial.println(msg);
+      client.publish(TOPIC_PUB_TEMP, String(tempResult).c_str());
+      client.publish(TOPIC_PUB_LIGHT, String(lightResult).c_str());
+      client.publish(TOPIC_PUB_PH, String(pinPhSensor).c_str());
+      
+      delay(1000);
+      tft.fillScreen(TFT_WHITE);
+      tft.drawNumber(tempResult,50,95); 
+      tft.drawNumber(lightResult,50,190); 
+      tft.drawNumber(pinPhSensor,210,95); 
+      tft.drawNumber(1,225,190); 
+     
+    }
+  }

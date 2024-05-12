@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import com.influxdb.query.FluxRecord;
 import com.influxdb.query.FluxTable;
 import javafx.scene.chart.LineChart;
@@ -25,7 +26,7 @@ import java.util.Map;
 
 public class ReadingsController extends NavigationController implements Initializable {
 
-//  Real-time Readings
+    //  Real-time Readings
     static SerialPort chosenPort;
     static int x = 0;   //
     @FXML
@@ -43,8 +44,10 @@ public class ReadingsController extends NavigationController implements Initiali
     private Label tempLabel;
     @FXML
     private Label feedLabel;
+    @FXML
+    private Button feedFishButton;
 
-//  Historical Readings
+    //  Historical Readings
     @FXML
     private LineChart<String, Number> linechartPh;
     @FXML
@@ -55,12 +58,18 @@ public class ReadingsController extends NavigationController implements Initiali
     private LineChart<String, Number> linechartDisp;
 
     private String activeFishMonitor;
+
     ApplicationInterface applicationInterface = new ApplicationInterface();
 
+    private volatile double threadCordinator = 0;
+
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle){
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
         setDate();
-        //realTimeData();
+
+        threadCordinator = Math.random();
+        realTimeData(threadCordinator);
 
         //Set active fish monitor to 1 since owning multiple monitors is not supported yet
         activeFishMonitor = "1";
@@ -94,7 +103,7 @@ public class ReadingsController extends NavigationController implements Initiali
         //The current structure of the UI makes this function obsolete since the charts are updated in the initialize function
         updateChart(linechartTemp, "Temperature");
         updateChart(linechartLight, "Light");
-        updateChart(linechartPh, "PhLevel");
+        updateChart(linechartPh, "Ph");
         updateChart(linechartDisp, "Dispenser");
     }
 
@@ -107,7 +116,7 @@ public class ReadingsController extends NavigationController implements Initiali
         series.setName(sensorName);
 
         //Query data based on active fish monitor and sensor name
-        List<FluxTable> tables = applicationInterface.QueryOfDuration(sensorName, "1w", activeFishMonitor);
+        List<FluxTable> tables = applicationInterface.QueryOfDuration(sensorName, "1d", activeFishMonitor);
 
         //Divide tables into individual tables
         for (FluxTable table : tables) {
@@ -161,90 +170,62 @@ public class ReadingsController extends NavigationController implements Initiali
         chart.getData().add(series);
     }
 
-
-    /**
+    /*
      * ------- REAL-TIME DATA VISUALIZATION -------
      */
-    // This method is useless if you start to use MQTT for RT display. because data will be processed in that class.
-    private String[] processData(String rawData) {
-        // we will use prefixes as "'temperature' : 21" and "'pH':8". to get the data at the right we split by :
-            String[] parts = rawData.split(":");
-            if (parts.length != 2) {    // the data should only have the type and the value (for RT)
-                return new String[]{"", ""};
-            }
-            // Extract sensor type and value
-            String sensorType = parts[0].trim();
-            String sensorValue = parts[1].trim();
-            return new String[]{sensorType, sensorValue};
-        }
 
-    private String readDataFromSerialPort() {
-        byte[] buffer = new byte[1024]; // holds the data received from the serial port
-        int numBytes = chosenPort.readBytes(buffer, buffer.length);
-        return new String(buffer, 0, numBytes); //convert byte array buffer to string starting from index 0
-    }
+    public void realTimeData(double threadIndex) {
+        // create a new thread that listens for incoming text and populates the graph
+        Thread thread = new Thread(() -> {
 
-    public void realTimeData(){
-        portList = new ComboBox<>();
-        connectButton = new Button("Connect");
-        roots = new VBox(portList, connectButton);
+            while (threadIndex == threadCordinator) {
 
-        // populate the box with available port names
-        SerialPort[] portNames = SerialPort.getCommPorts();
-        for (SerialPort port : portNames) {
-            portList.getItems().add(chosenPort.getSystemPortName());
-        }
+                // Query data based on active fish monitor and sensor name
+                List<FluxTable> tablesPh = applicationInterface.MeanOfDuration("Ph", "30s", activeFishMonitor);
+                List<FluxTable> tablesTemp = applicationInterface.MeanOfDuration("Temperature", "30s", activeFishMonitor);
+                List<FluxTable> tablesLight = applicationInterface.MeanOfDuration("Light", "30s", activeFishMonitor);
+                List<FluxTable> tablesDisp = applicationInterface.LastOfDuration("Dispenser", "25d", activeFishMonitor);
 
-        connectButton.setOnAction(event -> {
-            if (connectButton.getText().equals("Connect")) {
-                // attempt to connect to the serial port
-                chosenPort = SerialPort.getCommPort(portList.getValue().toString());
-                chosenPort.setComPortTimeouts(SerialPort.TIMEOUT_SCANNER, 0, 0);
+                // Extract the mean values from the tables
+                double meanPh = ApplicationInterface.extractMeanValue(tablesPh);
+                double meanTemp = ApplicationInterface.extractMeanValue(tablesTemp);
+                double meanLight = ApplicationInterface.extractMeanValue(tablesLight);
+                double lastFedHour = ApplicationInterface.extractLastRowHourlyTimeDifference(tablesDisp);
+
+                Platform.runLater(() -> {
+                    // update labels with the mean values
+                    phLabel.setText("pH: " + meanPh);
+                    tempLabel.setText("Temperature: " + meanTemp + "°C");
+                    lightLabel.setText("Light: " + meanLight);
+                    feedLabel.setText("Fed " + lastFedHour + " hours ago");
 
 
-                if (chosenPort.openPort()) {
-                    connectButton.setText("Disconnect");
-                    portList.setDisable(true);
-                }
-
-                // create a new thread that listens for incoming text and populates the graph
-                Thread thread = new Thread(() -> {
-                    while (true) {
-
-                        String data = readDataFromSerialPort();
-                        String[] sensorData = processData(data);
-
-                        Platform.runLater(() -> {
-                            // update labels based on sensor type
-                            if (sensorData[0].equals("pH")) {
-                                phLabel.setText("pH: " + sensorData[1]);
-                            } else if (sensorData[0].equals("Temperature")) {
-                                tempLabel.setText("Temperature: " + sensorData[1] + "°C");
-                            } else if (sensorData[0].equals("Light")) {
-                                lightLabel.setText("Light: " + sensorData[1]);
-                            }
-//                            else if (sensorData[0].equals("Dispenser")) {
-//                                lightLabel.setText("Last Fed: " + sensorData[1]);
-//                            }
-                        });
-
-                        // sleep to avoid reduce app's CPU usage
-                        try {
-                            Thread.sleep(1000); // 1000 = 1 sec
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
                 });
-                thread.start();
-            } else {
-                // disconnect from the serial port
-                chosenPort.closePort();
-                portList.setDisable(false);
-                connectButton.setText("Connect");
-                x = 0;
+
+                // sleep to avoid reduce app's CPU usage
+                try {
+                    Thread.sleep(3000); // 1000 = 1 sec
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
+            return;
         });
+        thread.start();
     }
 
+    private double extractMeanValue(List<FluxTable> tables) {
+        double meanValue = 0.0;
+        for (FluxTable table : tables) {
+            List<FluxRecord> records = table.getRecords();
+            for (FluxRecord fluxRecord : records) {
+                meanValue = (double) fluxRecord.getValue();
+            }
+        }
+        return meanValue;
+    }
+
+    public void feedFish() {
+        applicationInterface.ActivateFeeder(activeFishMonitor);
+    }
 }

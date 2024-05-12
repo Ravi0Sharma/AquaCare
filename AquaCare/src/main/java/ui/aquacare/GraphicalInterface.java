@@ -1,13 +1,12 @@
 package ui.aquacare;
 
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-
-import javafx.application.Application;
 
 public class GraphicalInterface extends Application {
     @Override
@@ -21,4 +20,3 @@ public class GraphicalInterface extends Application {
         stage.show();
     }
 }
-
