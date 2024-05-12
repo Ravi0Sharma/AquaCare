@@ -18,13 +18,15 @@ import com.influxdb.query.FluxTable;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import ui.utilities.ApplicationInterface;
-import ui.utilities.NotificationClient;
 import ui.utilities.NotificationController;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class ReadingsController extends NavigationController implements Initializable {
 
@@ -63,15 +65,15 @@ public class ReadingsController extends NavigationController implements Initiali
 
     ApplicationInterface applicationInterface = new ApplicationInterface();
 
-    private volatile double threadCordinator = 0;
+    // Still not exactly sure how static fixed multiple thread problem
+    private static ScheduledExecutorService executorService;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         setDate();
 
-        threadCordinator = Math.random();
-        realTimeData(threadCordinator);
+        realTimeData();
 
         //Set active fish monitor to 1 since owning multiple monitors is not supported yet
         activeFishMonitor = "1";
@@ -167,50 +169,46 @@ public class ReadingsController extends NavigationController implements Initiali
      * ------- REAL-TIME DATA VISUALIZATION -------
      */
 
-    public void realTimeData(double threadIndex) {
-        // create a new thread that listens for incoming text and populates the graph
-        Thread thread = new Thread(() -> {
+    public void realTimeData() {
+        // If there's already a running task, cancel it
+        if (executorService != null && !executorService.isShutdown()) {
+            System.out.println("**************************************************");
+            System.out.println("Shutting down the executor service");
+            executorService.shutdownNow();
+        }
 
-            while (threadIndex == threadCordinator) {
+        // Create a new executor service
+        executorService = Executors.newSingleThreadScheduledExecutor();
 
-                // Query data based on active fish monitor and sensor name
-                List<FluxTable> tablesPh = applicationInterface.MeanOfDuration("Ph", "30s", activeFishMonitor);
-                List<FluxTable> tablesTemp = applicationInterface.MeanOfDuration("Temperature", "30s", activeFishMonitor);
-                List<FluxTable> tablesLight = applicationInterface.MeanOfDuration("Light", "30s", activeFishMonitor);
-                List<FluxTable> tablesDisp = applicationInterface.LastOfDuration("Dispenser", "25d", activeFishMonitor);
+        // Schedule the task to run every interval
+        executorService.scheduleAtFixedRate(() -> {
+            // Query data based on active fish monitor and sensor name
+            List<FluxTable> tablesPh = applicationInterface.MeanOfDuration("Ph", "30s", activeFishMonitor);
+            List<FluxTable> tablesTemp = applicationInterface.MeanOfDuration("Temperature", "30s", activeFishMonitor);
+            List<FluxTable> tablesLight = applicationInterface.MeanOfDuration("Light", "30s", activeFishMonitor);
+            List<FluxTable> tablesDisp = applicationInterface.LastOfDuration("Dispenser", "25d", activeFishMonitor);
 
-                // Extract the mean values from the tables
-                double meanPh = ApplicationInterface.extractMeanValue(tablesPh);
-                double meanTemp = ApplicationInterface.extractMeanValue(tablesTemp);
-                double meanLight = ApplicationInterface.extractMeanValue(tablesLight);
-                double lastFedHour = ApplicationInterface.extractLastRowHourlyTimeDifference(tablesDisp);
+            // Extract the mean values from the tables
+            double meanPh = ApplicationInterface.extractMeanValue(tablesPh);
+            double meanTemp = ApplicationInterface.extractMeanValue(tablesTemp);
+            double meanLight = ApplicationInterface.extractMeanValue(tablesLight);
+            double lastFedHour = ApplicationInterface.extractLastRowHourlyTimeDifference(tablesDisp);
 
-                if (!(meanPh == -1 || meanTemp == -1)) {
-                    System.out.println("Checking for threshold breaches");
-                    NotificationController.checkThresholds(meanTemp, meanPh);
-                }
-                    System.out.println("No data available for threshold comparison");
-
-                Platform.runLater(() -> {
-                    // update labels with the mean values
-                    phLabel.setText("pH: " + meanPh);
-                    tempLabel.setText("Temperature: " + meanTemp + "°C");
-                    lightLabel.setText("Light: " + meanLight);
-                    feedLabel.setText("Fed " + lastFedHour + " hours ago");
-
-
-                });
-
-                // sleep to avoid reduce app's CPU usage
-                try {
-                    Thread.sleep(3000); // 1000 = 1 sec
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            //Check for threshold breaches
+            if (!(meanPh == -1 || meanTemp == -1)) {
+                System.out.println("Checking for threshold breaches");
+                NotificationController.checkThresholds(meanTemp, meanPh);
             }
-            return;
-        });
-        thread.start();
+            System.out.println("No data available for threshold comparison");
+
+            Platform.runLater(() -> {
+                // update labels with the mean values
+                phLabel.setText("pH: " + meanPh);
+                tempLabel.setText("Temperature: " + meanTemp + "°C");
+                lightLabel.setText("Light: " + meanLight);
+                feedLabel.setText("Fed " + lastFedHour + " hours ago");
+            });
+        }, 5, 5, TimeUnit.SECONDS);
     }
 
     private double extractMeanValue(List<FluxTable> tables) {
