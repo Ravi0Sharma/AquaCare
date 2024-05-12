@@ -18,6 +18,8 @@ import com.influxdb.query.FluxTable;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import ui.utilities.ApplicationInterface;
+import ui.utilities.NotificationClient;
+import ui.utilities.NotificationController;
 
 import java.util.HashMap;
 import java.util.List;
@@ -191,6 +193,11 @@ public class ReadingsController extends NavigationController implements Initiali
                 double meanTemp = ApplicationInterface.extractMeanValue(tablesTemp);
                 double meanLight = ApplicationInterface.extractMeanValue(tablesLight);
                 double lastFedHour = ApplicationInterface.extractLastRowHourlyTimeDifference(tablesDisp);
+
+                if (!(meanPh == -1 || meanTemp == -1)) {
+                    NotificationController.checkThresholds(meanTemp, meanPh);
+                }
+                    System.out.println("No data available for threshold comparison");
 
                 Platform.runLater(() -> {
                     // update labels with the mean values
