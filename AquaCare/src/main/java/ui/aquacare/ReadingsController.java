@@ -153,11 +153,13 @@ public class ReadingsController extends NavigationController implements Initiali
 
             for (FluxRecord fluxRecord : records) {
 
+                XYChart.Data<String, Number> dataPoint = new XYChart.Data(fluxRecord.getTime().toString(), fluxRecord.getValue());
+
                 //This actually works as intended
                 System.out.println("value: " + fluxRecord.getValue() + "    stamp:" + fluxRecord.getTime().toString());
 
                 //Save date and value to the data series
-                series.getData().add(new XYChart.Data(fluxRecord.getTime().toString(), fluxRecord.getValue()));
+                series.getData().add(addTooltip(dataPoint, fluxRecord));
             }
         }
 
