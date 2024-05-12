@@ -6,7 +6,7 @@
 WiFiClient wioClient;
 PubSubClient client(wioClient);
 
-const char* mqtt_server = "broker.hivemq.com"; 
+const char* mqtt_server = "broker.hivemq.com"; // MQTT server address
 
 // Topics for sending sensor data
 const char* TOPIC_PUB_TEMP  = "AquaCare/1/Temperature";
@@ -14,13 +14,13 @@ const char* TOPIC_PUB_LIGHT = "AquaCare/1/Light";
 const char* TOPIC_PUB_PH  = "AquaCare/1/Ph";
 const char* TOPIC_PUB_FOOD = "AquaCare/1/Dispenser";
 
-const char* TOPIC_SUB_FOOD = "AquaCare/1/Feed"; 
+const char* TOPIC_SUB_FOOD = "AquaCare/1/Feed";  // Topic for subscribing to food dispensing requests
 
-
+// Connect to MQTT broker
 
 void MQTT_connect() {
 
-  
+  //This code briefly displays "Connecting to MQTT" on both serial and screen.
   Serial.print("Connecting to MQTT"); 
   tft.fillScreen(TFT_BLACK);
   tft.setTextSize(2);
@@ -36,7 +36,7 @@ void MQTT_connect() {
       client.subscribe(TOPIC_SUB_FOOD);
       
     } else {
-      
+       // Attempts to connect to MQTT, updating the display and serial output until successful.
       Serial.print("failed, state=");
       Serial.print(client.state());
       Serial.println(" try again in 5 seconds");
@@ -45,7 +45,7 @@ void MQTT_connect() {
       tft.print("Connecting to MQTT");
 
 
-     
+       //Loop attempts to connect to Wi-Fi, updating the display and serial output until successful.
        while (WiFi.status() != WL_CONNECTED){
        delay(500);
        tft.fillScreen(TFT_BLACK);
@@ -59,7 +59,7 @@ void MQTT_connect() {
       
     }
   }
-
+  // Display and serial output Connected.
   Serial.println();
   Serial.print("Connected");
   tft.fillScreen(TFT_BLACK);
@@ -70,8 +70,8 @@ void MQTT_connect() {
   tft.fillScreen(TFT_WHITE);
 }
 
-
-void callback(char* topic, byte* payload, unsigned int length) {
+  //Handles incoming MQTT messages
+  void callback(char* topic, byte* payload, unsigned int length) {
  
   Serial.print("Message arrived [");
   Serial.print(topic);
@@ -82,7 +82,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
     buff_p[i] = (char)payload[i];
   }
 
- 
+ // Triggers servo if topic matches TOPIC_SUB_FOOD, and publishes confirmation.
  if (strcmp(topic, TOPIC_SUB_FOOD) == 0) {
     servo();
     client.publish(TOPIC_PUB_FOOD, "1");
