@@ -19,24 +19,22 @@ public class NotificationController {
 
     //Returns true if the thresholds are not breached
     public static void checkThresholds(double meanTemp, double meanPh) {
+        // Check if a fish has been selected
         if (CurrentFish.getInstance().getSelectedFish() == null) {
             System.out.println("No fish selected.");
             return;
         }
 
+        // Check if the selected fish's temperature and pH are within the threshold
         if (isWithinThreshold(CurrentFish.getInstance().getSelectedFish().getFishTemp(), meanTemp)
                 && isWithinThreshold(CurrentFish.getInstance().getSelectedFish().getFishPh(), meanPh)) {
 
             System.out.println("Thresholds are not breached.");
             return;
         }
-        System.out.println(CurrentFish.getInstance().getSelectedFish().getFishName());
-        System.out.println(CurrentFish.getInstance().getSelectedFish().getFishSpecies());
-        System.out.println(CurrentFish.getInstance().getSelectedFish().getFishPh());
-        System.out.println(CurrentFish.getInstance().getSelectedFish().getFishLight());
-        System.out.println(CurrentFish.getInstance().getSelectedFish().getFishTemp());
 
-
+        System.out.println("Thresholds are breached.");
+        // Display a system tray notification
         NotificationClient.displayTray(
                 "Fish " + CurrentFish.getInstance().getSelectedFish().getFishName(), "Threshold Breach with values of Temperature and pH: " + meanTemp + " and " + meanPh);
     }
