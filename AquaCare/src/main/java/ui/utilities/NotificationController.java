@@ -78,11 +78,7 @@ public class NotificationController {
 
                         //Check if it is within the threshold and send a notification in case of breach
                         if (value < threshold.getLowerThreshold() || value > threshold.getUpperThreshold()) {
-                            try {
-                                NotificationClient.displayTray("Aquarium " + deviceID, "Threshold Breach on " + sensor + " with value " + value);
-                            } catch (AWTException e) {
-                                e.printStackTrace();
-                            }
+                            NotificationClient.displayTray("Aquarium " + deviceID, "Threshold Breach on " + sensor + " with value " + value);
                         }
                     }
                 }
