@@ -75,8 +75,8 @@ public class ReadingsController extends NavigationController implements Initiali
     //  Units in seconds
     private int realTimeLabelDataAge = 30;
 
-    // Units in miliseconds
-    private int realTimeDataUpdateInterval = 3000; // 1000 = 1 seconds
+    // Units in milliseconds - 1 seconds = 1000 milliseconds
+    private int realTimeDataUpdateInterval = 3000;
 
 
     //  Units in days
