@@ -25,35 +25,34 @@ public class NotificationController {
         appInterface = new ApplicationInterface();
 
         // Initialize the executor service with a single thread
-        executorService = Executors.newSingleThreadScheduledExecutor();
+        //executorService = Executors.newSingleThreadScheduledExecutor();
 
         // Schedule the checkThresholds method to run every 30 seconds
         // with no initial delay
-        executorService.scheduleAtFixedRate(this::updateAndCheck, 30, 30, TimeUnit.SECONDS);
+        //executorService.scheduleAtFixedRate(this::updateAndCheck, 30, 30, TimeUnit.SECONDS);
     }
 
-    private void updateAndCheck() {
+    /*private void updateAndCheck() {
         if (counter == 10) {
             updateThresholds();
             counter = 0;
         }
             counter++;
             checkThresholds();
-    }
-
+    }*/
 
 
     //Scheduled executor service to run the checkThresholds method every interval
-    private final ScheduledExecutorService executorService;
+    /*private final ScheduledExecutorService executorService;*/
 
-    private void updateThresholds() {
+    /*private void updateThresholds() {
         deviceMap = new HashMap<String, HashMap<String, Threshold>>();
         //This function depends on selected fish which is not currently implemented
         //Get the latest data from the json - or maybe influxDB after the recent developments
         //Write it off to the Hashmap object
-    }
+    }*/
 
-    private void checkThresholds() {
+    /*private void checkThresholds() {
 
         //For each aquarium monitor
         for (String deviceID : deviceMap.keySet()) {
@@ -84,16 +83,51 @@ public class NotificationController {
                 }
             }
         }
-    }
+    }*/
 
     //Returns true if the thresholds are not breached
-    public static boolean checkThresholds(FluxRecord record){
+    public static void checkThresholds(double meanTemp, double meanPh) {
+        if (CurrentFish.getInstance().getSelectedFish() == null) {
+            return;
+        }
+
+        if (isWithinThreshold(CurrentFish.getInstance().getSelectedFish().getFishTemp(), meanTemp)
+                || isWithinThreshold(CurrentFish.getInstance().getSelectedFish().getFishPh(), meanPh)) {
+
+            System.out.println("Thresholds are not breached.");
+            return;
+        }
+        System.out.println(CurrentFish.getInstance().getSelectedFish().getFishName());
+        System.out.println(CurrentFish.getInstance().getSelectedFish().getFishSpecies());
+        System.out.println(CurrentFish.getInstance().getSelectedFish().getFishPh());
+        System.out.println(CurrentFish.getInstance().getSelectedFish().getFishLight());
+        System.out.println(CurrentFish.getInstance().getSelectedFish().getFishTemp());
 
 
-        return true;
+        NotificationClient.displayTray(
+                "Fish " + CurrentFish.getInstance().getSelectedFish().getFishName(), "Threshold Breach with values of Temperature and pH: " + meanTemp + " and " + meanPh);
+
+        return;
     }
 
-    public void stop() {
+    private static boolean isWithinThreshold(String thresholdString, double value) {
+        // Split the string by the "-" character
+        String[] parts = thresholdString.split("-");
+
+        // Remove any non-numeric characters from the maximum value string
+        String maxValueString = parts[1].replaceAll("[^\\d.]", "");
+
+        // Parse the minimum and maximum value strings into doubles
+        double minValue = Double.parseDouble(parts[0]);
+        double maxValue = Double.parseDouble(maxValueString);
+
+        System.out.println("Min: " + minValue + " Max: " + maxValue + " Value: " + value);
+
+        // Compare the value with the minimum and maximum values
+        return value >= minValue && value <= maxValue;
+    }
+
+    /*public void stop() {
         // Shut down the executor service when it's no longer needed
         executorService.shutdown();
         try {
@@ -103,8 +137,7 @@ public class NotificationController {
         } catch (InterruptedException e) {
             executorService.shutdownNow();
         }
-    }
-
+    }*/
 
 
 }
