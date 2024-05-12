@@ -85,6 +85,14 @@ public class NotificationController {
             }
         }
     }
+
+    //Returns true if the thresholds are not breached
+    public static boolean checkThresholds(FluxRecord record){
+
+
+        return true;
+    }
+
     public void stop() {
         // Shut down the executor service when it's no longer needed
         executorService.shutdown();
