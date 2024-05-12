@@ -8,9 +8,12 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.StackPane;
 import javafx.fxml.Initializable;
 import javafx.animation.Timeline;
+
 
 import java.net.URL;
 import java.time.Instant;
@@ -221,8 +224,12 @@ public class ReadingsController extends NavigationController implements Initiali
                     //Logic for checking if the data is already in the chart
 
                     if (seriesIsDataDuplicate(series, fluxRecord) == false) {
+
+                        // Create a new data point
+                        XYChart.Data<String, Number> dataPoint = new XYChart.Data(fluxRecord.getTime().toString(), fluxRecord.getValue());
+
                         //Save date and value to the data series, if the data is not already in the chart
-                        series.getData().add(new XYChart.Data(fluxRecord.getTime().toString(), fluxRecord.getValue()));
+                        series.getData().add(addTooltip(dataPoint, fluxRecord));
                     }
 
                 }
@@ -339,10 +346,20 @@ public class ReadingsController extends NavigationController implements Initiali
         }
     }
 
-/*
-    private void addTooltip
-*/
+    private XYChart.Data<String, Number> addTooltip(XYChart.Data<String, Number> dataPoint, FluxRecord fluxRecord) {
 
+        // Create a StackPane to use as the node for the data point
+        StackPane stackPane = new StackPane();
 
+        // Create a Tooltip with the timestamp
+        Tooltip tooltip = new Tooltip( fluxRecord.getValue().toString() + "\n" +  fluxRecord.getTime().toString());
 
+        // Add the Tooltip to the StackPane
+        Tooltip.install(stackPane, tooltip);
+
+        // Set the node for the data point to the StackPane
+        dataPoint.setNode(stackPane);
+
+        return dataPoint;
+    }
 }
