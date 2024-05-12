@@ -163,39 +163,8 @@ public class ReadingsController extends NavigationController implements Initiali
             }
         }
 
-        //*************************************************************************************
-        //These can be set up within fxml files themselves.
-
-        //Turn off the legend for the line chart, since it takes precious space
-        chart.setLegendVisible(false);
-
-        //Turn off the symbols or dots on the line chart, since they over-crowd the chart
-        chart.setCreateSymbols(false);
-
-        //Turn off the animation of the line chart, since it is not needed
-        chart.setAnimated(false);
-
-        //Instead of turning them off, try shortening time stamps
-        //Giving user about when data is collected is important
-        //Another choice would be to somehow downsample the labels(not data as a whole), to make it less crowded
-
-        //Turn off the horizontal grid labels of the line chart, since they make the chart much smaller
-        chart.getXAxis().setTickLabelsVisible(false);
-        chart.getXAxis().setOpacity(0);
-
-        //Turns off effects on the line chart, since they are not needed
-        chart.setEffect(null);
-
-        //Turn auto-scaling off for the line chart, realistically value will be between two values
-        chart.getYAxis().setAutoRanging(false);
-
-        //These values should be based on sensor type and tresholds set in json file
-        ((NumberAxis) chart.getYAxis()).setLowerBound(0);
-        ((NumberAxis) chart.getYAxis()).setUpperBound(100);
-
-        //XYChart.Data.setNode(hoverPane);
-
-        //*************************************************************************************
+        // Initialize chart settings
+        initializeChartSettings(chart);
 
         //Update the line chart with milked values
         chart.getData().add(series);
@@ -363,5 +332,30 @@ public class ReadingsController extends NavigationController implements Initiali
         dataPoint.setNode(stackPane);
 
         return dataPoint;
+    }
+
+    private void initializeChartSettings(LineChart chart) {
+        //Turn off the legend for the line chart, since it takes precious space
+        chart.setLegendVisible(false);
+
+        //Turn off the symbols or dots on the line chart, since they over-crowd the chart
+        chart.setCreateSymbols(false);
+
+        //Turn off the animation of the line chart, since it is not needed
+        chart.setAnimated(false);
+
+        //Turn off the horizontal grid labels of the line chart, since they make the chart much smaller
+        chart.getXAxis().setTickLabelsVisible(false);
+        chart.getXAxis().setOpacity(0);
+
+        //Turns off effects on the line chart, since they are not needed
+        chart.setEffect(null);
+
+        //Turn auto-scaling off for the line chart, realistically value will be between two values
+        chart.getYAxis().setAutoRanging(false);
+
+        //These values should be based on sensor type and tresholds set in json file
+        ((NumberAxis) chart.getYAxis()).setLowerBound(0);
+        ((NumberAxis) chart.getYAxis()).setUpperBound(100);
     }
 }
