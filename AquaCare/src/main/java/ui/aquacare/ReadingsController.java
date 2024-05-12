@@ -70,7 +70,10 @@ public class ReadingsController extends NavigationController implements Initiali
 
 
     //  Units in seconds
-    private int realTimeLabelUpdateInterval = 5;
+    private int realTimeLabelDataAge = 30;
+
+    // Units in miliseconds
+    private int realTimeDataUpdateInterval = 3000; // 1000 = 1 seconds
 
 
     //  Units in days
@@ -239,9 +242,9 @@ public class ReadingsController extends NavigationController implements Initiali
             while (threadIndex == threadCordinator) {
 
                 // Query data based on active fish monitor and sensor name
-                List<FluxTable> tablesPh = applicationInterface.MeanOfDuration("Ph", String.valueOf(realTimeLabelUpdateInterval) + "s", activeFishMonitor);
-                List<FluxTable> tablesTemp = applicationInterface.MeanOfDuration("Temperature", String.valueOf(realTimeLabelUpdateInterval) + "s", activeFishMonitor);
-                List<FluxTable> tablesLight = applicationInterface.MeanOfDuration("Light", String.valueOf(realTimeLabelUpdateInterval) + "s", activeFishMonitor);
+                List<FluxTable> tablesPh = applicationInterface.MeanOfDuration("Ph", String.valueOf(realTimeLabelDataAge) + "s", activeFishMonitor);
+                List<FluxTable> tablesTemp = applicationInterface.MeanOfDuration("Temperature", String.valueOf(realTimeLabelDataAge) + "s", activeFishMonitor);
+                List<FluxTable> tablesLight = applicationInterface.MeanOfDuration("Light", String.valueOf(realTimeLabelDataAge) + "s", activeFishMonitor);
                 List<FluxTable> tablesDisp = applicationInterface.LastOfDuration("Dispenser", "25d", activeFishMonitor);
 
                 // Extract the mean values from the tables
@@ -262,7 +265,7 @@ public class ReadingsController extends NavigationController implements Initiali
 
                 // sleep to avoid reduce app's CPU usage
                 try {
-                    Thread.sleep(3000); // 1000 = 1 sec
+                    Thread.sleep(realTimeDataUpdateInterval);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -335,6 +338,10 @@ public class ReadingsController extends NavigationController implements Initiali
             }
         }
     }
+
+/*
+    private void addTooltip
+*/
 
 
 
