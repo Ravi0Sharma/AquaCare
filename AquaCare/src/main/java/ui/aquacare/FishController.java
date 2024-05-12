@@ -13,6 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import ui.utilities.CurrentFish;
 import ui.utilities.NotificationClient;
 
 import java.io.*;
@@ -84,6 +85,8 @@ public class FishController extends NavigationController implements Initializabl
 
             fishTableView.setOnMouseClicked( event -> {
                 if( event.getClickCount() == 2 ) {
+                    FishModel selectedFish = fishTableView.getSelectionModel().getSelectedItem();
+                    CurrentFish.getInstance().setSelectedFish(selectedFish);
                     NotificationClient.displayTray("New fish selected", "Fish: " + fishTableView.getSelectionModel().getSelectedItem().getFishName() + " selected.");
                 }});
 
