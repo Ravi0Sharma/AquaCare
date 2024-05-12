@@ -36,7 +36,7 @@ public class NotificationController {
         System.out.println("Thresholds are breached.");
         // Display a system tray notification
         NotificationClient.displayTray(
-                "Fish " + CurrentFish.getInstance().getSelectedFish().getFishName(), "Threshold Breach with values of Temperature and pH: " + meanTemp + " and " + meanPh);
+                "Fish: " + CurrentFish.getInstance().getSelectedFish().getFishName(), "Threshold Breach with values of Temperature: " + meanTemp + " and  pH:" + meanPh);
     }
 
     private static boolean isWithinThreshold(String thresholdString, double value) {
