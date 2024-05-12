@@ -13,6 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import ui.utilities.NotificationClient;
 
 import java.io.*;
 import java.net.URL;
@@ -80,6 +81,12 @@ public class FishController extends NavigationController implements Initializabl
                             fish.getFishSpecies().toLowerCase().contains(lowerCaseFilter);
                 });
             });
+
+            fishTableView.setOnMouseClicked( event -> {
+                if( event.getClickCount() == 2 ) {
+                    NotificationClient.displayTray("New fish selected", "Fish: " + fishTableView.getSelectionModel().getSelectedItem().getFishName() + " selected.");
+                }});
+
 
             SortedList<FishModel> sortedData = new SortedList<>(filteredData);
             sortedData.comparatorProperty().bind(fishTableView.comparatorProperty());
