@@ -44,7 +44,7 @@ public class DatabaseInputParser {
                 // If there is a timestamp in the correct format, write the data with the timestamp
                 // Since the database only holds data of the last month, giving an older data may cause disconnection
                 // Excpect time in seconds
-                dataBaseHandler.WriteData(measurement, "deviceID", deviceID, "value", Double.parseDouble(value), Long.parseLong(timestamp));
+                dataBaseHandler.WriteData(measurement, "deviceID", deviceID, "value", Double.parseDouble(value), Long.parseLong(timestamp) * 1000000000L);
                 System.out.println("Have written data to InfluxDB");
                 return;
             }
