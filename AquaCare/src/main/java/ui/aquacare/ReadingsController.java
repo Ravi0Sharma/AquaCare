@@ -91,11 +91,19 @@ public class ReadingsController extends NavigationController implements Initiali
     // Still not exactly sure how static fixed multiple thread problem
     private static ScheduledExecutorService executorService;
 
+    private static String tempLevelText;
+    private static String phLevelText;
+    private static String lightLevelText;
+    private static String feedLevelText;
+
     Map<LineChart, String> linecharts = new HashMap<>();
     ;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        //Update the labels with the latest values so changing scenes do not show default values, may be considered redundant
+        updateLabels();
 
         //Set active fish monitor to 1 since owning multiple monitors is not supported yet
         activeFishMonitor = "1";
@@ -252,12 +260,14 @@ public class ReadingsController extends NavigationController implements Initiali
                 // update labels with the mean values
 
                 //Truncate the values to a certain length
-                phLabel.setText("pH: " + Double.toString(meanPh).substring(0, Math.min(Double.toString(meanPh).length(), 4)));
-                tempLabel.setText("Temperature: " + Double.toString(meanTemp).substring(0, Math.min(Double.toString(meanTemp).length(), 5)) + "°C");
-                lightLabel.setText("Light: " + Double.toString(meanLight).substring(0, Math.min(Double.toString(meanLight).length(), 6)));
-                feedLabel.setText("Fed " + Double.toString(lastFedHour).substring(0, Math.min(Double.toString(lastFedHour).length(), 5)) + " hours ago");
+                phLevelText = Double.toString(meanPh).substring(0, Math.min(Double.toString(meanPh).length(), 4));
+                tempLevelText = Double.toString(meanTemp).substring(0, Math.min(Double.toString(meanPh).length(), 5));
+                lightLevelText = Double.toString(meanLight).substring(0, Math.min(Double.toString(meanLight).length(), 6));
+                feedLevelText = Double.toString(lastFedHour).substring(0, Math.min(Double.toString(lastFedHour).length(), 5));
+
+                updateLabels();
             });
-        }, 5, 5, TimeUnit.SECONDS);
+        }, 0, 5, TimeUnit.SECONDS);
     }
 
     public void feedFish() {
@@ -365,4 +375,11 @@ public class ReadingsController extends NavigationController implements Initiali
         ((NumberAxis) chart.getYAxis()).setLowerBound(0);
         ((NumberAxis) chart.getYAxis()).setUpperBound(100);
     }
+    private void updateLabels() {
+        phLabel.setText("pH: " + phLevelText);
+        tempLabel.setText("Temperature: " + tempLevelText  + "°C");
+        lightLabel.setText("Light: " + lightLevelText);
+        feedLabel.setText("Fed " + feedLevelText + " hours ago");
+    }
+
 }
