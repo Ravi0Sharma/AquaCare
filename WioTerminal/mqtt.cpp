@@ -2,6 +2,8 @@
 #include "WiFi.h" 
 #include "utils.h"  
 #include "Screen_draw.h"
+#include <time.h>
+
                       
 WiFiClient wioClient;
 PubSubClient client(wioClient);
@@ -84,8 +86,14 @@ void MQTT_connect() {
 
  // Triggers servo if topic matches TOPIC_SUB_FOOD, and publishes confirmation.
  if (strcmp(topic, TOPIC_SUB_FOOD) == 0) {
+
+    unsigned long timeStamp = time(NULL);
+
+    // Create publish message
+    String dispenserMessage = "1" + ", " + String(timeStamp);
+
     servo();
-    client.publish(TOPIC_PUB_FOOD, "1");
+    client.publish(TOPIC_PUB_FOOD, dispenserMessage.c_str());
 
 }
 
