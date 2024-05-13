@@ -58,7 +58,7 @@ if (!client.connected()) { // Connect to Mqtt if not connected
 
       // Create publish message
       String temperatureMessage = String(tempResult) + ", " + String(timeStamp);
-      String lightMessage = String(lightResult) + ", " + String(timeStamp)
+      String lightMessage = String(lightResult) + ", " + String(timeStamp);
       String phMessage = String(phResult) + ", " + String(timeStamp);
 
 
