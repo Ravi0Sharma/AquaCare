@@ -38,6 +38,21 @@ tft.drawString("%",95,190);
 tft.drawString("pH",240,95);
 }
 
+void Screen_connectingWiFi(){
+tft.setTextSize(3);
+tft.setTextColor(TFT_BLACK);
+tft.setTextSize(2);
+tft.setCursor((320 - tft.textWidth("Connecting to Wi-Fi..")) / 2, 25);
+tft.print("Connecting to Wi-Fi..");
+}
+
+void Screen_connected(){
+  tft.setTextColor(TFT_BLUE);
+  tft.setTextSize(3);
+  tft.setCursor((320 - tft.textWidth("Connected!")) / 2, 115);
+  tft.print("Connected!");
+}
+
 void Screen_connectingMQTT(){
 tft.setTextSize(3);
 tft.setTextColor(TFT_BLACK);
