@@ -5,8 +5,8 @@
 #include"utils.h"
 
 char msg[50];const
-long interval = 5000;unsigned
-long previousMillis = 0;
+long interval = 5000;
+unsigned long previousMillis = 0;
 
 TFT_eSPI tft;
 Servo dispenser;
