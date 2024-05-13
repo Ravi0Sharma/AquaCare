@@ -3,6 +3,7 @@
 #include "pin.h"
 #include "utils.h"
 #include "mqtt.h"
+#include <time.h>
 
 
 char msg[50];
@@ -51,12 +52,22 @@ if (!client.connected()) { // Connect to Mqtt if not connected
 
   // Publish sensor readings and update display if interval has elapsed
   if (currentMillis - previousMillis >= interval) {
+
+      // Get current time in unix epoch seconds
+      unsigned long timeStamp = time(NULL);
+
+      // Create publish message
+      String temperatureMessage = String(tempResult) + ", " + String(timeStamp);
+      String lightMessage = String(lightResult) + ", " + String(timeStamp)
+      String phMessage = String(phResult) + ", " + String(timeStamp);
+
+
       previousMillis = currentMillis;
       Serial.print("Publish reading");
       Serial.println(msg);
-      client.publish(TOPIC_PUB_TEMP, String(tempResult).c_str());
-      client.publish(TOPIC_PUB_LIGHT, String(lightResult).c_str());
-      client.publish(TOPIC_PUB_PH, String(pinPhSensor).c_str());
+      client.publish(TOPIC_PUB_TEMP, temperatureMessage.c_str());
+      client.publish(TOPIC_PUB_LIGHT, lightMessage.c_str());
+      client.publish(TOPIC_PUB_PH, phMessage.c_str());
       
       delay(1000);
       tft.fillScreen(TFT_WHITE);
