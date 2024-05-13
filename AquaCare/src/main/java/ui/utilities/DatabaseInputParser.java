@@ -36,14 +36,14 @@ public class DatabaseInputParser {
             if (isParsableToLong(timestamp) == false) {
                 System.out.println("Timestamp not in correct format");
 
-            } else if (messageSentInLastWeekNanoseconds(Long.parseLong(timestamp)) == false) {
+            } else if (messageSentInLastWeekSeconds(Long.parseLong(timestamp)) == false) {
                 System.out.println("Timestamp is not from the last week");
             } else {
 
                 System.out.println("Writing data to InfluxDB");
                 // If there is a timestamp in the correct format, write the data with the timestamp
                 // Since the database only holds data of the last month, giving an older data may cause disconnection
-                // Excpect time in nanoseconds
+                // Excpect time in seconds
                 dataBaseHandler.WriteData(measurement, "deviceID", deviceID, "value", Double.parseDouble(value), Long.parseLong(timestamp));
                 System.out.println("Have written data to InfluxDB");
                 return;
@@ -79,12 +79,11 @@ public class DatabaseInputParser {
     }
 
     //Check if the message was sent in the last week
-    private boolean messageSentInLastWeekNanoseconds(Long timestamp) {
-        Long currentTime = Instant.now().getEpochSecond() * 1000000000L;
+    private boolean messageSentInLastWeekSeconds(Long timestamp) {
+        Long currentTime = Instant.now().getEpochSecond();
         Long weekInSeconds = 604800L;
-        Long weekInNanoseconds = weekInSeconds * 1000000000L;
-        Long weekAgo = currentTime - weekInNanoseconds;
-        if (timestamp < weekAgo || timestamp > currentTime) {
+        Long weekAgo = currentTime - weekInSeconds;
+        if (timestamp < weekAgo || timestamp >= currentTime) {
             return false;
         }
         return true;
