@@ -250,10 +250,12 @@ public class ReadingsController extends NavigationController implements Initiali
 
             Platform.runLater(() -> {
                 // update labels with the mean values
-                phLabel.setText("pH: " + meanPh);
-                tempLabel.setText("Temperature: " + meanTemp + "°C");
-                lightLabel.setText("Light: " + meanLight);
-                feedLabel.setText("Fed " + lastFedHour + " hours ago");
+
+                //Truncate the values to a certain length
+                phLabel.setText("pH: " + Double.toString(meanPh).substring(0, Math.min(Double.toString(meanPh).length(), 4)));
+                tempLabel.setText("Temperature: " + Double.toString(meanTemp).substring(0, Math.min(Double.toString(meanTemp).length(), 5)) + "°C");
+                lightLabel.setText("Light: " + Double.toString(meanLight).substring(0, Math.min(Double.toString(meanLight).length(), 6)));
+                feedLabel.setText("Fed " + Double.toString(lastFedHour).substring(0, Math.min(Double.toString(lastFedHour).length(), 5)) + " hours ago");
             });
         }, 5, 5, TimeUnit.SECONDS);
     }
