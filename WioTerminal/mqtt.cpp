@@ -90,7 +90,7 @@ void MQTT_connect() {
     unsigned long timeStamp = time(NULL);
 
     // Create publish message
-    String dispenserMessage = "1" + ", " + String(timeStamp);
+    String dispenserMessage = String("1") + String(", ") + String(timeStamp);
 
     servo();
     client.publish(TOPIC_PUB_FOOD, dispenserMessage.c_str());

@@ -57,9 +57,9 @@ if (!client.connected()) { // Connect to Mqtt if not connected
       unsigned long timeStamp = time(NULL);
 
       // Create publish message
-      String temperatureMessage = String(tempResult) + ", " + String(timeStamp);
-      String lightMessage = String(lightResult) + ", " + String(timeStamp);
-      String phMessage = String(phResult) + ", " + String(timeStamp);
+      String temperatureMessage = String(tempResult) + String(", ") + String(timeStamp);
+      String lightMessage = String(lightResult) + String(", ") + String(timeStamp);
+      String phMessage = String(phResult) + String(", ") + String(timeStamp);
 
 
       previousMillis = currentMillis;
