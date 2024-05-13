@@ -38,7 +38,13 @@ tft.drawString("%",95,190);
 tft.drawString("pH",240,95);
 }
 
-
+void Screen_connectingMQTT(){
+tft.setTextSize(3);
+tft.setTextColor(TFT_BLACK);
+tft.setTextSize(2);
+tft.setCursor((320 - tft.textWidth("Connecting to MQTT")) / 2, 25);
+tft.print("Connecting to MQTT");
+}
 
 void Screen_result(int tempResult, int lightResult, int phResult, int dispenserUsageCount){
  tft.fillScreen(TFT_WHITE);
