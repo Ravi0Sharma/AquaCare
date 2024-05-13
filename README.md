@@ -15,9 +15,6 @@ AquaCare's historical data can be used to offer potential buyers detailed insigh
 Our application serves as a central hub for aquarium monitoring, offering real-time sensor readings and a comprehensive overview of the health and conditions of aquatic life.
 
 <!--- 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
 ## Visuals
 Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
 -->
@@ -43,10 +40,11 @@ After downloading the .zip file, extract the contents using [7zip](https://www.7
 
 
 ## Roadmap
-For the future releases and upcoming features, refer to [Milestones](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/milestones).
+For a detailed view of expected future releases and upcoming features, please refer to [Milestones](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/milestones).
 
 ## Contributing
-For contributions that everyone needs to abide by, refer [Contributions.md](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/blob/main/CONTRIBUTING.md)
+
+In the [Contributions.md](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/blob/main/CONTRIBUTING.md) file, you'll find general guidelines for participating in this project. This includes steps on how to propose changes to the project, how to submit a pull request, and the process for reviewing and merging that request. For more detailed information on each contribution type and specific instructions, please refer to the [contributions.md](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/blob/main/CONTRIBUTING.md) file.
 
 ## Authors and acknowledgment
 - Ahmet Yavuz Kalkan([@ahmety](https://git.chalmers.se/ahmety)): Made substantial contributions to backend utilities for the application.
@@ -54,8 +52,6 @@ For contributions that everyone needs to abide by, refer [Contributions.md](http
 - Süeda Nalan Tahtaci([@sueda](https://git.chalmers.se/sueda)): Made substantial contributions to the front-end.
 
 - Ravi Sharma([@ravisha](https://git.chalmers.se/ravisha)): Led the team as project manager and made substantial contributions to the backend utilities for the Wio Terminal and application.
-<!--- add your contributions here without too much detail-->
-
 
 <!---
 ## Support
