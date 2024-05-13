@@ -7,7 +7,7 @@ const char* password =  "aquacare";
 
 void WiFi_setup() {
     
-     // Source : https://wiki.seeedstudio.com/Wio-Terminal-Wi-Fi/
+     // Source : https://wiki.seeedstudio.comWio-Terminal-Wi-Fi/
     WiFi.mode(WIFI_STA); // Switches Wi-Fi mode to station mode
     WiFi.disconnect(); // disconnects from any connected network
 
