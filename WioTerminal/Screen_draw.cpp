@@ -38,6 +38,16 @@ tft.drawString("%",95,190);
 tft.drawString("pH",240,95);
 }
 
+void Screen_logo(){
+tft.fillRect(0,65,320,120,TFT_BLUE);  //Fills a blue rectangle at the top of the Wio Terminal screen.
+tft.setTextSize(4);
+tft.setTextColor(TFT_WHITE);
+tft.setCursor((320 - tft.textWidth("AquaCare")) / 2, 110);
+tft.print("AQUACARE");
+tft.drawFastHLine(0,100,320,TFT_GREEN); //Drawing horizontal line
+tft.drawFastHLine(0,150,320,TFT_GREEN); //Drawing horizontal line
+}
+
 void Screen_connectingWiFi(){
 tft.setTextSize(3);
 tft.setTextColor(TFT_BLACK);
