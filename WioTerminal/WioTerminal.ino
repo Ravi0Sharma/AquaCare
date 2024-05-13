@@ -56,7 +56,7 @@ if (!client.connected()) { // Connect to Mqtt if not connected
       client.publish(TOPIC_PUB_PH, String(pinPhSensor).c_str());
 
       delay(1000);
-      Screen_result(tempResult, lightResult, pinPhSensor, dispenserUsageCount); 
+      Screen_result(tempResult, lightResult, pinPhSensor, 1); 
      
     }
   }

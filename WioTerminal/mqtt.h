@@ -17,4 +17,4 @@ extern const char* TOPIC_PUB_FOOD;
 
 extern const char* TOPIC_SUB_FOOD; // Topic for receiving user requests to dispense food
 
-extern int dispenserUsageCount; 
+

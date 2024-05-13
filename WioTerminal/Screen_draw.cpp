@@ -76,5 +76,5 @@ void Screen_result(int tempResult, int lightResult, int phResult, int dispenserU
   tft.drawNumber(tempResult,50,95); 
   tft.drawNumber(lightResult,50,190); 
   tft.drawNumber(pinPhSensor,210,95); 
-  tft.drawNumber(dispenserUsageCount,225,190);
+  tft.drawNumber(1,225,190);
 }
