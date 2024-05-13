@@ -2,18 +2,6 @@
 
 [[_TOC_]]
 
-<!---
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
--->
-
 ## Description
 
 AquaCare offers an aquarium monitoring system designed to assist in maintaining fish and plant life in a well-nurtured environment. The system collects readings using pH and temperature sensors to provide users with detailed historical data on temperature, pH and light levels.
@@ -53,16 +41,6 @@ To download the source code, check [Relases](https://git.chalmers.se/courses/dit
 
 After downloading the .zip file, extract the contents using [7zip](https://www.7-zip.org/)
 
-<!---
-#### How To Compile From Source Code
-!WIP
-
-## Usage
-!WIP
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
--->
 
 ## Roadmap
 For the future releases and upcoming features, refer to [Milestones](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/milestones).
@@ -86,8 +64,3 @@ For contributions that everyone needs to abide by, refer [Contributions.md](http
 
 ## License
 This project is under MIT license, to read more refer to [License](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/blob/main/LICENSE.MD)
-
-<!--- 
-## Project status
-Project is under heavy developement
--->
