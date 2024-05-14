@@ -59,10 +59,10 @@ tft.print("Connecting to Wi-Fi..");
 }
 Display a message indicating when the device is connected
 void Screen_connected(){
-  tft.setTextColor(TFT_BLUE);
-  tft.setTextSize(3);
-  tft.setCursor((320 - tft.textWidth("Connected!")) / 2, 115);
-  tft.print("Connected!");
+tft.setTextColor(TFT_BLUE);
+tft.setTextSize(3);
+tft.setCursor((320 - tft.textWidth("Connected!")) / 2, 115);
+tft.print("Connected!");
 }
 
 Display a message indicating the device is connecting to broker
@@ -74,11 +74,11 @@ tft.setCursor((320 - tft.textWidth("Connecting to MQTT")) / 2, 25);
 tft.print("Connecting to MQTT");
 }
 
-// Function to display the results on the screen.
+// Display the results on the screen
 void Screen_result(int tempResult, int lightResult, int phResult, int dispenserUsageCount){
- tft.fillScreen(TFT_WHITE);
-  tft.drawNumber(tempResult,50,95); 
-  tft.drawNumber(lightResult,50,190); 
-  tft.drawNumber(pinPhSensor,210,95); 
-  tft.drawNumber(dispenserUsageCount,225,190);
+tft.fillScreen(TFT_WHITE);
+tft.drawNumber(tempResult,50,95); 
+tft.drawNumber(lightResult,50,190); 
+tft.drawNumber(pinPhSensor,210,95); 
+tft.drawNumber(dispenserUsageCount,225,190);
 }

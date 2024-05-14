@@ -15,11 +15,11 @@ void setup() {
 
     tft.begin();
     tft.setRotation(3);
-    tft.fillScreen(TFT_WHITE); // Fill Wio Terminal screen white.
+    tft.fillScreen(TFT_WHITE); // Fill Wio Terminal screen white
 
     Serial.begin(serial_Begin_Rate); // Start serial communication
 
-    WiFi_setup(); // Establishes a connection between the Wio Terminal and a WiFi network.
+    WiFi_setup(); // Establishes a connection between the Wio Terminal and a WiFi network
     delay(3000);
     client.setServer(mqtt_server, 1883); // Connect the MQTT Server
 
@@ -56,7 +56,7 @@ if (!client.connected()) { // Connect to Mqtt if not connected
       client.publish(TOPIC_PUB_PH, String(pinPhSensor).c_str());
 
       delay(1000);
-      Screen_result(tempResult, lightResult, pinPhSensor, dispenserUsageCount); 
+      Screen_result(tempResult, lightResult, pinPhSensor, dispenserUsageCount);  // Update the screen with sensor readings
      
     }
   }

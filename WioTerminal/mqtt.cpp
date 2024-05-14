@@ -17,11 +17,12 @@ const char* TOPIC_PUB_FOOD = "AquaCare/1/Dispenser";
 const char* TOPIC_SUB_FOOD = "AquaCare/1/Feed"; // Topic for subscribing to food dispensing requests
 
 int dispenserUsageCount = 0; 
-// Connect to MQTT broker
 
+
+// Connect to MQTT broker
 void MQTT_connect() {
 
-  //This code briefly displays "Connecting to MQTT" on both serial and screen.
+  //This code briefly displays "Connecting to MQTT" on both serial and screen
   tft.fillScreen(TFT_WHITE);
   Screen_logo();
   Screen_connectingMQTT();
@@ -36,12 +37,12 @@ void MQTT_connect() {
       client.subscribe(TOPIC_SUB_FOOD);
       
     } else {
-      // Attempts to connect to MQTT, updating the display and serial output until successful.
+      // Attempts to connect to MQTT, updating the display and serial output until successful
       Serial.print("failed, state=");
       Serial.print(client.state());
       Serial.println(" try again in 5 seconds");
 
-      //Loop attempts to connect to Wi-Fi, updating the display and serial output until successful.
+      //Loop attempts to connect to Wi-Fi, updating the display and serial output until successful
        while (WiFi.status() != WL_CONNECTED){
        delay(500);
        tft.fillScreen(TFT_WHITE);
@@ -52,7 +53,7 @@ void MQTT_connect() {
       
     }
   }
-  // Display and serial output Connected.
+  // Display and serial output Connected
   tft.fillScreen(TFT_WHITE);
   Screen_connected();
   delay(4000);
@@ -71,7 +72,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
     buff_p[i] = (char)payload[i];
   }
 
- // Triggers servo if topic matches TOPIC_SUB_FOOD, and publishes confirmation.
+ // Triggers servo if topic matches TOPIC_SUB_FOOD, and publishes confirmation
  if (strcmp(topic, TOPIC_SUB_FOOD) == 0) {
     servo();
     client.publish(TOPIC_PUB_FOOD, "1");

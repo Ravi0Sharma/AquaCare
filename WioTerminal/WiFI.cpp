@@ -4,7 +4,6 @@
 const char* ssid = "iPhone";
 const char* password =  "aquacare";
 
-
 void WiFi_setup() {
     
      // Source : https://wiki.seeedstudio.comWio-Terminal-Wi-Fi/
