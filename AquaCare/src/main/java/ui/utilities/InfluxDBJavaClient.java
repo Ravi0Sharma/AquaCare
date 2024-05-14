@@ -49,11 +49,10 @@ public class InfluxDBJavaClient {
         bucket = "Storage";
         org = "DIT113";
 
-        System.out.println("Connecting to InfluxDB");
+       
         client = InfluxDBClientFactory.create("https://eu-central-1-1.aws.cloud2.influxdata.com", token.toCharArray());
         //client = InfluxDBClientFactory.create("http://localhost:8086/", token.toCharArray());
 
-        System.out.println("Connected to InfluxDB");
 
         writeApi = client.getWriteApiBlocking();
     }
@@ -86,7 +85,6 @@ public class InfluxDBJavaClient {
         writeApi.writePoint(bucket, org, point);
 
         //!For testing purposes
-        System.out.println("Wrote data to InfluxDB");
     }
 
     /**********************************************************/
@@ -144,7 +142,6 @@ public class InfluxDBJavaClient {
 
         //Querying the database
         List<FluxTable> tables = client.getQueryApi().query(query, org);
-        System.out.println("Queried data from InfluxDB");
 
         //Printing the data
         //!For testing purposes
@@ -190,7 +187,6 @@ public class InfluxDBJavaClient {
 
         //Querying the database
         List<FluxTable> tables = client.getQueryApi().query(query, org);
-        System.out.println("Queried data from InfluxDB");
 
         return tables;
     }
