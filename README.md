@@ -21,7 +21,7 @@ Depending on what you are making, it can be a good idea to include screenshots o
 
 ## **How To Set Up**
 
-## Installation of the Application
+## Application
 
 ### Prerequisites
 Before installing the application, ensure you have the following prerequisites installed on your system:
@@ -36,18 +36,18 @@ After downloading the .zip file, extract the contents using [7zip](https://www.7
 
 ### Building and Running the Application
 
-Within the extracted project folders, locate and enter AquaCare which is the folder that holds **Application** related files. 
+Within the extracted project folders, locate and enter **AquaCare** which is the folder that holds **Application** related files. 
 
-Open a CLI tool which could be **Command Prompt** or **PowerShell** in Windows. Navigate to the AquaCare folder. Check this [Guide](https://www.codecademy.com/learn/learn-the-command-line/modules/learn-the-command-line-navigation/cheatsheet) for more information about navigating the file system using a CLI. 
+Open a CLI tool which could be **Command Prompt** or **PowerShell** in Windows and navigate to the **AquaCare** folder. Check this [Guide](https://www.codecademy.com/learn/learn-the-command-line/modules/learn-the-command-line-navigation/cheatsheet) for more information about navigating the file system using a CLI. 
 - If using **Command Prompt**, use gradlew command 
 - If using **PowerShell**, use ./gradlew command
 - For **Linux** and **Mac** CLI tools, you should use ./gradlew like the **PowerShell**
 
-To build the application, try running **build** task along with **gradlew** command such as: `gradlew build`
+To automatically build the application, try running **build** task along with **gradlew** command such as: `gradlew build`
   
 - You can then locate **build** folder which just appeared after building the project. In **build\distributions**, there should be two compressed packages. Extract the zip file and locate **bin** folder which has runnable files. Which one to run depends on the Operating System on the users computer.
 
-To run the application without building, try running **run** task along with **gradlew** command such as: `gradlew run`
+To automatically build and run the application, try running **run** task along with **gradlew** command such as: `gradlew run`
 
 
 ## Wio Terminal
@@ -77,7 +77,7 @@ To run the application without building, try running **run** task along with **g
 ### Installation Process
 1. Install and open **Arduino IDE**. You can use the link in [Dependencies](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16#dependencies) to navigate to Arduino offical website.
 2. Download source code from [Relases](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/releases) tab. Unzip the package using [7zip](https://www.7-zip.org/).
-2. Locate and open **WioTerminal.ino** file using the IDE. The file should be located within WioTerminal directory.
+2. Locate and open **WioTerminal.ino** file using the IDE. The file should be located within **WioTerminal** directory.
 3. In your Arduino IDE, click on **File > Preferences**, and copy the [url](https://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json) to **Additional Boards Manager URLs**.
 4. Click on **Tools > Board > Board Manager** and Search **Wio Terminal** in the **Boards Manager** and install it.
 5. You'll need to select the entry in the **Tools > Board** menu that corresponds to your Arduino. Select the **Wio Terminal**.
