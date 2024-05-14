@@ -56,7 +56,6 @@ public class ApplicationInterface {
         influxDBJavaClient.WriteData(measurement, tagValue, fieldValue);
     }
 
-
     /**********************************************************/
     //Query database
 
@@ -109,7 +108,6 @@ public class ApplicationInterface {
             }
         }
 
-        System.out.println("Returning: -1");
         return -1;
     }
 
@@ -131,7 +129,6 @@ public class ApplicationInterface {
                 return duration.toHours();
             }
         }
-        System.out.println("Returning: -1 :(");
         return -1;
     }
 }
