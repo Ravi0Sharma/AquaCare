@@ -42,21 +42,6 @@ public class MqttJavaClient implements MqttCallbackExtended {
     @Override
     public void connectionLost(Throwable arg0) {
         System.err.println("connection lost");
-        //Mayb reconnection code
-
-    }
-
-    /**
-     * 
-     * deliveryComplete
-     * This callback is invoked when a message published by this client
-     * is successfully received by the broker.
-     * 
-     */
-    @Override
-    public void deliveryComplete(IMqttDeliveryToken token) {
-        System.out.println("Publish complete");
-        //System.out.println("Publish complete" + new String(token.getMessage().getPayload()));
     }
 
     /**
