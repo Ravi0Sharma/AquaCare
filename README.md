@@ -19,7 +19,7 @@ Our application serves as a central hub for aquarium monitoring, offering real-t
 Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
 -->
 
-## **Installation**
+## **How To Set Up**
 
 ## Installation of the Application
 
@@ -41,7 +41,7 @@ To download the source code, check [Relases](https://git.chalmers.se/courses/dit
 
 After downloading the .zip file, extract the contents using [7zip](https://www.7-zip.org/)
 
-## Installation of Wio Terminal Script
+## Wio Terminal
 
 ### Dependencies
 
@@ -63,6 +63,15 @@ After downloading the .zip file, extract the contents using [7zip](https://www.7
     2. [Garsent Digital pH Sensor](https://www.amazon.se/-/en/Garsent-Digital-Composite-ElectrodeAquaculture/dp/B07QKK1XB6) 
     3. [Grove Light Sensor](https://wiki.seeedstudio.com/Grove-Light_Sensor/)
     4. [MMOBIEL Servo Motor](https://www.amazon.se/-/en/Micro-Servo-Motor-Kit-Radio-Controlled/dp/B097RD8RB7/?th=1)
+
+### Installation Process
+1. Install and open **Arduino IDE**. You can use the link in [Dependencies](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16#dependencies) to navigate to Arduino offical website.
+2. Locate and open **WioTerminal.ino** file using the IDE. The file should be located within WioTerminal directory.
+3. In your Arduino IDE, click on **File > Preferences**, and copy the [url](https://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json) to **Additional Boards Manager URLs**.
+4. Click on **Tools > Board > Board Manager** and Search **Wio Terminal** in the **Boards Manager** and install it.
+5. You'll need to select the entry in the **Tools > Board** menu that corresponds to your Arduino. Select the **Wio Terminal**.
+6. Now we we have to install the required libraries. Open **Library Manager** in **Arduino IDE**. From required libraries section of [Dependencies](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16#dependencies), search for each library in **Library Manager** and download. All of them are required for Installation to be complete.
+7. Press on **Verify** on the top left corner of the IDE. If there is a problem, it is probably due to a library issue which you may have to double check. If the compilation works with no problems, you are ready to install the script into the device by pressing **Upload** button.
 
 ## **Roadmap**
 For a detailed view of expected future releases and upcoming features, please refer to [Milestones](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/milestones).
