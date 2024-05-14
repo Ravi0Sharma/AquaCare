@@ -251,10 +251,8 @@ public class ReadingsController extends NavigationController implements Initiali
 
             //Check for threshold breaches
             if (!(meanPh == -1 || meanTemp == -1)) {
-                System.out.println("Checking for threshold breaches");
                 NotificationController.checkThresholds(meanTemp, meanPh);
             }
-            System.out.println("No data available for threshold comparison");
 
             Platform.runLater(() -> {
                 // update labels with the mean values
@@ -284,8 +282,6 @@ public class ReadingsController extends NavigationController implements Initiali
     }
 
     private boolean seriesIsDataDuplicate(XYChart.Series<String, Number> series, FluxRecord newRecord) {
-
-        System.out.println("Checking if the data is duplicate");
 
         // Check if the series is empty
         if (!series.getData().isEmpty()) {
