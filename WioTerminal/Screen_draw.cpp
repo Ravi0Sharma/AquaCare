@@ -49,7 +49,7 @@ tft.drawFastHLine(0,100,320,TFT_GREEN); //Drawing horizontal line
 tft.drawFastHLine(0,150,320,TFT_GREEN); //Drawing horizontal line
 }
 
-Display a message indicating the device is connecting to Wi-Fi
+//Display a message indicating the device is connecting to Wi-Fi
 void Screen_connectingWiFi(){
 tft.setTextSize(3);
 tft.setTextColor(TFT_BLACK);
