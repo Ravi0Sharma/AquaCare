@@ -1,54 +1,51 @@
-#include "Screen_draw.h"
-#include "WiFi.h"
-#include "pin.h"
-#include "utils.h"
-#include "mqtt.h"
+#include"Screen_draw.h"
+#include"WiFi.h"
+#include"pin.h"
+#include"mqtt.h"
+#include"utils.h"
 
-
-char msg[50];
-const long interval = 5000;
-unsigned long previousMillis = 0;  
+char msg[50];const
+long interval = 5000;
+unsigned long previousMillis = 0;
 
 TFT_eSPI tft;
 Servo dispenser;
 
 void setup() {
-  
-  tft.begin();
-  tft.setRotation(3);
-  tft.fillScreen(TFT_WHITE); // Fill Wio Terminal screen white.
 
-  Serial.begin(serial_Begin_Rate);  //start serial communication
+    tft.begin();
+    tft.setRotation(3);
+    tft.fillScreen(TFT_WHITE); // Fill Wio Terminal screen white.
 
-  WiFi_setup(); // Establishes a connection between the Wio Terminal and a WiFi network.
-  delay (3000);
-  client.setServer(mqtt_server, 1883); // Connect the MQTT Server
+    Serial.begin(serial_Begin_Rate); // Start serial communication
 
-  client.setCallback(callback); // Define behavior when message recvided from mqtt broker
-  dispenser.attach(pinfoodDispenser); // Set up servo motor 
-  
+    WiFi_setup(); // Establishes a connection between the Wio Terminal and a WiFi network.
+    delay(3000);
+    client.setServer(mqtt_server, 1883); // Connect the MQTT Server
+
+    client.setCallback(callback); // Define behavior when message recvided from mqtt broker
+    dispenser.attach(pinfoodDispenser); // Set up servo motor
+
 }
 
 void loop() {
 
 unsigned long currentMillis = millis(); //Store the current time in milliseconds since the program started
 
-Screen_draw();
-
 if (!client.connected()) { // Connect to Mqtt if not connected 
      MQTT_connect();
 }
   client.loop();
-  
-  int valueTemp = analogRead(pinTempSensor);   // read temperature sensor signal     
-  int valueLight = analogRead(pinLightSensor); // read light sensor signal
-  int valuePh = analogRead(pinPhSensor);       // read ph sensor signal
 
-  int tempResult = convertTemp(valueTemp);  // read temperature sensor signal
+  Screen_draw();
+
+  int valueTemp = analogRead(pinTempSensor);    // read temperature sensor signal
+  int valueLight = analogRead(pinLightSensor);  // read light sensor signal
+  int valuePh = analogRead(pinPhSensor);        // read ph sensor signal
+
+  int tempResult = convertTemp(valueTemp); 
   int lightResult = mapToPercentage(valueLight);
-  int phResult = convertPh(valuePh);
-
-
+  
   // Publish sensor readings and update display if interval has elapsed
   if (currentMillis - previousMillis >= interval) {
       previousMillis = currentMillis;
@@ -57,13 +54,9 @@ if (!client.connected()) { // Connect to Mqtt if not connected
       client.publish(TOPIC_PUB_TEMP, String(tempResult).c_str());
       client.publish(TOPIC_PUB_LIGHT, String(lightResult).c_str());
       client.publish(TOPIC_PUB_PH, String(pinPhSensor).c_str());
-      
+
       delay(1000);
-      tft.fillScreen(TFT_WHITE);
-      tft.drawNumber(tempResult,50,95); 
-      tft.drawNumber(lightResult,50,190); 
-      tft.drawNumber(pinPhSensor,210,95); 
-      tft.drawNumber(1,225,190); 
+      Screen_result(tempResult, lightResult, pinPhSensor, 1); 
      
     }
   }

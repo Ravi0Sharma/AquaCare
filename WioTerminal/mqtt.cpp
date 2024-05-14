@@ -14,19 +14,19 @@ const char* TOPIC_PUB_LIGHT = "AquaCare/1/Light";
 const char* TOPIC_PUB_PH  = "AquaCare/1/Ph";
 const char* TOPIC_PUB_FOOD = "AquaCare/1/Dispenser";
 
-const char* TOPIC_SUB_FOOD = "AquaCare/1/Feed";  // Topic for subscribing to food dispensing requests
+const char* TOPIC_SUB_FOOD = "AquaCare/1/Feed"; // Topic for subscribing to food dispensing requests
 
+int dispenserUsageCount = 0; 
 // Connect to MQTT broker
 
 void MQTT_connect() {
 
   //This code briefly displays "Connecting to MQTT" on both serial and screen.
-  Serial.print("Connecting to MQTT"); 
-  tft.fillScreen(TFT_BLACK);
-  tft.setTextSize(2);
-  tft.setCursor((320 - tft.textWidth("Connecting to MQTT")) / 2, 120);
-  tft.print("Connecting to MQTT");
-  delay(3000);
+  tft.fillScreen(TFT_WHITE);
+  Screen_logo();
+  Screen_connectingMQTT();
+  delay(2000);
+  
   
   while (!client.connected()) {
     String clientId = "WioTerminal/Aquacare";
@@ -36,42 +36,31 @@ void MQTT_connect() {
       client.subscribe(TOPIC_SUB_FOOD);
       
     } else {
-       // Attempts to connect to MQTT, updating the display and serial output until successful.
+      // Attempts to connect to MQTT, updating the display and serial output until successful.
       Serial.print("failed, state=");
       Serial.print(client.state());
       Serial.println(" try again in 5 seconds");
-   
-      tft.setCursor((320 - tft.textWidth("Connecting to MQTT")) / 2, 120);
-      tft.print("Connecting to MQTT");
 
-
-       //Loop attempts to connect to Wi-Fi, updating the display and serial output until successful.
+      //Loop attempts to connect to Wi-Fi, updating the display and serial output until successful.
        while (WiFi.status() != WL_CONNECTED){
        delay(500);
-       tft.fillScreen(TFT_BLACK);
+       tft.fillScreen(TFT_WHITE);
       delay(1000);
-       tft.setCursor((320 - tft.textWidth("Connecting to Wi-Fi..")) / 2, 120);
-       tft.print("Connecting to Wi-Fi..");
-       Serial.println("Connecting to WiFi..");
-       WiFi.begin(ssid, password);
+      WiFi_setup();
       }
       delay(3000);
       
     }
   }
   // Display and serial output Connected.
-  Serial.println();
-  Serial.print("Connected");
-  tft.fillScreen(TFT_BLACK);
-  tft.setCursor((320 - tft.textWidth("Connected!")) / 2, 120);
-  delay(2000);
-  tft.print("Connected");
-  delay(5000);
+  tft.fillScreen(TFT_WHITE);
+  Screen_connected();
+  delay(4000);
   tft.fillScreen(TFT_WHITE);
 }
 
-  //Handles incoming MQTT messages
-  void callback(char* topic, byte* payload, unsigned int length) {
+//Handles incoming MQTT messages
+void callback(char* topic, byte* payload, unsigned int length) {
  
   Serial.print("Message arrived [");
   Serial.print(topic);
@@ -87,6 +76,7 @@ void MQTT_connect() {
     servo();
     client.publish(TOPIC_PUB_FOOD, "1");
 
+ 
 }
 
 }
