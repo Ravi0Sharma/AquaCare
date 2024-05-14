@@ -38,7 +38,7 @@ tft.drawString("%",95,190);
 tft.drawString("pH",240,95);
 }
 
-Display the AquaCare logo on the Wio Terminal screen
+//Display the AquaCare logo on the Wio Terminal screen
 void Screen_logo(){
 tft.fillRect(0,65,320,120,TFT_BLUE);  //Fills a blue rectangle at the top of the Wio Terminal screen
 tft.setTextSize(4);
@@ -57,7 +57,7 @@ tft.setTextSize(2);
 tft.setCursor((320 - tft.textWidth("Connecting to Wi-Fi..")) / 2, 25);
 tft.print("Connecting to Wi-Fi..");
 }
-Display a message indicating when the device is connected
+//Display a message indicating when the device is connected
 void Screen_connected(){
 tft.setTextColor(TFT_BLUE);
 tft.setTextSize(3);
@@ -65,7 +65,7 @@ tft.setCursor((320 - tft.textWidth("Connected!")) / 2, 115);
 tft.print("Connected!");
 }
 
-Display a message indicating the device is connecting to broker
+//Display a message indicating the device is connecting to broker
 void Screen_connectingMQTT(){
 tft.setTextSize(3);
 tft.setTextColor(TFT_BLACK);
@@ -74,7 +74,7 @@ tft.setCursor((320 - tft.textWidth("Connecting to MQTT")) / 2, 25);
 tft.print("Connecting to MQTT");
 }
 
-// Display the results on the screen
+//Display the results on the screen
 void Screen_result(int tempResult, int lightResult, int phResult, int dispenserUsageCount){
 tft.fillScreen(TFT_WHITE);
 tft.drawNumber(tempResult,50,95); 
