@@ -85,7 +85,7 @@ To automatically build and run the application, try running **run** task along w
 7. Press on **Verify** on the top left corner of the IDE. If there is a problem, it is probably due to a library issue which you may have to double check. If the compilation works with no problems, you are ready to install the script into the device by pressing **Upload** button.
 
 ## For Developers
-If you're a developer looking to contribute, we encourage you to fork the repository using [IMAGE] button and download the `main` branch from the newly created remote private repository. 
+If you're a developer looking to contribute, we encourage you to fork the repository using [IMAGE](.gitlab/resources/fork_button.png) button and download the `main` branch from the newly created remote private repository. 
 
 While releases provide stable versions of the software, the `main` branch will always have the most recent changes and updates. This allows you to work with the latest code, making it easier to implement new features or fix bugs. 
 
