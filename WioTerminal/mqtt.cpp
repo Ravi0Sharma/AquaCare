@@ -76,7 +76,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
     servo();
     client.publish(TOPIC_PUB_FOOD, "1");
 
- 
+    dispenserUsageCount++; 
 }
 
 }

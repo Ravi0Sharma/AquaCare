@@ -17,7 +17,6 @@ int mapToPercentage(int signal) {
 return map(signal, MIN_READING, MAX_READING, 0, 100);
 }             
 
-
 // Controls a servo motor to dispense food.
 void servo(){
     for (pos = 0; pos <= 90; pos += 1) {
