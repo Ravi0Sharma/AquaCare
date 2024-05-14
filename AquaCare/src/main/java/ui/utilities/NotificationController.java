@@ -21,7 +21,6 @@ public class NotificationController {
     public static void checkThresholds(double meanTemp, double meanPh) {
         // Check if a fish has been selected
         if (CurrentFish.getInstance().getSelectedFish() == null) {
-            System.out.println("No fish selected.");
             return;
         }
 
@@ -29,7 +28,6 @@ public class NotificationController {
         if (isWithinThreshold(CurrentFish.getInstance().getSelectedFish().getFishTemp(), meanTemp)
                 && isWithinThreshold(CurrentFish.getInstance().getSelectedFish().getFishPh(), meanPh)) {
 
-            System.out.println("Thresholds are not breached.");
             return;
         }
 
