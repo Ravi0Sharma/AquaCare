@@ -26,20 +26,29 @@ Depending on what you are making, it can be a good idea to include screenshots o
 ### Prerequisites
 Before installing the application, ensure you have the following prerequisites installed on your system:
 
-Java Development Kit (JDK) version 19 or higher: [Download JDK](https://www.oracle.com/java/technologies/downloads/#java19)
-
-### Downloading the application
-To download the application, check [Relases](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/releases) tab. There you can download the most recent relase. 
-
-After downloading the .zip file, extract the contents using [7zip](https://www.7-zip.org/)
-
-Running the .jar or .exe file should start the application.
+- Java Development Kit (JDK) version 19 or higher: [Download JDK](https://www.oracle.com/java/technologies/downloads/#java19)
 
 ### Downloading the source code
 
-To download the source code, check [Relases](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/releases) tab. There, under the assets menu, you can find and download the most recent source code relase. 
+To download the source code, check [Relases](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/releases) tab. There, under the assets menu, you can find and download the most recent source code release. 
 
 After downloading the .zip file, extract the contents using [7zip](https://www.7-zip.org/)
+
+### Building and Running the Application
+
+Within the extracted project folders, locate and enter AquaCare which is the folder that holds **Application** related files. 
+
+Open a CLI tool which could be **Command Prompt** or **PowerShell** in Windows. Navigate to the AquaCare folder. Check this [Guide](https://www.codecademy.com/learn/learn-the-command-line/modules/learn-the-command-line-navigation/cheatsheet) for more information about navigating the file system using a CLI. 
+- If using **Command Prompt**, use gradlew command 
+- If using **PowerShell**, use ./gradlew command
+- For **Linux** and **Mac** CLI tools, you should use ./gradlew like the **PowerShell**
+
+To build the application, try running **build** task along with **gradlew** command such as: `gradlew build`
+  
+- You can then locate **build** folder which just appeared after building the project. In **build\distributions**, there should be two compressed packages. Extract the zip file and locate **bin** folder which has runnable files. Which one to run depends on the Operating System on the users computer.
+
+To run the application without building, try running **run** task along with **gradlew** command such as: `gradlew run`
+
 
 ## Wio Terminal
 
@@ -47,8 +56,9 @@ After downloading the .zip file, extract the contents using [7zip](https://www.7
 
 1. [Wio Terminal](https://wiki.seeedstudio.com/Wio-Terminal-Getting-Started/)
 2. [Arduino IDE](https://www.arduino.cc/en/software) or [Arduino CLI](https://arduino.github.io/arduino-cli/0.35/installation/) (We recommend using IDE since it is more user friendly)
-3. [Wio Terminal Board Library](https://wiki.seeedstudio.com/Wio-Terminal-Getting-Started/#software)
-4. Required Libraries:
+3. Source code of the project packaged as a zip in [Relases](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/releases) tab.
+4. [Wio Terminal Board Library](https://wiki.seeedstudio.com/Wio-Terminal-Getting-Started/#software)
+5. Required Libraries:
     1. [PubSubClient@2.8](https://www.arduino.cc/reference/en/libraries/pubsubclient/)
     2. [Seeed Arduino rpcUnified@2.1.4](https://www.arduino.cc/reference/en/libraries/seeed-arduino-rpcunified/)
     3. [Seeed Arduino rpcWiFi@1.0.7](https://www.arduino.cc/reference/en/libraries/seeed-arduino-rpcwifi/)
@@ -58,7 +68,7 @@ After downloading the .zip file, extract the contents using [7zip](https://www.7
     7. [WiFiNINA](https://www.arduino.cc/reference/en/libraries/wifinina/)
     8. [Seeed Arduino rpcBLE@1.0.0](https://www.arduino.cc/reference/en/libraries/seeed-arduino-rpcble/)
     9. [Master-Servo]() (A magical file with unknown origin)
-5. Sensors Used In Our Project (Exact same product may not be required):
+6. Sensors Used In Our Project (Exact same product may not be required):
     1. [Temperature sensor](https://wiki.seeedstudio.com/Grove-Temperature_Sensor_V1.2/)
     2. [Garsent Digital pH Sensor](https://www.amazon.se/-/en/Garsent-Digital-Composite-ElectrodeAquaculture/dp/B07QKK1XB6) 
     3. [Grove Light Sensor](https://wiki.seeedstudio.com/Grove-Light_Sensor/)
@@ -66,6 +76,7 @@ After downloading the .zip file, extract the contents using [7zip](https://www.7
 
 ### Installation Process
 1. Install and open **Arduino IDE**. You can use the link in [Dependencies](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16#dependencies) to navigate to Arduino offical website.
+2. Download source code from [Relases](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/releases) tab. Unzip the package using [7zip](https://www.7-zip.org/).
 2. Locate and open **WioTerminal.ino** file using the IDE. The file should be located within WioTerminal directory.
 3. In your Arduino IDE, click on **File > Preferences**, and copy the [url](https://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json) to **Additional Boards Manager URLs**.
 4. Click on **Tools > Board > Board Manager** and Search **Wio Terminal** in the **Boards Manager** and install it.
