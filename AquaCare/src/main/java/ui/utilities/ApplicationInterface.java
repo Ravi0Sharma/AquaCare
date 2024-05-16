@@ -103,7 +103,6 @@ public class ApplicationInterface {
             if (!records.isEmpty()) {
                 //Get the first entry value
                 double value = (double) records.get(0).getValue();
-                System.out.println("Returning: " + value);
                 return value;
             }
         }

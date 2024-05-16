@@ -44,7 +44,6 @@ public class InfluxDBJavaClient {
 // TODO: create a secret document in gitlab to store those values
         //Defining the connection values
         //!WIP This is not the best way to hold values such as api keys
-        //token = "U3_AyxHK1iflHLBaCW4ph-hrQBzc8ECvKuOP02kUwzGAL1CjKEokPG7wMnRtAWIziZT4SmHX7w9qVs0LJQ3AcA==";
         token = "ZK-vVqNlD2iFXpKPWfQsvkFFe_wl4mNlAm3FHCzBCbjzPnXKBZDswr5RKRFb8KDinw_b4mSWQIx3xMNnIFDvkA==";
         bucket = "Storage";
         org = "DIT113";
@@ -143,16 +142,6 @@ public class InfluxDBJavaClient {
         //Querying the database
         List<FluxTable> tables = client.getQueryApi().query(query, org);
 
-        //Printing the data
-        //!For testing purposes
-        for (FluxTable fluxTable : tables) {
-            System.out.println(fluxTable);
-            List<FluxRecord> records = fluxTable.getRecords();
-            for (FluxRecord fluxRecord : records) {
-                System.out.println(fluxRecord.getRow());
-
-            }
-        }
         return tables;
     }
 

@@ -119,24 +119,19 @@ public class ReadingsController extends NavigationController implements Initiali
         //***********************************************
         for (Map.Entry<LineChart, String> chartEntry : linecharts.entrySet()) {
             if (chartEntry.getKey() != null) {
-                System.out.println(chartEntry.getKey() + "      " + chartEntry.getValue());
                 initializeChartContents(chartEntry.getKey(), chartEntry.getValue());
 
                 if (timeline == null) {
-                    System.out.println("Timeline is null");
                     // Create a Timeline that updates the chart every few seconds
                     timeline = new Timeline(new KeyFrame(Duration.seconds(dynamicChartUpdateInterval), event -> {
                         //Wonder if we could put realTimeData() here as well instead of creating a thread
-                        System.out.println("Initiated a timeline");
                         updateChart(chartEntry.getKey(), chartEntry.getValue()); //Will enter new values dynamically to the chart
                     }));
                     timeline.setCycleCount(Timeline.INDEFINITE);
                     timeline.play();
                 }
 
-            } else {
-                System.out.println(chartEntry.getValue() + " is null");
-            }
+            } 
         }
 
     }
@@ -165,9 +160,6 @@ public class ReadingsController extends NavigationController implements Initiali
             for (FluxRecord fluxRecord : records) {
 
                 XYChart.Data<String, Number> dataPoint = new XYChart.Data(fluxRecord.getTime().toString(), fluxRecord.getValue());
-
-                //This actually works as intended
-                System.out.println("value: " + fluxRecord.getValue() + "    stamp:" + fluxRecord.getTime().toString());
 
                 //Save date and value to the data series
                 series.getData().add(addTooltip(dataPoint, fluxRecord));
@@ -201,8 +193,6 @@ public class ReadingsController extends NavigationController implements Initiali
 
                 for (FluxRecord fluxRecord : records) {
 
-                    System.out.println("value: " + fluxRecord.getValue() + "    stamp:" + fluxRecord.getTime().toString());
-
                     //Logic for checking if the data is already in the chart
 
                     if (seriesIsDataDuplicate(series, fluxRecord) == false) {
@@ -227,8 +217,6 @@ public class ReadingsController extends NavigationController implements Initiali
     public void realTimeData() {
         // If there's already a running task, cancel it
         if (executorService != null && !executorService.isShutdown()) {
-            System.out.println("**************************************************");
-            System.out.println("Shutting down the executor service");
             executorService.shutdownNow();
         }
 

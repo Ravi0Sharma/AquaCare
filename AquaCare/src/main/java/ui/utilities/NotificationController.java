@@ -31,7 +31,6 @@ public class NotificationController {
             return;
         }
 
-        System.out.println("Thresholds are breached.");
         // Display a system tray notification
         NotificationClient.displayTray(
                 "Fish: " + CurrentFish.getInstance().getSelectedFish().getFishName(), "Threshold Breach with values of Temperature: " + meanTemp + " and  pH:" + meanPh);
@@ -47,8 +46,6 @@ public class NotificationController {
         // Parse the minimum and maximum value strings into doubles
         double minValue = Double.parseDouble(parts[0]);
         double maxValue = Double.parseDouble(maxValueString);
-
-        System.out.println("Min: " + minValue + " Max: " + maxValue + " Value: " + value);
 
         // Compare the value with the minimum and maximum values
         return value >= minValue && value <= maxValue;
