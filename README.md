@@ -79,7 +79,7 @@ To automatically build and run the application, try running **run** task along w
     
     8. [Seeed Arduino rpcBLE@1.0.0](https://www.arduino.cc/reference/en/libraries/seeed-arduino-rpcble/)
     
-    9. [Master-Servo]() (A magical file with unknown origin)
+    9. [Master-Servo](https://github.com/PaintYourDragon/Servo)
 
 6. Sensors Used In Our Project (Exact same product may not be required):
     1. [Temperature sensor](https://wiki.seeedstudio.com/Grove-Temperature_Sensor_V1.2/)
@@ -105,7 +105,9 @@ To automatically build and run the application, try running **run** task along w
 
 7. Now we we have to install the required libraries. Open **Library Manager** in **Arduino IDE**. From required libraries section of [Dependencies](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16#dependencies), search for each library in **Library Manager** and download. All of them are required for Installation to be complete.
 
-8. Press on **Verify** on the top left corner of the IDE. If there is a problem, it is probably due to a library issue which you may have to double check. If the compilation works with no problems, you are ready to install the script into the device by pressing **Upload** button.
+8. Some libraries may not be in Arduino Library Manager, those libraries need to be downloaded and then imported as .zip files. To download the library, click on the library to visit the code hosting website, then download the .zip file by **Code > Download ZIP**. To import a .zip library, **Sketch > Include Library > Add .ZIP Library** and select the previously downloaded file.
+
+9. After every single library has been installed, press on **Verify** on the top left corner of the IDE. If there is a problem, it is probably due to a library issue which you may have to double check. If the compilation works with no problems, you are ready to install the script into the device by pressing **Upload** button.
 
 ## For Developers
 If you're a developer looking to contribute, we encourage you to fork the repository using ![IMAGE](.gitlab/resources/fork_button.png) button and download the `main` branch from the newly created remote private repository. 
