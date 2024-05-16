@@ -4,11 +4,11 @@
 
 ## **Description**
 
-AquaCare offers an aquarium monitoring system designed to assist in maintaining fish and plant life in a well-nurtured environment. The system collects readings using pH and temperature sensors to provide users with detailed historical data on temperature, pH and light levels.
+AquaCare offers an aquarium monitoring system designed to assist in maintaining fish and plant life in a well-nurtured environment. The system collects readings using pH and temperature sensors to provide users with detailed historical and realtime data on temperature, pH and light levels.
 
-AquaCare offers products tailored to owners with specific needs, including species highly sensitive to temperature, light and pH fluctuations. Additionally, it provides a solution for anyone who wants to be notified of an excessive levels which can be harmful to aquatic life.
+AquaCare offers products tailored to owners with specific needs, including species highly sensitive to temperature and pH fluctuations. Additionally, it provides a solution for anyone who wants to be notified of an excessive levels which can be harmful to aquatic life.
 
-To save time and ensure proper care, AquaCare notifies users when monitored levels (such as temperature, light or pH) exceed set thresholds, indicating the need for adjustments to protect aquatic life from hazardous conditions. AquaCare also includes an automated food dispenser for customers who prefers to feed their fish remotely.
+To save time and ensure proper care, AquaCare notifies users when monitored levels (such as temperature or pH) exceed set thresholds, indicating the need for adjustments to protect aquatic life from hazardous conditions. AquaCare also includes an food dispenser for customers who prefers to feed their fish remotely.
 
 AquaCare's historical data can be used to offer potential buyers detailed insights into how fish and plants have been cared for, displaying their habitat conditions during ownership.
 
@@ -39,9 +39,9 @@ After downloading the .zip file, extract the contents using [7zip](https://www.7
 Within the extracted project folders, locate and enter **AquaCare** which is the folder that holds **Application** related files. 
 
 Open a CLI tool which could be **Command Prompt** or **PowerShell** in Windows and navigate to the **AquaCare** folder. Check this [Guide](https://www.codecademy.com/learn/learn-the-command-line/modules/learn-the-command-line-navigation/cheatsheet) for more information about navigating the file system using a CLI. 
-- If using **Command Prompt**, use gradlew command 
-- If using **PowerShell**, use ./gradlew command
-- For **Linux** and **Mac** CLI tools, you should use ./gradlew like the **PowerShell**
+- If using **Command Prompt**, use `gradlew` command 
+- If using **PowerShell**, use `./gradlew` command
+- For **Linux** and **Mac** CLI tools, you should use `./gradlew` like the **PowerShell** users
 
 To automatically build the application, try running **build** task along with **gradlew** command such as: `gradlew build`
   
@@ -64,30 +64,19 @@ To automatically build and run the application, try running **run** task along w
 5. Required Libraries:
 
     1. [PubSubClient@2.8](https://www.arduino.cc/reference/en/libraries/pubsubclient/)
-    
     2. [Seeed Arduino rpcUnified@2.1.4](https://www.arduino.cc/reference/en/libraries/seeed-arduino-rpcunified/)
-    
     3. [Seeed Arduino rpcWiFi@1.0.7](https://www.arduino.cc/reference/en/libraries/seeed-arduino-rpcwifi/)
-    
     4. [Seeed Arduino SFUD@2.0.2](https://www.arduino.cc/reference/en/libraries/seeed-arduino-sfud/)
-    
     5. [Seeed_Arduino_mbedtls@3.0.1](https://www.arduino.cc/reference/en/libraries/seeed_arduino_mbedtls/)
-    
     6. [ArduinoSTL](https://www.arduino.cc/reference/en/libraries/arduinostl/)
-    
     7. [WiFiNINA](https://www.arduino.cc/reference/en/libraries/wifinina/)
-    
     8. [Seeed Arduino rpcBLE@1.0.0](https://www.arduino.cc/reference/en/libraries/seeed-arduino-rpcble/)
-    
-    9. [Master-Servo](https://github.com/PaintYourDragon/Servo)
-
+    9. [Master-Servo](https://github.com/PaintYourDragon/Servo
 6. Sensors Used In Our Project (Exact same product may not be required):
+
     1. [Temperature sensor](https://wiki.seeedstudio.com/Grove-Temperature_Sensor_V1.2/)
-    
     2. [Garsent Digital pH Sensor](https://www.amazon.se/-/en/Garsent-Digital-Composite-ElectrodeAquaculture/dp/B07QKK1XB6) 
-    
     3. [Grove Light Sensor](https://wiki.seeedstudio.com/Grove-Light_Sensor/)
-    
     4. [MMOBIEL Servo Motor](https://www.amazon.se/-/en/Micro-Servo-Motor-Kit-Radio-Controlled/dp/B097RD8RB7/?th=1)
 
 ### Installation Process
@@ -115,6 +104,27 @@ If you're a developer looking to contribute, we encourage you to fork the reposi
 While releases provide stable versions of the software, the `main` branch will always have the most recent changes and updates. This allows you to work with the latest code, making it easier to implement new features or fix bugs. 
 
 Please follow the contribution guidelines detailed in the [`contributions.md`](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/blob/main/CONTRIBUTING.md) file when submitting your changes.
+
+## Further Customize Your System
+
+Some of these customizations may be required for your system to function therefore we recommend going over them.
+
+### Wio Terminal
+
+We store Wifi credentials in code therefore Terminal may have problems connecting to your local network. We will have to change wifi SSID and password in the [**WiFI.cpp**](WioTerminal/WiFI.cpp#4) file which is located in WioTerminal directory.
+
+To make edits on the code, you could use any type of text editor such as Windows Notepad, Visual Studio Code, Apple TextEdit or Sublime Text.
+
+The changes should be made on 4th and 5th lines of the file which specifies a SSID and a password. Changes should be made within the quotation marks ("") and the modified text must precisely match the WiFi SSID and password, including capitalization and without any extra spaces or alterations.
+
+After the changes, the file needs to be saved. Use `Ctrl + S` shortcut or try **File >  Save** menu on top-bar. See [Wio Terminal Installation Process](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16#installation-process)
+
+<!--- ### MQTT 
+How to change mqtt broker or so
+May not be needed
+-->
+
+### Database
 
 ## **Roadmap**
 For a detailed view of expected future releases and upcoming features, please refer to [Milestones](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/milestones).
