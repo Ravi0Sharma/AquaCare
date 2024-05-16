@@ -21,20 +21,20 @@ Depending on what you are making, it can be a good idea to include screenshots o
 
 ## **How To Set Up**
 
-## Application
+### Application
 
-### Prerequisites
+#### Prerequisites
 Before installing the application, ensure you have the following prerequisites installed on your system:
 
 - Java Development Kit (JDK) version 19 or higher: [Download JDK](https://www.oracle.com/java/technologies/downloads/#java19)
 
-### Downloading the source code
+#### Downloading the source code
 
 To download the source code, check [Relases](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/releases) tab. There, under the assets menu, you can find and download the most recent source code release. 
 
 After downloading the .zip file, extract the contents using [7zip](https://www.7-zip.org/)
 
-### Building and Running the Application
+#### Building and Running the Application
 
 Within the extracted project folders, locate and enter **AquaCare** which is the folder that holds **Application** related files. 
 
@@ -49,9 +49,9 @@ To automatically build the application, try running **build** task along with **
 
 To automatically build and run the application, try running **run** task along with **gradlew** command such as: `gradlew run`
 
-## Wio Terminal
+### Wio Terminal
 
-### Dependencies
+#### Dependencies
 
 1. [Wio Terminal](https://wiki.seeedstudio.com/Wio-Terminal-Getting-Started/)
 
@@ -79,7 +79,7 @@ To automatically build and run the application, try running **run** task along w
     3. [Grove Light Sensor](https://wiki.seeedstudio.com/Grove-Light_Sensor/)
     4. [MMOBIEL Servo Motor](https://www.amazon.se/-/en/Micro-Servo-Motor-Kit-Radio-Controlled/dp/B097RD8RB7/?th=1)
 
-### Installation Process
+#### Installation Process
 1. Install and open **Arduino IDE**. You can use the link in [Dependencies](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16#dependencies) to navigate to Arduino offical website.
 
 2. Download source code from [Relases](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/releases) tab. Unzip the package using [7zip](https://www.7-zip.org/).
@@ -98,18 +98,18 @@ To automatically build and run the application, try running **run** task along w
 
 9. After every single library has been installed, press on **Verify** on the top left corner of the IDE. If there is a problem, it is probably due to a library issue which you may have to double check. If the compilation works with no problems, you are ready to install the script into the device by pressing **Upload** button.
 
-## For Developers
+### For Developers
 If you're a developer looking to contribute, we encourage you to fork the repository using ![IMAGE](.gitlab/resources/fork_button.png) button and download the `main` branch from the newly created remote private repository. 
 
 While releases provide stable versions of the software, the `main` branch will always have the most recent changes and updates. This allows you to work with the latest code, making it easier to implement new features or fix bugs. 
 
 Please follow the contribution guidelines detailed in the [`contributions.md`](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/blob/main/CONTRIBUTING.md) file when submitting your changes.
 
-## Further Customize Your System
+### Further Customize Your System
 
 Some of these customizations may be required for your system to function therefore we recommend going over them.
 
-### Wio Terminal
+#### Wio Terminal
 
 We store Wifi credentials in code therefore Terminal may have problems connecting to your local network. We will have to change wifi SSID and password in the [**WiFI.cpp**](WioTerminal/WiFI.cpp#4) file which is located in WioTerminal directory.
 
@@ -124,7 +124,7 @@ How to change mqtt broker or so
 May not be needed
 -->
 
-### Database
+#### Database
 
 ## **Roadmap**
 For a detailed view of expected future releases and upcoming features, please refer to [Milestones](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/milestones).
