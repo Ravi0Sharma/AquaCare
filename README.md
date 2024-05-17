@@ -152,9 +152,9 @@ For a detailed view of expected future releases and upcoming features, please re
 In the [Contributions.md](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/blob/main/CONTRIBUTING.md) file, you'll find general guidelines for participating in this project. This includes steps on how to propose changes to the project, how to submit a pull request, and the process for reviewing and merging that request. For more detailed information on each contribution type and specific instructions, please refer to the [contributions.md](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/blob/main/CONTRIBUTING.md) file.
 
 ## **Authors and acknowledgment**
-- Ahmet Yavuz Kalkan([@ahmety](https://git.chalmers.se/ahmety)): Made substantial contributions to the backend and front end parts of the application.
+- Ahmet Yavuz Kalkan([@ahmety](https://git.chalmers.se/ahmety)): Made substantial contributions to the backend with some contributions to front end parts of the application.
 
-- Süeda Nalan Tahtaci([@sueda](https://git.chalmers.se/sueda)): Made substantial contributions to the front-end and backend parts of the application.
+- Süeda Nalan Tahtaci([@sueda](https://git.chalmers.se/sueda)): Made substantial contributions to the front-end with some contributions to backend parts of the application.
 
 - Ravi Sharma([@ravisha](https://git.chalmers.se/ravisha)): Led the team as project manager and made substantial contributions for the Wio Terminal.
 
