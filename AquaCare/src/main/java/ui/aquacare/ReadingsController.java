@@ -25,11 +25,15 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.util.Duration;
 import ui.utilities.ApplicationInterface;
+import ui.utilities.NotificationController;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class ReadingsController extends NavigationController implements Initializable {
 
@@ -84,13 +88,22 @@ public class ReadingsController extends NavigationController implements Initiali
 
     ApplicationInterface applicationInterface = new ApplicationInterface();
 
-    private volatile double threadCordinator = 0;
+    // Still not exactly sure how static fixed multiple thread problem
+    private static ScheduledExecutorService executorService;
+
+    private static String tempLevelText;
+    private static String phLevelText;
+    private static String lightLevelText;
+    private static String feedLevelText;
 
     Map<LineChart, String> linecharts = new HashMap<>();
     ;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        //Update the labels with the latest values so changing scenes do not show default values, may be considered redundant
+        updateLabels();
 
         //Set active fish monitor to 1 since owning multiple monitors is not supported yet
         activeFishMonitor = "1";
@@ -99,8 +112,7 @@ public class ReadingsController extends NavigationController implements Initiali
 
         setDate();
 
-        threadCordinator = Math.random();
-        realTimeData(threadCordinator);
+        realTimeData();
 
         //***********************************************
         //Check which line chart is not null and update it
@@ -126,7 +138,6 @@ public class ReadingsController extends NavigationController implements Initiali
                 System.out.println(chartEntry.getValue() + " is null");
             }
         }
-        //updateChartData();
 
     }
 
@@ -213,44 +224,50 @@ public class ReadingsController extends NavigationController implements Initiali
      * ------- REAL-TIME DATA VISUALIZATION -------
      */
 
-    public void realTimeData(double threadIndex) {
-        // create a new thread that listens for incoming text and populates the graph
-        Thread thread = new Thread(() -> {
+    public void realTimeData() {
+        // If there's already a running task, cancel it
+        if (executorService != null && !executorService.isShutdown()) {
+            System.out.println("**************************************************");
+            System.out.println("Shutting down the executor service");
+            executorService.shutdownNow();
+        }
 
-            while (threadIndex == threadCordinator) {
+        // Create a new executor service
+        executorService = Executors.newSingleThreadScheduledExecutor();
 
-                // Query data based on active fish monitor and sensor name
-                List<FluxTable> tablesPh = applicationInterface.MeanOfDuration("Ph", String.valueOf(realTimeLabelDataAge) + "s", activeFishMonitor);
-                List<FluxTable> tablesTemp = applicationInterface.MeanOfDuration("Temperature", String.valueOf(realTimeLabelDataAge) + "s", activeFishMonitor);
-                List<FluxTable> tablesLight = applicationInterface.MeanOfDuration("Light", String.valueOf(realTimeLabelDataAge) + "s", activeFishMonitor);
-                List<FluxTable> tablesDisp = applicationInterface.LastOfDuration("Dispenser", "25d", activeFishMonitor);
+        // Schedule the task to run every interval
+        executorService.scheduleAtFixedRate(() -> {
+            // Query data based on active fish monitor and sensor name
+            List<FluxTable> tablesPh = applicationInterface.MeanOfDuration("Ph", String.valueOf(realTimeLabelDataAge) + "s", activeFishMonitor);
+            List<FluxTable> tablesTemp = applicationInterface.MeanOfDuration("Temperature", String.valueOf(realTimeLabelDataAge) + "s", activeFishMonitor);
+            List<FluxTable> tablesLight = applicationInterface.MeanOfDuration("Light", String.valueOf(realTimeLabelDataAge) + "s", activeFishMonitor);
+            List<FluxTable> tablesDisp = applicationInterface.LastOfDuration("Dispenser", "25d", activeFishMonitor);
 
-                // Extract the mean values from the tables
-                double meanPh = ApplicationInterface.extractMeanValue(tablesPh);
-                double meanTemp = ApplicationInterface.extractMeanValue(tablesTemp);
-                double meanLight = ApplicationInterface.extractMeanValue(tablesLight);
-                double lastFedHour = ApplicationInterface.extractLastRowHourlyTimeDifference(tablesDisp);
+            // Extract the mean values from the tables
+            double meanPh = ApplicationInterface.extractMeanValue(tablesPh);
+            double meanTemp = ApplicationInterface.extractMeanValue(tablesTemp);
+            double meanLight = ApplicationInterface.extractMeanValue(tablesLight);
+            double lastFedHour = ApplicationInterface.extractLastRowHourlyTimeDifference(tablesDisp);
 
-                Platform.runLater(() -> {
-                    // update labels with the mean values
-                    phLabel.setText("pH: " + meanPh);
-                    tempLabel.setText("Temperature: " + meanTemp + "°C");
-                    lightLabel.setText("Light: " + meanLight);
-                    feedLabel.setText("Fed " + lastFedHour + " hours ago");
-
-
-                });
-
-                // sleep to avoid reduce app's CPU usage
-                try {
-                    Thread.sleep(realTimeDataUpdateInterval);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            //Check for threshold breaches
+            if (!(meanPh == -1 || meanTemp == -1)) {
+                System.out.println("Checking for threshold breaches");
+                NotificationController.checkThresholds(meanTemp, meanPh);
             }
-            return;
-        });
-        thread.start();
+            System.out.println("No data available for threshold comparison");
+
+            Platform.runLater(() -> {
+                // update labels with the mean values
+
+                //Truncate the values to a certain length
+                phLevelText = Double.toString(meanPh).substring(0, Math.min(Double.toString(meanPh).length(), 4));
+                tempLevelText = Double.toString(meanTemp).substring(0, Math.min(Double.toString(meanPh).length(), 5));
+                lightLevelText = Double.toString(meanLight).substring(0, Math.min(Double.toString(meanLight).length(), 6));
+                feedLevelText = Double.toString(lastFedHour).substring(0, Math.min(Double.toString(lastFedHour).length(), 5));
+
+                updateLabels();
+            });
+        }, 0, 5, TimeUnit.SECONDS);
     }
 
     public void feedFish() {
@@ -358,4 +375,11 @@ public class ReadingsController extends NavigationController implements Initiali
         ((NumberAxis) chart.getYAxis()).setLowerBound(0);
         ((NumberAxis) chart.getYAxis()).setUpperBound(100);
     }
+    private void updateLabels() {
+        phLabel.setText("pH: " + phLevelText);
+        tempLabel.setText("Temperature: " + tempLevelText  + "°C");
+        lightLabel.setText("Light: " + lightLevelText);
+        feedLabel.setText("Fed " + feedLevelText + " hours ago");
+    }
+
 }
