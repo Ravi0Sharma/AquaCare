@@ -71,7 +71,7 @@ To automatically build and run the application, try running **run** task along w
     6. [ArduinoSTL](https://www.arduino.cc/reference/en/libraries/arduinostl/)
     7. [WiFiNINA](https://www.arduino.cc/reference/en/libraries/wifinina/)
     8. [Seeed Arduino rpcBLE@1.0.0](https://www.arduino.cc/reference/en/libraries/seeed-arduino-rpcble/)
-    9. [Master-Servo](https://github.com/PaintYourDragon/Servo
+    9. [Master-Servo](https://github.com/PaintYourDragon/Servo)
 6. Sensors Used In Our Project (Exact same product may not be required):
 
     1. [Temperature sensor](https://wiki.seeedstudio.com/Grove-Temperature_Sensor_V1.2/)
@@ -119,25 +119,19 @@ The changes should be made on 4th and 5th lines of the file which specifies a SS
 
 After the changes, the file needs to be saved. Use `Ctrl + S` shortcut or try **File >  Save** menu on top-bar. See [Wio Terminal Installation Process](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16#installation-process)
 
-<!--- ### MQTT 
-How to change mqtt broker or so
-May not be needed
--->
-
-
 **Database**
 
-The application stores API keys and other Database related information in code, therefore it is suggested for user to create a new database so they can have more privacy. 
+Our application stores API keys and other database-related information directly in the code, therefore we recommend users to create a new database so they can have more privacy. 
 
-How to setup a new Influx Database for the application:
-- Create an account or login on [Cloud InfluxDB](https://cloud2.influxdata.com/signup)
-- Create an organization and name it
-- Create a storage bucket and name it `Storage`
-- Generate an API token 
-- Using a text editor, open the `InfluxDBJavaClient.java` file in `AquaCare/src/main/ui/utilities` directory.
-- Edit line **48** and **50** according to your API token and organization name.
-- Edit line **53** according to your InfluxDB address.
-- Save the file and build/run the application again
+To set up a new Influx Database for the application, you can follow these steps:
+
+Create an account or log in to [Cloud InfluxDB](https://cloud2.influxdata.com/signup) Once logged in, create an organization and give it a name. 
+
+Next, create a storage bucket and name it `Storage` and generate an API token which will be used for authentication.
+
+After setting up the InfluxDB, open the `InfluxDBJavaClient.java` file in `AquaCare/src/main/ui/utilities` directory using a text editor. Update line **48** and **50** according to your API token and organization name and line **53** according to your InfluxDB address. Ensure that the entered details match exactly with what you have on InfluxDB.
+
+After making these changes, save the file. You can use the `Ctrl + S` shortcut or navigate to the **File > Save** menu on the top-bar. Once saved, build and run the application again.
 
 ## **Roadmap**
 For a detailed view of expected future releases and upcoming features, please refer to [Milestones](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/milestones).
