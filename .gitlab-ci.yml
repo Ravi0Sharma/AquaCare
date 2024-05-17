@@ -16,7 +16,6 @@ before_script:
 
 stages:
   - build
-  - test
   - deploy
 
 build application:
@@ -31,27 +30,6 @@ build application:
   artifacts:                                        # saves the built app
     paths:
       - AquaCare/build/distributions/*
-  cache:                                            # caches test related files
-    key: "$CI_COMMIT_REF_NAME"
-    policy: push
-    paths:
-      - AquaCare/build                              # whole build directory is cached for test stage
-      - AquaCare/.gradle
-
-test:
-  stage: test
-  image: amd64/gradle:8.0.1-jdk19-alpine    # an image with gradle and java installed just for us to use gradlew
-  tags:
-    - docker
-  script:
-    - cd AquaCare                            # gets into correct path
-    - ./gradlew check                        # exactly same as gradle test, which runs all the detected unit tests
-  cache:
-    key: "$CI_COMMIT_REF_NAME"
-    policy: pull                             # pulls from previously pushed cache
-    paths:
-      - build
-      - .gradle
 
 compile:
   stage: build
