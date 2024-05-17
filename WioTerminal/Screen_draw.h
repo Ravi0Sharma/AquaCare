@@ -12,7 +12,7 @@ extern void Screen_connectingMQTT(); // External declaration for the Screen_conn
 
 extern void Screen_connected(); // External declaration for the Screen_connected() function
 
-extern void Screen_result(int tempResult, int LightResult, int phResult, int dispenserUsageCount); // External declaration for the Screen_connected() function
+extern void Screen_result(int tempResult, int LightResult, int phResult, int dispenserUsageCount); // External declaration for the Screen_result() function
 
 
 
