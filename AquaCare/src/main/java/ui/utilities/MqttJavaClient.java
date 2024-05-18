@@ -55,8 +55,6 @@ public class MqttJavaClient implements MqttCallbackExtended {
      */
     @Override
     public void deliveryComplete(IMqttDeliveryToken token) {
-        System.out.println("Publish complete");
-        //System.out.println("Publish complete" + new String(token.getMessage().getPayload()));
     }
 
     /**
@@ -67,10 +65,7 @@ public class MqttJavaClient implements MqttCallbackExtended {
      */
     @Override
     public void messageArrived(String topic, MqttMessage message) throws Exception {
-        System.out.println("topic: " + topic);
-        System.out.println("message: " + new String(message.getPayload()));
         databaseInputParser.parseMqttData(topic, new String(message.getPayload()));
-
     }
 
     @Override
@@ -115,11 +110,9 @@ public class MqttJavaClient implements MqttCallbackExtended {
             connOpts.setCleanSession(true);
             connOpts.setAutomaticReconnect(true);
             mqttAsyncJavaClient.setCallback(this);
-            System.out.println("Connecting to broker: " + broker);
             //connOpts.setUserName("username");
             //connOpts.setPassword("password".toCharArray());
             mqttAsyncJavaClient.connect(connOpts);
-            System.out.println("Connected");
             Thread.sleep(500); // wait until connection is complete
 
         } catch (Exception e){
@@ -131,7 +124,6 @@ public class MqttJavaClient implements MqttCallbackExtended {
 
     public void Publish(String topic, String message, int qos){
         try {
-            System.out.println("Publishing message: " + message);
              IMqttDeliveryToken token = null;
              MqttMessage Mqttmsg = new MqttMessage(message.getBytes());
              Mqttmsg.setQos(qos);
@@ -140,7 +132,6 @@ public class MqttJavaClient implements MqttCallbackExtended {
              // Wait until the message has been delivered to the broker
              token.waitForCompletion();
              Thread.sleep(100);
-             System.out.println("Message published");
 
         } catch (Exception e) {
             System.out.println("pub error :"+ e);
@@ -152,7 +143,6 @@ public class MqttJavaClient implements MqttCallbackExtended {
     private void Subscribe(String[] topics, int[] Qos){
         try {
             mqttAsyncJavaClient.subscribe(topics, Qos);
-            System.out.println("Subscribed");
         } catch (Exception e){
             System.out.println("sub error :"+e);
         }
@@ -164,7 +154,6 @@ public class MqttJavaClient implements MqttCallbackExtended {
     public void Subscribe(String topic, int qos){
         try {
             mqttAsyncJavaClient.subscribe(topic, qos);
-            System.out.println("Subscribed");
         } catch (Exception e){
             System.out.println("sub error: " +e);
         }
@@ -186,8 +175,6 @@ public class MqttJavaClient implements MqttCallbackExtended {
     public void Disconnect(){
         try {
             mqttAsyncJavaClient.disconnect();
-            System.out.println("Disconnected");
-
         } catch (Exception e){
             System.out.println("disconnect error" + e);
         }

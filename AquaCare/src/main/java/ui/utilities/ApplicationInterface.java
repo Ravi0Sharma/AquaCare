@@ -56,7 +56,6 @@ public class ApplicationInterface {
         influxDBJavaClient.WriteData(measurement, tagValue, fieldValue);
     }
 
-
     /**********************************************************/
     //Query database
 
@@ -104,12 +103,10 @@ public class ApplicationInterface {
             if (!records.isEmpty()) {
                 //Get the first entry value
                 double value = (double) records.get(0).getValue();
-                System.out.println("Returning: " + value);
                 return value;
             }
         }
 
-        System.out.println("Returning: -1");
         return -1;
     }
 
@@ -131,7 +128,6 @@ public class ApplicationInterface {
                 return duration.toHours();
             }
         }
-        System.out.println("Returning: -1 :(");
         return -1;
     }
 }

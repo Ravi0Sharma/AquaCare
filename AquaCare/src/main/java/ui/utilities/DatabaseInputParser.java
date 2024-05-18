@@ -15,7 +15,6 @@ public class DatabaseInputParser {
         // Parse the MQTT message
         String[] topicLayers = topic.split("/");      //Split the topic into layers
         if (topicLayers.length != 3) {                      //Ensure the topic is in the correct format
-            System.out.println("Invalid topic format");
             return;
         }
 
@@ -26,7 +25,6 @@ public class DatabaseInputParser {
         String value = messageParts[0].trim();              //Get the value
 
         if (isParsableToDouble(value) == false) {           //Ensure the value is in the correct format
-            System.out.println("Value not in correct format");
             return;
         }
 
@@ -34,18 +32,17 @@ public class DatabaseInputParser {
             String timestamp = messageParts[1].trim();      //Get the timestamp
 
             if (isParsableToLong(timestamp) == false) {
-                System.out.println("Timestamp not in correct format");
+                
 
             } else if (messageSentInLastWeekNanoseconds(Long.parseLong(timestamp)) == false) {
-                System.out.println("Timestamp is not from the last week");
+                
             } else {
 
-                System.out.println("Writing data to InfluxDB");
                 // If there is a timestamp in the correct format, write the data with the timestamp
                 // Since the database only holds data of the last month, giving an older data may cause disconnection
                 // Excpect time in nanoseconds
                 dataBaseHandler.WriteData(measurement, "deviceID", deviceID, "value", Double.parseDouble(value), Long.parseLong(timestamp));
-                System.out.println("Have written data to InfluxDB");
+        
                 return;
             }
         }
@@ -54,10 +51,8 @@ public class DatabaseInputParser {
         // This section saves the data even though there is no timestamp, but that may not be required for us
         // Since it was stated that timestamps are in fact a requirement
 
-        System.out.println("Writing data without timestamp to InfluxDB");
         //If there is no timestamp, write the data with the current time
         dataBaseHandler.WriteData(measurement, "deviceID", deviceID, "value", Double.parseDouble(value));
-        System.out.println("Have written data to InfluxDB");
     }
 
     private boolean isParsableToDouble(String str) {
