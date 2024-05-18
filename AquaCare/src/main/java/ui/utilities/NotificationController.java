@@ -21,7 +21,6 @@ public class NotificationController {
     public static void checkThresholds(double meanTemp, double meanPh) {
         // Check if a fish has been selected
         if (CurrentFish.getInstance().getSelectedFish() == null) {
-            System.out.println("No fish selected.");
             return;
         }
 
@@ -29,11 +28,9 @@ public class NotificationController {
         if (isWithinThreshold(CurrentFish.getInstance().getSelectedFish().getFishTemp(), meanTemp)
                 && isWithinThreshold(CurrentFish.getInstance().getSelectedFish().getFishPh(), meanPh)) {
 
-            System.out.println("Thresholds are not breached.");
             return;
         }
 
-        System.out.println("Thresholds are breached.");
         // Display a system tray notification
         NotificationClient.displayTray(
                 "Fish: " + CurrentFish.getInstance().getSelectedFish().getFishName(), "Threshold Breach with values of Temperature: " + meanTemp + " and  pH:" + meanPh);
@@ -49,8 +46,6 @@ public class NotificationController {
         // Parse the minimum and maximum value strings into doubles
         double minValue = Double.parseDouble(parts[0]);
         double maxValue = Double.parseDouble(maxValueString);
-
-        System.out.println("Min: " + minValue + " Max: " + maxValue + " Value: " + value);
 
         // Compare the value with the minimum and maximum values
         return value >= minValue && value <= maxValue;
