@@ -12,6 +12,7 @@
 ## Community Guidelines
 
 ## License
+This project is licensed under the MIT License. For details, please see the (LICENSE.MD) file
 
 ## Contact Info
 
