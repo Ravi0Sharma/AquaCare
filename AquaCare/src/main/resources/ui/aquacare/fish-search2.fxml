@@ -59,8 +59,8 @@
                 <TableColumn fx:id="fFavFoodTableColumn" editable="false" minWidth="30.0" prefWidth="215.0" resizable="false" text="Favorite Food" />
                 <TableColumn fx:id="fPhTableColumn" editable="false" prefWidth="171.0" resizable="false" text="pH" />
                 <TableColumn fx:id="fTempTableColumn" editable="false" prefWidth="168.0" resizable="false" text="Temperature" />
-                <TableColumn fx:id="fLightTableColumn" editable="false" prefWidth="110.0" resizable="false" text="Light" />
-                <TableColumn fx:id="fURLTableColumn" editable="false" minWidth="0.0" prefWidth="110.0" resizable="false" text="Image URL" />
+                <TableColumn fx:id="fLightTableColumn" editable="false" prefWidth="113.0" resizable="false" text="Light" />
+<!--                <TableColumn fx:id="fURLTableColumn" editable="false" minWidth="0.0" prefWidth="110.0" resizable="false" text="Image URL" />-->
             </columns>
         </TableView>
         <Label layoutX="175.0" layoutY="49.0" prefHeight="49.0" prefWidth="123.0" text="Search Fish" textFill="#ffffffd1">

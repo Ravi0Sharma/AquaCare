@@ -84,7 +84,7 @@
             <NumberAxis side="LEFT" />
          </yAxis>
       </LineChart>
-      <TextField fx:id="textFieldLight" editable="false" layoutX="216.0" layoutY="136.0" prefHeight="33.0" prefWidth="105.0" style="-fx-background-color: #20333D; -fx-background-radius: 5;" />
+      <TextField fx:id="textFieldLight" editable="false" layoutX="216.0" layoutY="136.0" prefHeight="33.0" prefWidth="105.0" style="-fx-background-radius: 5;" styleClass="chartTextField" stylesheets="@stylesheet.css" />
       <Button fx:id="lightButton1" layoutX="194.0" layoutY="485.0" mnemonicParsing="false" prefHeight="180.0" prefWidth="170.0" styleClass="cards2" stylesheets="@stylesheet.css" textFill="#ffffffb2" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="184.0" AnchorPane.rightAnchor="926.0">
          <font>
             <Font size="24.0" />

@@ -11,14 +11,14 @@ public class FishModel {
     private String fishTemp;
     private String fishLight;
 
-    public FishModel(String fishName, String fishSpecies, String favoriteFood, String fishURL, String fishPh, String fishTemp, String fishLight) {
+    public FishModel(String fishName, String fishSpecies, String favoriteFood, String fishPh, String fishTemp, String fishLight) {
         this.fishName = fishName;
         this.fishSpecies = fishSpecies;
         this.favoriteFood = favoriteFood;
-        this.fishURL = fishURL;
         this.fishPh = fishPh;
         this.fishTemp = fishTemp;
         this.fishLight = fishLight;
+//        this.fishURL = fishURL;
     }
 
     public String getFishName() {
