@@ -15,6 +15,11 @@ public class MqttJavaClient implements MqttCallbackExtended {
     private final String userName;
     private final String password;
 
+    // Random ID generator
+    final private int min = 1000;
+    final private int max = 9999;
+
+
     // private instance variable
 
     private  MemoryPersistence persistence;
@@ -77,13 +82,14 @@ public class MqttJavaClient implements MqttCallbackExtended {
      private MqttJavaClient(){
         // Do initialization here
         databaseInputParser = new DatabaseInputParser();
+         int randomNum = min + (int)(Math.random() * ((max - min) + 1));
 
-        //!Will be changed so credidential are not hardcoded
         broker = "tcp://broker.hivemq.com:1883";
 
         //I have discovered that Client ID may cause improper connection, such as constant disconnecting and re-connecting
-        clientId = "AquaCareApplication";
+        clientId = "AquaCare";
 
+         //!Will be changed so credidential are not hardcoded
         userName = "username";
         password = "password";
 
@@ -91,8 +97,7 @@ public class MqttJavaClient implements MqttCallbackExtended {
         try {
             persistence = new MemoryPersistence();
             connOpts = new MqttConnectOptions();
-            mqttAsyncJavaClient = new MqttAsyncClient(broker, clientId, persistence);
-
+            mqttAsyncJavaClient = new MqttAsyncClient(broker, clientId + "_" + Integer.toString(randomNum), persistence);
         } catch (Exception e){
             System.out.println(e);
 
