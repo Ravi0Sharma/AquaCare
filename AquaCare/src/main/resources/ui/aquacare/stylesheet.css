@@ -1,5 +1,5 @@
 .background{
-    -fx-background-color: linear-gradient(to top right, #14141F, #2D2633);
+    -fx-background-color: linear-gradient(to top right, #0D182A, #3A5D73);
     /*-fx-background-color: linear-gradient(to top right, #01374f, #597162);*/
 }
 
@@ -22,21 +22,21 @@
     /*-fx-background-color: #4a4545;*/
     -fx-text-fill: #00ffc4;
 }
-.cards{ /* After click */
+.cards{ /* Before click */
     accent-color: #ffffff;
     -fx-background-radius: 20;
-    -fx-background-color: linear-gradient(to top right, #1E1E29, #21242F);
+    -fx-background-color: linear-gradient(to top right, rgba(30, 30, 41, 0.66), rgba(33, 36, 47, 0.7));
     -fx-border-color: rgba(24, 24, 35, 0.68);  /*181823*/
     /*-fx-background-color: linear-gradient(to top right, rgb(78, 88, 109), rgb(78, 88, 109));*/
     /*-fx-border-color: rgb(28, 27, 27);  !*181823*!*/
     -fx-border-width: 8;
     -fx-border-radius: 20;
 }
-.cards2{ /* Before click */
+.cards2{ /* After click */
     -fx-background-radius: 20;
     -fx-border-width: 8;
     -fx-border-radius: 20;
-    -fx-background-color: linear-gradient(to top right, #162430, #192935);
+    -fx-background-color: linear-gradient(to top right, #03433b, #24423a);
     -fx-border-color: rgba(31, 31, 40, 0.68);  /*181823*/
     /*-fx-background-color: linear-gradient(to top right, #8a8a8a, #8a8a8a);*/
     /*-fx-border-color: rgb(70, 69, 69);  !*181823*!*/
@@ -57,7 +57,7 @@
     -fx-background-radius: 20;
 }
 .topBar{
-    -fx-background-color: linear-gradient(to top right, #1F242D, #302B37);
+    -fx-background-color: linear-gradient(to top right, rgba(31, 36, 45, 0.58), rgba(48, 43, 55, 0.56));
     /*-fx-background-color: linear-gradient(to top right, #102837, #3b5141);*/
     -fx-background-radius: 20;
 }
@@ -96,3 +96,34 @@
     -fx-border-width: 1;
 }
 
+/*.chart {*/
+/*    -fx-padding: 10px;*/
+/*}*/
+/*.chart-content {*/
+/*    -fx-padding: 30px;*/
+/*}*/
+
+.chart-vertical-grid-lines {
+    -fx-stroke: transparent;
+}
+.chart-horizontal-grid-lines {
+    -fx-stroke: #3f454a;
+}
+.chart-alternative-row-fill {
+    -fx-fill: #1c2f42;
+    -fx-stroke: transparent;
+    -fx-stroke-width: 0;
+}
+
+.chart-plot-background {
+    -fx-background-color: transparent;}
+
+.chart-series-line {
+    -fx-stroke-width: 2px;
+    -fx-effect: null;
+}
+
+.default-color0.chart-series-line { -fx-stroke: #959191; }
+
+
+.default-color0.chart-line-symbol { -fx-background-color: #7f7e81, white; }
