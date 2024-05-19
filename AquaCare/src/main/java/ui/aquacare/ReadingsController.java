@@ -69,14 +69,14 @@ public class ReadingsController extends NavigationController implements Initiali
 
 
     //  Units in seconds
-    private int realTimeLabelDataAge = 30;
+    private int realTimeLabelDataAge = 60;
 
     // Units in milliseconds - 1 seconds = 1000 milliseconds
     private int realTimeDataUpdateInterval = 3000;
 
 
-    //  Units in days
-    private int chartDataAge = 7;
+    //  Units in seconds - 1 day = 24 hours = 1440 minutes = 86400 seconds
+    private int chartDataAge = 20 * 60; // 20 mins
 
     ApplicationInterface applicationInterface = new ApplicationInterface();
 
@@ -89,6 +89,7 @@ public class ReadingsController extends NavigationController implements Initiali
     private static String feedLevelText;
 
     Map<LineChart, String> linecharts = new HashMap<>();
+    ;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -140,7 +141,7 @@ public class ReadingsController extends NavigationController implements Initiali
         series.setName(sensorName);
 
         //Query data based on active fish monitor and sensor name
-        List<FluxTable> tables = applicationInterface.QueryOfDuration(sensorName, String.valueOf(chartDataAge) + "d", activeFishMonitor);
+        List<FluxTable> tables = applicationInterface.QueryOfDuration(sensorName, String.valueOf(chartDataAge) + "s", activeFishMonitor);
 
         //Divide tables into individual tables
         for (FluxTable table : tables) {
@@ -297,8 +298,7 @@ public class ReadingsController extends NavigationController implements Initiali
             long diffInSeconds = currentTime.getEpochSecond() - dataTime.getEpochSecond();
 
             // If the difference is greater than the threshold, remove the data point from the series
-            // chartDataAge is the threshold in days so we need to convert it to seconds
-            if (diffInSeconds > chartDataAge * 24 * 60 * 60) {
+            if (diffInSeconds > chartDataAge) {
                 series.getData().remove(i);
                 // Decrement the counter as we have removed an element
                 i--;
