@@ -228,7 +228,7 @@
     "fishPh": "5.5-7.0",
     "fishPhMin": "5.5",
     "fishPhMax": "7.0",
-    "fishTemp": "24-30 °C",
+    "fishTemp": "24-30°C",
     "fishTempMin": "24",
     "fishTempMax": "30",
     "fishLight": "Low"
@@ -241,7 +241,7 @@
     "fishPh": "6.0-8.0",
     "fishPhMin": "6.0",
     "fishPhMax": "8.0",
-    "fishTemp": "23-27 °C",
+    "fishTemp": "23-27°C",
     "fishTempMin": "23",
     "fishTempMax": "27",
     "fishLight": "Moderate"
@@ -254,7 +254,7 @@
     "fishPh": "6.0-7.5",
     "fishPhMin": "6.0",
     "fishPhMax": "7.5",
-    "fishTemp": "22-25 °C",
+    "fishTemp": "22-25°C",
     "fishTempMin": "22",
     "fishTempMax": "25",
     "fishLight": "Low to Moderate"

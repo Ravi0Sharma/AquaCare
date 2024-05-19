@@ -2,6 +2,12 @@
     -fx-background-color: linear-gradient(to top right, #14141F, #2D2633);
     /*-fx-background-color: linear-gradient(to top right, #01374f, #597162);*/
 }
+
+.chartTextField{
+    -fx-background-color: #20333D;
+    -fx-background-radius: 5;
+}
+
 .label{
     -fx-text-fill: rgba(255, 255, 255, 0.68);
     -fx-font-size: 22px;
@@ -56,23 +62,37 @@
     -fx-background-radius: 20;
 }
 
+@font-face {
+    font-family: 'Exo-Light';
+    src: url('Exo-Light.ttf');
+}
+
 .table-view {
-    -fx-text-fill: #ffffff;
-    -fx-wrap-text: true;
-    -fx-font-size: 12;
-    -fx-background-color: #32343c;
-    -fx-border-color: black;
-}
-.table-column{
-    -fx-text-fill: #ffffff;
-    -fx-wrap-text: true;
-    -fx-font-size: 12;
     -fx-background-color: #15171e;
-    -fx-border-color: black;
 }
 
-
-.chartTextField{
-    -fx-background-color: #20333D;
-    -fx-background-radius: 5;
+.table-view .column-header {
+    -fx-font-family: Exo-Light;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color: #1d303e;
+    -fx-alignment: CENTER;
+    -fx-border-color: rgb(28, 27, 27);
+    -fx-border-width: 1;
 }
+
+.table-row-cell {
+    -fx-font-family: "Calibri Light";
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+    -fx-text-alignment: center;
+    -fx-alignment: CENTER;
+
+    -fx-background-color: #15171e;
+    -fx-pref-height: 20;
+
+    -fx-border-color: rgb(28, 27, 27);
+    -fx-vertical-grid-lines-visible: false;
+    -fx-border-width: 1;
+}
+

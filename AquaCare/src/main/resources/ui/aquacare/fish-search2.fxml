@@ -6,7 +6,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,7 +14,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" styleClass="background" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.aquacare.FishController">
     <children>
-        <TextField fx:id="searchBarSP" layoutX="302.0" layoutY="64.0" prefHeight="25.0" prefWidth="560.0" promptText="Keywords...">
+        <TextField fx:id="searchBarSP" layoutX="316.0" layoutY="64.0" prefHeight="30.0" prefWidth="846.0" promptText="Keywords...">
          <font>
             <Font size="14.0" />
          </font></TextField>
@@ -39,24 +38,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button fx:id="buttonLeft3" layoutX="30.0" layoutY="417.0" mnemonicParsing="false" onAction="#goConfigPage" prefHeight="40.0" prefWidth="40.0" styleClass="buttonHP" stylesheets="@stylesheet.css">
-                    <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
-                            <image>
-                                <Image url="@image/button_configranges.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-                <Button fx:id="buttonLeft4" layoutX="30.0" layoutY="483.0" mnemonicParsing="false" onAction="#goSettings" prefHeight="40.0" prefWidth="40.0" styleClass="buttonHP" stylesheets="@stylesheet.css">
-                    <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
-                            <image>
-                                <Image url="@image/button_settings.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
+
                 <Button fx:id="exitButton" layoutX="15.0" layoutY="690.0" mnemonicParsing="false" onAction="#quit" prefHeight="40.0" prefWidth="40.0" styleClass="buttonHP" stylesheets="@stylesheet.css">
                     <graphic>
                         <ImageView fitHeight="25.0" fitWidth="57.0" pickOnBounds="true">
@@ -70,45 +52,6 @@
             </children>
         </Pane>
         <Separator layoutX="102.0" layoutY="32.0" opacity="0.12" orientation="VERTICAL" prefHeight="710.0" style="-fx-background-color: #1D1E29;" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="102.0" />
-        <Button fx:id="buttonRight" layoutX="1124.0" layoutY="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="buttonMenuHP" stylesheets="@stylesheet.css" AnchorPane.rightAnchor="105.0" AnchorPane.topAnchor="49.0">
-            <graphic>
-                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@image/button_notification.png" />
-                    </image>
-                </ImageView>
-            </graphic>
-            <effect>
-                <DropShadow blurType="TWO_PASS_BOX" height="15.0" radius="7.0" width="15.0" />
-            </effect>
-        </Button>
-        <Button fx:id="buttonRight1" layoutX="1189.0" layoutY="49.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="buttonMenuHP" stylesheets="@stylesheet.css" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="49.0">
-            <graphic>
-                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                    <effect>
-                        <DropShadow blurType="TWO_PASS_BOX" height="15.0" radius="7.0" width="15.0" />
-                    </effect>
-                    <image>
-                        <Image url="@image/button_calender.png" />
-                    </image>
-                </ImageView>
-            </graphic>
-            <effect>
-                <DropShadow blurType="TWO_PASS_BOX" height="10.0" radius="4.5" width="10.0" />
-            </effect>
-        </Button>
-        <Button fx:id="buttonRight2" layoutX="1076.0" layoutY="50.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="buttonMenuHP" stylesheets="@stylesheet.css" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="49.0">
-            <graphic>
-                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
-                    <image>
-                        <Image url="@image/button_messageBox.png" />
-                    </image>
-                </ImageView>
-            </graphic>
-            <effect>
-                <DropShadow blurType="TWO_PASS_BOX" height="15.0" radius="7.0" width="15.0" />
-            </effect>
-        </Button>
         <TableView fx:id="fishTableView" fixedCellSize="0.0" layoutX="167.0" layoutY="296.0" prefHeight="587.0" prefWidth="1049.0" stylesheets="@stylesheet.css" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="167.0" AnchorPane.rightAnchor="64.0">
             <columns>
                 <TableColumn fx:id="fNameTableColumn" editable="false" minWidth="30.0" prefWidth="206.0" resizable="false" text="Name" />
