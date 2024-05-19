@@ -38,14 +38,6 @@ import java.util.concurrent.TimeUnit;
 public class ReadingsController extends NavigationController implements Initializable {
 
     //  Real-time Readings
-    static SerialPort chosenPort;
-    static int x = 0;   //
-    @FXML
-    private static ComboBox<String> portList;
-    @FXML
-    private static Button connectButton;
-    @FXML
-    private VBox roots;
     //  Dashboard Cards
     @FXML
     private Label phLabel;

@@ -1,7 +1,13 @@
 .background{
-    -fx-background-color: linear-gradient(to top right, #14141F, #2D2633);
+    -fx-background-color: linear-gradient(to top right, #0D182A, #3A5D73);
     /*-fx-background-color: linear-gradient(to top right, #01374f, #597162);*/
 }
+
+.chartTextField{
+    -fx-background-color: #20333D;
+    -fx-background-radius: 5;
+}
+
 .label{
     -fx-text-fill: rgba(255, 255, 255, 0.68);
     -fx-font-size: 22px;
@@ -16,21 +22,21 @@
     /*-fx-background-color: #4a4545;*/
     -fx-text-fill: #00ffc4;
 }
-.cards{ /* After click */
+.cards{ /* Before click */
     accent-color: #ffffff;
     -fx-background-radius: 20;
-    -fx-background-color: linear-gradient(to top right, #1E1E29, #21242F);
+    -fx-background-color: linear-gradient(to top right, rgba(30, 30, 41, 0.66), rgba(33, 36, 47, 0.7));
     -fx-border-color: rgba(24, 24, 35, 0.68);  /*181823*/
     /*-fx-background-color: linear-gradient(to top right, rgb(78, 88, 109), rgb(78, 88, 109));*/
     /*-fx-border-color: rgb(28, 27, 27);  !*181823*!*/
     -fx-border-width: 8;
     -fx-border-radius: 20;
 }
-.cards2{ /* Before click */
+.cards2{ /* After click */
     -fx-background-radius: 20;
     -fx-border-width: 8;
     -fx-border-radius: 20;
-    -fx-background-color: linear-gradient(to top right, #162430, #192935);
+    -fx-background-color: linear-gradient(to top right, #03433b, #24423a);
     -fx-border-color: rgba(31, 31, 40, 0.68);  /*181823*/
     /*-fx-background-color: linear-gradient(to top right, #8a8a8a, #8a8a8a);*/
     /*-fx-border-color: rgb(70, 69, 69);  !*181823*!*/
@@ -51,28 +57,123 @@
     -fx-background-radius: 20;
 }
 .topBar{
-    -fx-background-color: linear-gradient(to top right, #1F242D, #302B37);
+    -fx-background-color: linear-gradient(to top right, rgba(31, 36, 45, 0.58), rgba(48, 43, 55, 0.56));
     /*-fx-background-color: linear-gradient(to top right, #102837, #3b5141);*/
     -fx-background-radius: 20;
 }
 
+@font-face {
+    font-family: 'Exo-Light';
+    src: url('Exo-Light.ttf');
+}
+
 .table-view {
-    -fx-text-fill: #ffffff;
-    -fx-wrap-text: true;
-    -fx-font-size: 12;
-    -fx-background-color: #32343c;
-    -fx-border-color: black;
-}
-.table-column{
-    -fx-text-fill: #ffffff;
-    -fx-wrap-text: true;
-    -fx-font-size: 12;
-    -fx-background-color: #15171e;
-    -fx-border-color: black;
+    -fx-background-color: #283950;
+    -fx-text-fill: white;
 }
 
+.table-view .column-header {
+    -fx-font-family: Exo-Light;
+    -fx-text-fill: #f8f8f8;
+    -fx-font-weight: bold;
+    -fx-background-color: #1d303e;
+    -fx-alignment: CENTER;
+    /*-fx-border-color: rgb(28, 27, 27);*/
+    -fx-border-width: 1;
+}
 
-.chartTextField{
-    -fx-background-color: #20333D;
-    -fx-background-radius: 5;
+.table-row-cell {
+    -fx-font-family: "Calibri Light";
+    -fx-font-size: 14;
+    -fx-text-alignment: center;
+    -fx-alignment: CENTER;
+
+    -fx-background-color: transparent;
+    -fx-pref-height: 20;
+
+    -fx-border-color: transparent;
+    -fx-vertical-grid-lines-visible: false;
+    -fx-border-width: 1;
+}
+.chart-vertical-grid-lines {
+    -fx-stroke: transparent;
+}
+.chart-horizontal-grid-lines {
+    -fx-stroke: #3f454a;
+}
+.chart-alternative-row-fill {
+    -fx-fill: #1c2f42;
+    -fx-stroke: transparent;
+    -fx-stroke-width: 0;
+}
+
+.chart-plot-background {
+    -fx-background-color: transparent;}
+
+.chart-series-line {
+    -fx-stroke-width: 2px;
+    -fx-effect: null;
+}
+
+.default-color0.chart-series-line { -fx-stroke: #959191; }
+
+
+.default-color0.chart-line-symbol { -fx-background-color: #7f7e81, white; }
+
+.table-view{
+    -fx-background-color: transparent;
+}
+
+.table-view:focused{
+    -fx-background-color: transparent;
+}
+
+/* Spaltenköpfe
+    Struktur column-header-background -> column-header */
+
+.table-view .column-header-background{
+    /*-fx-background-color: linear-gradient(#131313 0%, #424141 100%);*/
+    /*-fx-background-color: #1d303e;*/
+    -fx-background-color: linear-gradient(#1d303e, #424141);
+
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell{
+    -fx-text-fill: white;
+}
+
+.table-row-cell{
+    -fx-background-color: -fx-table-cell-border-color, #616161;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em; /* 0 */
+}
+
+.table-row-cell:odd{
+    -fx-background-color: -fx-table-cell-border-color, #424242;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em; /* 0 */
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #005797;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+}
+
+.table-view > .virtual-flow > .scroll-bar:vertical,
+.table-view > .virtual-flow > .scroll-bar:vertical > .track,
+.table-view > .virtual-flow > .scroll-bar:vertical > .track-background,
+.table-view > .virtual-flow > .scroll-bar:horizontal,
+.table-view > .virtual-flow > .scroll-bar:horizontal > .track,
+.table-view > .virtual-flow > .scroll-bar:horizontal > .track-background {
+    -fx-background-color: transparent;
 }

@@ -16,8 +16,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import ui.utilities.CurrentFish;
 import ui.utilities.NotificationClient;
 
+import javax.swing.text.html.ImageView;
 import java.io.*;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 
 public class FishController extends NavigationController implements Initializable {
@@ -31,13 +33,14 @@ public class FishController extends NavigationController implements Initializabl
     @FXML
     private TableColumn<FishModel, String> fFavFoodTableColumn;
     @FXML
-    private TableColumn<FishModel, String> fURLTableColumn;
-    @FXML
     private TableColumn<FishModel, String> fPhTableColumn;
     @FXML
     private TableColumn<FishModel, String> fTempTableColumn;
     @FXML
     private TableColumn<FishModel, String> fLightTableColumn;
+    @FXML
+    private TableColumn<FishModel, ImageView> fURLTableColumn;
+
     @FXML
     private TextField searchBarSP;
 
@@ -47,7 +50,7 @@ public class FishController extends NavigationController implements Initializabl
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         try (InputStream inputStream = getClass().getResourceAsStream("/ui/aquacare/fish.json");
-             InputStreamReader streamReader = new InputStreamReader(inputStream);
+             InputStreamReader streamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
              BufferedReader reader = new BufferedReader(streamReader)) {
 
             StringBuilder jsonContent = new StringBuilder();
@@ -63,7 +66,7 @@ public class FishController extends NavigationController implements Initializabl
             fNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("fishName"));
             fSpeciesTableColumn.setCellValueFactory(new PropertyValueFactory<>("fishSpecies"));
             fFavFoodTableColumn.setCellValueFactory(new PropertyValueFactory<>("favoriteFood"));
-            fURLTableColumn.setCellValueFactory(new PropertyValueFactory<>("fishURL"));
+//            fURLTableColumn.setCellValueFactory(new PropertyValueFactory<FishModel,ImageView>("fishURL"));
             fPhTableColumn.setCellValueFactory(new PropertyValueFactory<>("fishPh"));
             fTempTableColumn.setCellValueFactory(new PropertyValueFactory<>("fishTemp"));
             fLightTableColumn.setCellValueFactory(new PropertyValueFactory<>("fishLight"));

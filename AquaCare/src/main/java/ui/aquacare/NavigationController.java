@@ -17,14 +17,6 @@ import java.time.format.DateTimeFormatter;
 
 public class NavigationController {
 
-    // TODO: close influxdb client for real-time readings when scenes switched
-    //          public void close() {
-    //        if (databaseClient != null) {
-    //            databaseClient.close();
-    //        }
-    //        ***
-
-
     //  General
     private Stage stage;
     private Scene scene;
@@ -35,7 +27,6 @@ public class NavigationController {
     private Text dateHP;
 
     public void setDate(){
-        // TODO: The date should be able to change while the app is still running.
         LocalDate localDate = LocalDate.now();
         DateTimeFormatter theFormat = DateTimeFormatter.ofPattern("d MMMM YYYY");
         String formattedDate = localDate.format(theFormat);
@@ -45,11 +36,9 @@ public class NavigationController {
     @FXML
     public void quit(){
         exitButton.setOnAction(event -> {
-            Platform.exit();
             System.exit(0);
         });
-        // TODO: add new exit function to close sensor readings too.
-        //  + should be able to quit with single click.
+
     }
 
     private void goToPage(String fxmlFileName, ActionEvent event) throws IOException {
@@ -79,13 +68,5 @@ public class NavigationController {
     @FXML
     public void goTempPage(ActionEvent event) throws IOException {
         goToPage("temperature-scene.fxml", event);
-    }
-    @FXML
-    public void goConfigPage(ActionEvent event) throws IOException {
-        goToPage("configRanges.fxml", event);
-    }
-    @FXML
-    public void goSettings(ActionEvent event) throws IOException {
-        goToPage("settings.fxml", event);
     }
 }

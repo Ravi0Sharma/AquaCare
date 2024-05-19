@@ -1,3 +1,0 @@
-
-TODO:
-    Change javafx version in the fxml files
