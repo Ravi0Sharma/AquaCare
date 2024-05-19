@@ -17,6 +17,6 @@
 
 If you have any questions, need further assistance or wish to contribute, please reach out to:
 
-- **Project Lead :** [Ravi] (Email: [gusravish@student.gu.se])
+- **Project Lead :** Ravi (Email: gusravish@student.gu.se)
 
 Thank you for considering contributing to our project!
