@@ -24,11 +24,36 @@
 3. **Status Labels**: Remove 'needs-review' label upon approval and add done label.
 4. **Merging**: Only merge the request after these steps have been completed and the pipeline has passed.
 
-### Closing Issues:
+### Merge Requests Example:
 
+Assignee and Reviewer:
+- **Assignee:** @ahmety
+- **Reviewer:** @ravisha
+
+Description:
+Resolve #30 ("Customer Request - Improvements Over Line Charts")
+
+Changes Made:
+- Added chart initialization
+- Implemented Data management
+- Created tooltips and timestamps 
+
+Status Labels:
+- Initial status: `Feature, High Priority, Improvement , In Progress`
+- Upon approval: `Feature, High Priority, Improvement, in review`
+
+Merging:
+- Pipeline tests passed successfully.
+- Code reviewed and approved by @ravisha.
+
+Reviewer Duties:
+- Reviewed the code for quality standards.
+- Provided constructive feedback on the implementation.
+- Approved the PR for merging.
 
 
 ## Code Style and Standards
+
 
 ## Pull Requests
 
