@@ -10,6 +10,29 @@
 4. **Due Date**: Set an appropriate due date respecting the milestone's deadline.
 5. **Continuous Updates**: Continuously update acceptance criteria based on committed implementations.
 
+### Example of a Good Issue
+**Title:** Update README.md Based On Current State Of The Project
+
+**Description:**
+The README file contains outdated information regarding the current state of the project. This issue aims to update/enhance the README file to make it more informative and user-friendly.
+
+**Acceptance Criteria**
+1. **Update Project Description:** Review and update the project description to explain its current project purpose and goals. Some of the sentences may be outdated.
+2. **Installation Guide:** Add detailed instructions on how to install and set up the project locally.
+3. **Usage Instructions:** Provide clear guidance on how to use the project, including any necessary configurations or commands.
+4. **Formatting and Styling:** Ensure consistent formatting, styling, and readability throughout the README file.
+5. Update the current system diagram to adjust with the project scope and changes.
+6. Explains the "Purpose and Benefits" about the project
+7. Update contributions section
+
+**Status Labels:**
+- Initial status: `Documentation Improvement Medium Priority To Do`
+- Upon completion: `Documentation Improvement Medium Priority In progress`
+
+**Assignee and Reviewer:**
+- **Assignee:** @ahmety
+
+
 ### Commit Messages:
 1. **Traceability**: Include the corresponding issue via #<n> syntax.
 2. **Description**: Provide a description covering the changes of the commit.
@@ -26,27 +49,27 @@
 
 ### Merge Requests Example:
 
-Assignee and Reviewer:
+**Assignee and Reviewer:**
 - **Assignee:** @ahmety
 - **Reviewer:** @ravisha
 
-Description:
+**Description:**
 Resolve #30 ("Customer Request - Improvements Over Line Charts")
 
-Changes Made:
+**Changes Made:**
 - Added chart initialization
 - Implemented Data management
 - Created tooltips and timestamps 
 
-Status Labels:
+**Status Labels:**
 - Initial status: `Feature, High Priority, Improvement , In Progress`
 - Upon approval: `Feature, High Priority, Improvement, in review`
 
-Merging:
+**Merging:**
 - Pipeline tests passed successfully.
 - Code reviewed and approved by @ravisha.
 
-Reviewer Duties:
+**Reviewer Duties:**
 - Reviewed the code for quality standards.
 - Provided constructive feedback on the implementation.
 - Approved the PR for merging.
