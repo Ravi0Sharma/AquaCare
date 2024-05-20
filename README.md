@@ -150,7 +150,7 @@ In the [Contributions.md](https://git.chalmers.se/courses/dit113/2024/group-16/d
 
 - Süeda Nalan Tahtaci([@sueda](https://git.chalmers.se/sueda)): Made substantial contributions to the front-end with some contributions to backend parts of the application.
 
-- Ravi Sharma([@ravisha](https://git.chalmers.se/ravisha)): Led the team as project manager and made substantial contributions for the Wio Terminal.
+- Ravi Sharma([@ravisha](https://git.chalmers.se/ravisha)): Led the team as project manager and made substantial contributions to the back end with a specific emphasis on the Wio Terminal.
 
 <details>
 <summary>Special Thanks To</summary>
