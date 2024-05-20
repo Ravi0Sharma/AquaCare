@@ -11,7 +11,6 @@
    - Branch Creation
    - Merge Requests
    - Merge Request Example
-* License
 * Contact Info
 
 
@@ -26,7 +25,7 @@ When adding new contributions to the project, use features branches. To make cha
 ### Milestones:
 Milestones are used in relation to issues and merge requests to track progress towards specific goals or releases. They provide a high-level overview of the project's roadmap and assist in planning work.
  
-## Requirements 
+### Requirements 
 System requirements can be documented either in SRS format or as user epics. These epics can then be broken down into smaller user stories, each addressing a specific issue.
 
 ## How to Contribute
@@ -101,10 +100,6 @@ Resolve #30 ("Customer Request - Improvements Over Line Charts")
 - Reviewed the code for quality standards.
 - Provided constructive feedback on the implementation.
 - Approved the PR for merging.
-
-
-## License
-This project is licensed under the MIT License. For details, please see the (LICENSE.MD) file
 
 ## Contact Info
 
