@@ -1,17 +1,16 @@
 ## Table of content
 
-* Introduction 
- * Labels
- * Features Branch
- * Milestones
- * Requirement
+- Introduction 
+     - Labels
+     - Features Branch Milestones
+     - Requirement
 * How to Contribute
- * Isssue Creation 
- * Example Of A Good Issue
- * Commit Messages
- * Branch Creation
- * Merge Requests
- * Merge Request Example
+   - Isssue Creation 
+   - Example Of A Good Issue
+   - Commit Messages
+   - Branch Creation
+   - Merge Requests
+   - Merge Request Example
 * License
 * Contact Info
 
