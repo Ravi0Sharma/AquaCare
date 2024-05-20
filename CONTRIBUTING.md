@@ -16,13 +16,13 @@
 
 ## Introduction
 
-### Labels:
+### Labels
 Labels categorize issues and merge requests for better organization and filtering. They indicate the nature of the work, such as priority or type, helping contributors understand and prioritize tasks. When creating an issue or merge request, select appropriate labels from the predefined list.
 
 ### Features Branch
 When adding new contributions to the project, use features branches. To make changes or additions for a specific issue, first use the corresponding branch. Then, merge these changes into the main branch through a merge request.
 
-### Milestones:
+### Milestones
 Milestones are used in relation to issues and merge requests to track progress towards specific goals or releases. They provide a high-level overview of the project's roadmap and assist in planning work.
  
 ### Requirements 
@@ -30,7 +30,7 @@ System requirements can be documented either in SRS format or as user epics. The
 
 ## How to Contribute
 
-### Issue Creation:
+### Issue Creation
 1. **Issue Template**: Ensure your issue template includes a user story, description and acceptance criteria.
 2. **Assignee**: Assign yourself as the assignee.
 3. **Labels**: Add appropriate labels like "bug" or "improvement" as well as priority.
@@ -60,21 +60,21 @@ The README file contains outdated information regarding the current state of the
 - **Assignee:** @ahmety
 
 
-### Commit Messages:
+### Commit Messages
 1. **Traceability**: Include the corresponding issue via #<n> syntax.
 2. **Description**: Provide a description covering the changes of the commit.
 
-### Branch Creation:
+### Branch Creation
 1. **Distinct Branch**: Create a distinct branch from the corresponding issue.
 2. **Branch Name**: Give the branch a concise name and enter the associated issue number as a prefix.
 
-### Merge Requests:
+### Merge Requests
 1. **Assignee and Reviewer**: Ensure a merge request has an assignee (author of the issue) and a reviewer.
 2. **Reviewer Duties**: Review code for quality standards, provide feedback, and approve if suitable.
 3. **Status Labels**: Remove 'needs-review' label upon approval and add done label.
 4. **Merging**: Only merge the request after these steps have been completed and the pipeline has passed.
 
-### Merge Request Example:
+### Merge Request Example
 
 **Assignee and Reviewer:**
 - **Assignee:** @ahmety
