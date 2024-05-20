@@ -74,7 +74,7 @@ The README file contains outdated information regarding the current state of the
 3. **Status Labels**: Remove 'needs-review' label upon approval and add done label.
 4. **Merging**: Only merge the request after these steps have been completed and the pipeline has passed.
 
-### Merge Requests Example:
+### Merge Request Example:
 
 **Assignee and Reviewer:**
 - **Assignee:** @ahmety
