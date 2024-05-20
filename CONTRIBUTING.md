@@ -32,7 +32,7 @@ The README file contains outdated information regarding the current state of the
 **Assignee and Reviewer:**
 - **Assignee:** @ahmety
 
-  
+<br>
 
 ### Commit Messages:
 1. **Traceability**: Include the corresponding issue via #<n> syntax.
@@ -76,16 +76,14 @@ Resolve #30 ("Customer Request - Improvements Over Line Charts")
 - Approved the PR for merging.
 
 
-###Labels:
+### Labels:
 Labels categorize issues and merge requests for better organization and filtering. They indicate the nature of the work, such as priority or type, helping contributors understand and prioritize tasks. When creating an issue or merge request, select appropriate labels from the predefined list.
 
-###Milestones:
+### Milestones:
 Milestones are used in relation to issues and merge requests to track progress towards specific goals or releases. They provide a high-level overview of the project's roadmap and assist in planning work.
 
+
 ## Code Style and Standards
-
-
-## Pull Requests
 
 ## Review Process
 
