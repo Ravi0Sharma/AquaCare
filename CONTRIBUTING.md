@@ -1,5 +1,34 @@
+## Table of content
 
-## Introduction
+* Introduction 
+ * Labels
+ * Features Branch
+ * Milestones
+ * Requirement
+* How to Contribute
+ * Isssue Creation 
+ * Example Of A Good Issue
+ * Commit Messages
+ * Branch Creation
+ * Merge Requests
+ * Merge Request Example
+* License
+* Contact Info
+
+
+## Introduction 
+
+### Labels:
+Labels categorize issues and merge requests for better organization and filtering. They indicate the nature of the work, such as priority or type, helping contributors understand and prioritize tasks. When creating an issue or merge request, select appropriate labels from the predefined list.
+
+## Features Branch
+When adding new contributions to the project, use features branches. To make changes or additions for a specific issue, first use the corresponding branch. Then, merge these changes into the main branch through a merge request.
+
+### Milestones:
+Milestones are used in relation to issues and merge requests to track progress towards specific goals or releases. They provide a high-level overview of the project's roadmap and assist in planning work.
+ 
+##Requirement
+System requirements can be documented either in SRS format or as user epics. These epics can then be broken down into smaller user stories, each addressing a specific issue.
 
 ## How to Contribute
 
@@ -10,7 +39,7 @@
 4. **Due Date**: Set an appropriate due date respecting the milestone's deadline.
 5. **Continuous Updates**: Continuously update acceptance criteria based on committed implementations.
 
-### Example of a Good Issue
+### Example Of A Good Issue
 **Title:** Update README.md Based On Current State Of The Project
 
 **Description:**
@@ -32,7 +61,6 @@ The README file contains outdated information regarding the current state of the
 **Assignee and Reviewer:**
 - **Assignee:** @ahmety
 
-<br>
 
 ### Commit Messages:
 1. **Traceability**: Include the corresponding issue via #<n> syntax.
@@ -75,19 +103,6 @@ Resolve #30 ("Customer Request - Improvements Over Line Charts")
 - Provided constructive feedback on the implementation.
 - Approved the PR for merging.
 
-
-### Labels:
-Labels categorize issues and merge requests for better organization and filtering. They indicate the nature of the work, such as priority or type, helping contributors understand and prioritize tasks. When creating an issue or merge request, select appropriate labels from the predefined list.
-
-### Milestones:
-Milestones are used in relation to issues and merge requests to track progress towards specific goals or releases. They provide a high-level overview of the project's roadmap and assist in planning work.
-
-
-## Code Style and Standards
-
-## Review Process
-
-## Community Guidelines
 
 ## License
 This project is licensed under the MIT License. For details, please see the (LICENSE.MD) file
