@@ -81,7 +81,7 @@ The README file contains outdated information regarding the current state of the
 - **Reviewer:** @ravisha
 
 **Description:**
-Resolve #30 ("Customer Request - Improvements Over Line Charts")
+[Resolve #30 ("Customer Request - Improvements Over Line Charts")](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/merge_requests/38)
 
 **Changes Made:**
 - Added chart initialization
