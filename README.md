@@ -172,3 +172,6 @@ Special thanks for guidance throughout the project
 
 ## **License**
 This project is under MIT license, to read more refer to [License](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/blob/main/LICENSE.MD)
+
+## **Promotion Video**
+https://youtu.be/BUS7sOsEhDc
