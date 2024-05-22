@@ -1,17 +1,4 @@
-## Table of Contents
-
-- Introduction 
-     - Labels
-     - Features Branch Milestones
-     - Requirement
-* How to Contribute
-   - Isssue Creation 
-   - Example Of A Good Issue
-   - Commit Messages
-   - Branch Creation
-   - Merge Requests
-   - Merge Request Example
-* Contact Info
+[[_TOC_]]
 
 
 ## Introduction
