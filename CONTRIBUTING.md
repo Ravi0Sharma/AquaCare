@@ -40,8 +40,8 @@ The README file contains outdated information regarding the current state of the
 7. Update contributions section
 
 **Status Labels:**
-- Initial status: `Documentation Improvement Medium Priority To Do`
-- Upon completion: `Documentation Improvement Medium Priority In progress`
+- Initial status: `Documentation`, `Improvement`, `Medium Priority`, `To Do`
+- Upon completion: `Documentation`, `Improvement`, `Medium Priority`, `In progress`
 
 **Assignee and Reviewer:**
 - **Assignee:** @ahmety
