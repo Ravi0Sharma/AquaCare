@@ -6,14 +6,14 @@
 ### Labels
 Labels categorize issues and merge requests for better organization and filtering. They indicate the nature of the work, such as priority or type, helping contributors understand and prioritize tasks. When creating an issue or merge request, select appropriate labels from the predefined list.
 
-### Features Branch
-When adding new contributions to the project, use features branches. To make changes or additions for a specific issue, first use the corresponding branch. Then, merge these changes into the main branch through a merge request.
+### Feature Branch
+When adding new contributions to the project, use [feature branches](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow). To make changes or additions for a specific issue, first use the corresponding branch. Then, merge these changes into the main branch through a merge request.
 
 ### Milestones
 Milestones are used in relation to issues and merge requests to track progress towards specific goals or releases. They provide a high-level overview of the project's roadmap and assist in planning work.
  
 ### Requirements 
-System requirements can be documented either in SRS format or as user epics. These epics can then be broken down into smaller user stories, each addressing a specific issue.
+System requirements can be documented either in SRS format or as user epics. Then these requirements can be broken down into user stories, each addressing a specific issue.
 
 ## How to Contribute
 
