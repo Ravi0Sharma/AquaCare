@@ -76,8 +76,8 @@ The README file contains outdated information regarding the current state of the
 - Created tooltips and timestamps 
 
 **Status Labels:**
-- Initial status: `Feature, High Priority, Improvement , In Progress`
-- Upon approval: `Feature, High Priority, Improvement, in review`
+- Initial status: `Feature`, `High Priority`, `Improvement`, `In Progress`
+- Upon approval: `Feature`, `High Priority`, `Improvement`, `In Review`
 
 **Merging:**
 - Pipeline tests passed successfully.
