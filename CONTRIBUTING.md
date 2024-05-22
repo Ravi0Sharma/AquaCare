@@ -25,7 +25,7 @@ System requirements can be documented either in SRS format or as user epics. The
 5. **Continuous Updates**: Continuously update acceptance criteria based on committed implementations.
 
 ### Example Of A Good Issue
-**Title:** Update README.md Based On Current State Of The Project
+**Title:** [Update README.md Based On Current State Of The Project](#37)
 
 **Description:**
 The README file contains outdated information regarding the current state of the project. This issue aims to update/enhance the README file to make it more informative and user-friendly.
