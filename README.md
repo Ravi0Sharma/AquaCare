@@ -1,7 +1,5 @@
 # **AquaCare**
 
-[[_TOC_]]
-
 ## **Description**
 
 AquaCare offers an aquarium monitoring system designed to assist in maintaining fish and plant life in a well-nurtured environment. The system collects readings using pH and temperature sensors to provide users with detailed historical and realtime data on temperature, pH and light levels.
@@ -145,33 +143,9 @@ For a detailed view of expected future releases and upcoming features, please re
 
 In the [Contributions.md](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/blob/main/CONTRIBUTING.md) file, you'll find general guidelines for participating in this project. This includes steps on how to propose changes to the project, how to submit a pull request, and the process for reviewing and merging that request. For more detailed information on each contribution type and specific instructions, please refer to the [contributions.md](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/blob/main/CONTRIBUTING.md) file.
 
-## **Authors and Acknowledgment**
-- Ahmet Yavuz Kalkan([@ahmety](https://git.chalmers.se/ahmety)): Made substantial contributions to the backend with some contributions to front end parts of the application.
-
-- Süeda Nalan Tahtaci([@sueda](https://git.chalmers.se/sueda)): Made substantial contributions to the front-end with some contributions to backend parts of the application.
-
-- Ravi Sharma([@ravisha](https://git.chalmers.se/ravisha)): Led the team as project manager and made substantial contributions to the back end with a specific emphasis on the Wio Terminal.
 
 <details>
 <summary>Special Thanks To</summary>
 
-- [Sabina Akbarova](https://git.chalmers.se/akbarov)
-
-- [Francisco Gomes](https://git.chalmers.se/francisco.gomes)
-
-- [Amin Mahmoudifard](https://git.chalmers.se/aminmah)
-
-Special thanks for guidance throughout the project
-
-</details>
-
-<!---
-## **Support**
-[Buy us a coffee](https://www.coop.se/handla/varor/dryck/kaffe/bryggkaffe/bryggkaffe-mellanrost-8711000530085)
--->
-
 ## **License**
 This project is under MIT license, to read more refer to [License](https://git.chalmers.se/courses/dit113/2024/group-16/dev-team-16/-/blob/main/LICENSE.MD)
-
-## **Promotion Video**
-https://youtu.be/BUS7sOsEhDc
